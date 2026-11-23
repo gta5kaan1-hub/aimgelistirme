@@ -7,19 +7,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #07080e;
-      --bg-card: rgba(17, 21, 36, 0.94);
+      --bg-dark: #07080f;
       --primary: #ff2a55;
       --primary-glow: rgba(255, 42, 85, 0.55);
-      --gold: #f7b733;
-      --gold-glow: rgba(247, 183, 51, 0.55);
+      --gold: #ffc13b;
+      --gold-glow: rgba(255, 193, 59, 0.55);
       --cyan: #00f3ff;
-      --cyan-glow: rgba(0, 243, 255, 0.45);
-      --emerald: #00e676;
-      --violet: #b366ff;
-      --text-main: #f6f8fc;
-      --text-muted: #939eb5;
-      --border: rgba(255, 255, 255, 0.12);
+      --cyan-glow: rgba(0, 243, 255, 0.48);
+      --emerald: #00f59b;
+      --violet: #c06cff;
+      --magenta: #ff3df0;
+      --text-main: #f7f9fc;
+      --text-muted: #9ba7bf;
+      --border: rgba(255, 255, 255, 0.14);
     }
 
     * {
@@ -38,12 +38,13 @@
     body {
       background-color: var(--bg-dark);
       background-image:
-        radial-gradient(circle at 18% 12%, rgba(247, 183, 51, 0.18) 0%, transparent 44%),
-        radial-gradient(circle at 84% 14%, rgba(255, 42, 85, 0.2) 0%, transparent 46%),
-        radial-gradient(circle at 50% 92%, rgba(0, 243, 255, 0.12) 0%, transparent 50%),
-        linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 100% 100%, 42px 42px, 42px 42px;
+        radial-gradient(circle at 12% 14%, rgba(255, 193, 59, 0.24) 0%, transparent 40%),
+        radial-gradient(circle at 86% 15%, rgba(255, 42, 85, 0.25) 0%, transparent 42%),
+        radial-gradient(circle at 75% 85%, rgba(192, 108, 255, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 22% 88%, rgba(0, 243, 255, 0.2) 0%, transparent 45%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 44px 44px, 44px 44px;
       color: var(--text-main);
       font-family: 'Rajdhani', sans-serif;
       display: flex;
@@ -51,27 +52,31 @@
     }
 
     .glow-interact {
-      transition: transform 0.16s ease, box-shadow 0.24s ease, border-color 0.22s ease, background 0.22s ease;
+      transition: transform 0.15s ease, box-shadow 0.22s ease, border-color 0.2s ease, background 0.22s ease;
+    }
+
+    .glow-interact:hover {
+      box-shadow: 0 0 22px rgba(0, 243, 255, 0.25), 0 0 14px rgba(255, 193, 59, 0.2);
     }
 
     .glow-interact:active {
       transform: scale(0.97) !important;
-      box-shadow: 0 0 26px var(--gold-glow), 0 0 18px var(--cyan-glow) !important;
+      box-shadow: 0 0 30px var(--gold-glow), 0 0 20px var(--cyan-glow) !important;
       border-color: var(--gold) !important;
     }
 
     /* Üst HUD Bar */
     header {
       height: 72px;
-      background: linear-gradient(90deg, rgba(13, 16, 28, 0.96), rgba(28, 13, 25, 0.94), rgba(13, 16, 28, 0.96));
+      background: linear-gradient(90deg, rgba(16, 18, 34, 0.96), rgba(44, 14, 34, 0.94), rgba(14, 24, 42, 0.96));
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(247, 183, 51, 0.3);
+      border-bottom: 1px solid rgba(255, 193, 59, 0.36);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 22px;
+      padding: 0 20px;
       z-index: 40;
-      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.72);
+      box-shadow: 0 6px 34px rgba(0, 0, 0, 0.75);
       flex-shrink: 0;
     }
 
@@ -86,14 +91,14 @@
       width: 36px;
       height: 36px;
       border: 2px solid var(--gold);
-      border-radius: 7px;
+      border-radius: 8px;
       display: grid;
       place-items: center;
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
-      color: var(--gold);
-      background: linear-gradient(135deg, rgba(247, 183, 51, 0.22), rgba(255, 42, 85, 0.2));
-      box-shadow: 0 0 20px var(--gold-glow);
+      color: #090b12;
+      background: linear-gradient(135deg, var(--gold), #ff6b3d, var(--magenta));
+      box-shadow: 0 0 22px var(--gold-glow);
       transform: rotate(45deg);
     }
 
@@ -104,23 +109,23 @@
       font-size: 1.32rem;
       font-weight: 900;
       letter-spacing: 2.5px;
-      background: linear-gradient(90deg, #ffffff, var(--gold), #ff5c7c);
+      background: linear-gradient(90deg, #ffffff, var(--gold), var(--cyan), #ff5c8a);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hud-stats {
       display: flex;
-      gap: 14px;
+      gap: 12px;
     }
 
     .stat-box {
       text-align: center;
-      background: rgba(8, 10, 18, 0.74);
-      padding: 5px 14px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      min-width: 92px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(8, 10, 18, 0.82));
+      padding: 5px 13px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      min-width: 88px;
     }
 
     .stat-label {
@@ -132,26 +137,27 @@
 
     .stat-value {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.14rem;
       font-weight: 700;
       color: #fff;
     }
 
     .stat-value.gold { color: var(--gold); text-shadow: 0 0 12px var(--gold-glow); }
     .stat-value.cyan { color: var(--cyan); text-shadow: 0 0 12px var(--cyan-glow); }
-    .stat-value.red { color: #ff476e; text-shadow: 0 0 12px var(--primary-glow); }
+    .stat-value.red { color: #ff4d79; text-shadow: 0 0 12px var(--primary-glow); }
+    .stat-value.emerald { color: var(--emerald); text-shadow: 0 0 12px rgba(0, 245, 155, 0.45); }
 
     .controls {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
     }
 
     button.icon-btn {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.07);
       border: 1px solid var(--border);
       color: #fff;
-      padding: 8px 12px;
+      padding: 7px 12px;
       border-radius: 8px;
       font-family: 'Rajdhani', sans-serif;
       font-weight: 700;
@@ -161,37 +167,30 @@
 
     button.icon-btn:hover {
       border-color: var(--gold);
-      background: rgba(247, 183, 51, 0.14);
-      box-shadow: 0 0 15px rgba(247, 183, 51, 0.22);
+      background: rgba(255, 193, 59, 0.16);
     }
 
     button.exit-btn {
-      border-color: rgba(255, 42, 85, 0.5);
-      color: #ff859d;
+      border-color: rgba(255, 42, 85, 0.55);
+      color: #ff8ca4;
     }
 
     button.exit-btn:hover {
-      background: rgba(255, 42, 85, 0.24);
+      background: rgba(255, 42, 85, 0.25);
       border-color: var(--primary);
       color: #fff;
     }
 
-    /* Sağ Üst Profil Rozeti */
     .header-profile-chip {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, rgba(247, 183, 51, 0.16), rgba(255, 42, 85, 0.14));
-      border: 1px solid rgba(247, 183, 51, 0.48);
+      background: linear-gradient(135deg, rgba(255, 193, 59, 0.2), rgba(192, 108, 255, 0.16), rgba(0, 243, 255, 0.12));
+      border: 1px solid rgba(255, 193, 59, 0.55);
       padding: 5px 12px 5px 6px;
       border-radius: 999px;
       cursor: pointer;
-      box-shadow: 0 0 18px rgba(247, 183, 51, 0.2);
-    }
-
-    .header-profile-chip:hover {
-      border-color: var(--gold);
-      box-shadow: 0 0 24px rgba(247, 183, 51, 0.42);
+      box-shadow: 0 0 20px rgba(255, 193, 59, 0.24);
     }
 
     .avatar-circle {
@@ -199,7 +198,7 @@
       height: 36px;
       border-radius: 50%;
       border: 2px solid var(--gold);
-      background: #141829;
+      background: linear-gradient(135deg, #1b1530, #0d1b2a);
       display: grid;
       place-items: center;
       font-size: 1.15rem;
@@ -215,11 +214,7 @@
       object-fit: cover;
     }
 
-    .chip-info {
-      text-align: left;
-      line-height: 1.15;
-    }
-
+    .chip-info { text-align: left; line-height: 1.15; }
     .chip-name {
       font-family: 'Orbitron', sans-serif;
       font-size: 0.8rem;
@@ -230,12 +225,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
-    .chip-rank {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
+    .chip-rank { font-size: 0.72rem; font-weight: 700; color: var(--gold); }
 
     /* Oyun Alanı */
     #arena-wrapper {
@@ -243,7 +233,14 @@
       flex: 1;
       width: 100%;
       overflow: hidden;
+    }
+
+    #arena-wrapper.playing-cursor {
       cursor: none;
+    }
+
+    #arena-wrapper.overdrive-glow {
+      box-shadow: inset 0 0 65px rgba(255, 193, 59, 0.28), inset 0 0 35px rgba(255, 42, 85, 0.25);
     }
 
     canvas#gameCanvas {
@@ -260,11 +257,10 @@
       display: none;
     }
 
-    /* Tam Ortalı Overlay Katmanları */
     .overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 45%, rgba(34, 22, 46, 0.86), rgba(6, 7, 13, 0.96));
+      background: radial-gradient(circle at 50% 45%, rgba(42, 20, 58, 0.86), rgba(6, 7, 14, 0.96));
       backdrop-filter: blur(13px);
       display: flex;
       align-items: center;
@@ -275,7 +271,6 @@
       overflow-y: auto;
     }
 
-    /* Tam Ekran Ortalanmış Açılış Ekranı */
     #welcome-screen {
       position: fixed;
       inset: 0;
@@ -291,18 +286,18 @@
       max-width: 620px;
       width: 100%;
       margin: auto;
-      background: linear-gradient(155deg, rgba(25, 28, 48, 0.97), rgba(10, 12, 22, 0.99));
-      border: 1px solid rgba(247, 183, 51, 0.5);
+      background: linear-gradient(155deg, rgba(28, 24, 52, 0.97), rgba(10, 12, 24, 0.99));
+      border: 1px solid rgba(255, 193, 59, 0.55);
       border-radius: 20px;
-      padding: 46px 38px;
+      padding: 44px 36px;
       text-align: center;
-      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.9), 0 0 55px rgba(247, 183, 51, 0.2);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(192, 108, 255, 0.22);
       overflow: hidden;
-      animation: cardEntrance 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: cardEntrance 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes cardEntrance {
-      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
@@ -310,8 +305,8 @@
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--gold), var(--cyan), var(--violet), var(--primary));
+      height: 3.5px;
+      background: linear-gradient(90deg, var(--primary), var(--gold), var(--emerald), var(--cyan), var(--violet), var(--primary));
     }
 
     .shimmer-badge {
@@ -321,21 +316,21 @@
       letter-spacing: 2.5px;
       padding: 5px 15px;
       border-radius: 999px;
-      color: var(--gold);
-      border: 1px solid rgba(247, 183, 51, 0.45);
-      background: rgba(247, 183, 51, 0.1);
-      box-shadow: 0 0 18px rgba(247, 183, 51, 0.22);
-      margin-bottom: 16px;
+      color: var(--cyan);
+      border: 1px solid rgba(0, 243, 255, 0.45);
+      background: linear-gradient(90deg, rgba(0, 243, 255, 0.12), rgba(192, 108, 255, 0.14));
+      box-shadow: 0 0 18px rgba(0, 243, 255, 0.2);
+      margin-bottom: 14px;
     }
 
     .welcome-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.3rem;
+      font-size: 2.25rem;
       font-weight: 900;
       letter-spacing: 2px;
       line-height: 1.15;
-      margin-bottom: 14px;
-      background: linear-gradient(120deg, #ffffff 10%, var(--gold) 45%, var(--cyan) 80%, #ff4d79 100%);
+      margin-bottom: 12px;
+      background: linear-gradient(120deg, #ffffff 10%, var(--gold) 42%, var(--cyan) 72%, var(--magenta) 100%);
       background-size: 220% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -346,36 +341,32 @@
 
     .welcome-desc {
       color: var(--text-muted);
-      font-size: 1.05rem;
+      font-size: 1.04rem;
       max-width: 470px;
-      margin: 0 auto 24px;
+      margin: 0 auto 22px;
       line-height: 1.45;
     }
 
-    .nick-box {
-      max-width: 390px;
-      margin: 0 auto 14px;
-    }
+    .nick-box { max-width: 390px; margin: 0 auto 14px; }
 
     .nick-input {
       width: 100%;
       background: rgba(0, 0, 0, 0.58);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 10px;
-      padding: 13px 16px;
+      padding: 12px 16px;
       color: #fff;
       text-align: center;
       font-family: 'Orbitron', sans-serif;
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: 700;
       letter-spacing: 1px;
       outline: none;
-      transition: 0.2s;
     }
 
     .nick-input:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 20px rgba(247, 183, 51, 0.32);
+      box-shadow: 0 0 20px rgba(255, 193, 59, 0.34);
     }
 
     .saved-profiles-row {
@@ -383,13 +374,13 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 8px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .saved-pill {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(247, 183, 51, 0.3);
-      color: #e2e8f0;
+      background: linear-gradient(135deg, rgba(255, 193, 59, 0.12), rgba(0, 243, 255, 0.08));
+      border: 1px solid rgba(255, 193, 59, 0.35);
+      color: #f1f5f9;
       padding: 4px 12px;
       border-radius: 999px;
       font-size: 0.82rem;
@@ -397,13 +388,6 @@
       cursor: pointer;
     }
 
-    .saved-pill:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(247, 183, 51, 0.14);
-    }
-
-    /* Ana Menü Düzeni */
     .hub-container {
       max-width: 1150px;
       width: 100%;
@@ -418,9 +402,9 @@
     }
 
     .panel {
-      background: linear-gradient(155deg, rgba(22, 26, 44, 0.96), rgba(11, 13, 22, 0.98));
-      border: 1px solid rgba(247, 183, 51, 0.32);
-      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.78), 0 0 28px rgba(0, 243, 255, 0.06);
+      background: linear-gradient(155deg, rgba(25, 24, 48, 0.96), rgba(11, 13, 24, 0.98));
+      border: 1px solid rgba(255, 193, 59, 0.35);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8), 0 0 32px rgba(192, 108, 255, 0.1);
       border-radius: 16px;
       padding: 22px;
       position: relative;
@@ -431,8 +415,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(120deg, rgba(247, 183, 51, 0.09), rgba(0, 243, 255, 0.05), rgba(0, 0, 0, 0.45));
-      border: 1px solid rgba(247, 183, 51, 0.28);
+      background: linear-gradient(125deg, rgba(255, 193, 59, 0.14), rgba(192, 108, 255, 0.12), rgba(0, 243, 255, 0.08));
+      border: 1px solid rgba(255, 193, 59, 0.34);
       border-radius: 12px;
       padding: 12px 16px;
       margin-bottom: 16px;
@@ -440,22 +424,9 @@
       flex-wrap: wrap;
     }
 
-    .player-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .player-meta h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.02rem;
-      color: #fff;
-    }
-
-    .player-meta span {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
+    .player-left { display: flex; align-items: center; gap: 12px; }
+    .player-meta h3 { font-family: 'Orbitron', sans-serif; font-size: 1.02rem; color: #fff; }
+    .player-meta span { font-size: 0.88rem; color: var(--text-muted); }
 
     .rank-pill {
       padding: 6px 14px;
@@ -465,53 +436,23 @@
       font-weight: 800;
       letter-spacing: 1px;
       border: 1px solid var(--gold);
-      color: var(--gold);
-      background: linear-gradient(90deg, rgba(247, 183, 51, 0.22), rgba(255, 42, 85, 0.18));
-      box-shadow: 0 0 18px rgba(247, 183, 51, 0.28);
+      color: #090b12;
+      background: linear-gradient(90deg, var(--gold), #ff8a3d);
+      box-shadow: 0 0 18px rgba(255, 193, 59, 0.35);
     }
 
-    .xp-wrap {
-      width: 100%;
-      margin-top: 2px;
-    }
-
-    .xp-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 5px;
-    }
-
-    .xp-bar {
-      width: 100%;
-      height: 7px;
-      background: rgba(255, 255, 255, 0.09);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
+    .xp-wrap { width: 100%; margin-top: 2px; }
+    .xp-labels { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px; }
+    .xp-bar { width: 100%; height: 7px; background: rgba(255, 255, 255, 0.1); border-radius: 999px; overflow: hidden; }
     .xp-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--gold), var(--primary), var(--cyan));
-      box-shadow: 0 0 12px var(--gold-glow);
+      background: linear-gradient(90deg, var(--emerald), var(--cyan), var(--gold), var(--primary));
       transition: width 0.4s ease;
     }
 
-    .section-heading {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.18rem;
-      letter-spacing: 1.5px;
-      margin-bottom: 4px;
-      color: #fff;
-    }
-
-    .subtitle {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      margin-bottom: 14px;
-    }
+    .section-heading { font-family: 'Orbitron', sans-serif; font-size: 1.18rem; letter-spacing: 1.5px; margin-bottom: 4px; color: #fff; }
+    .subtitle { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 14px; }
 
     .mode-grid {
       display: grid;
@@ -520,12 +461,10 @@
       margin-bottom: 16px;
     }
 
-    @media (max-width: 560px) {
-      .mode-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 560px) { .mode-grid { grid-template-columns: 1fr; } }
 
     .mode-card {
-      background: rgba(255, 255, 255, 0.035);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
       border: 1px solid var(--border);
       border-radius: 11px;
       padding: 13px;
@@ -535,14 +474,14 @@
 
     .mode-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(0, 243, 255, 0.55);
-      box-shadow: 0 6px 20px rgba(0, 243, 255, 0.14);
+      border-color: var(--cyan);
+      box-shadow: 0 6px 22px rgba(0, 243, 255, 0.2);
     }
 
     .mode-card.active {
-      background: linear-gradient(145deg, rgba(255, 42, 85, 0.2), rgba(247, 183, 51, 0.16), rgba(0, 243, 255, 0.08));
+      background: linear-gradient(145deg, rgba(255, 42, 85, 0.24), rgba(255, 193, 59, 0.18), rgba(192, 108, 255, 0.16));
       border-color: var(--gold);
-      box-shadow: 0 0 24px rgba(247, 183, 51, 0.34), inset 0 0 14px rgba(247, 183, 51, 0.12);
+      box-shadow: 0 0 26px rgba(255, 193, 59, 0.36), inset 0 0 14px rgba(255, 193, 59, 0.14);
     }
 
     .mode-tag {
@@ -551,8 +490,8 @@
       font-weight: 700;
       padding: 2px 8px;
       border-radius: 4px;
-      background: rgba(0, 243, 255, 0.14);
-      color: var(--cyan);
+      background: rgba(192, 108, 255, 0.22);
+      color: #e4b8ff;
       margin-bottom: 5px;
       letter-spacing: 1px;
     }
@@ -562,25 +501,10 @@
       color: #090a0f;
     }
 
-    .mode-card h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.95rem;
-      margin-bottom: 3px;
-      color: #fff;
-    }
+    .mode-card h3 { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; margin-bottom: 3px; color: #fff; }
+    .mode-card p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.3; }
 
-    .mode-card p {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      line-height: 1.3;
-    }
-
-    .duration-bar {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
+    .duration-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 16px; }
 
     .dur-btn {
       background: rgba(255, 255, 255, 0.05);
@@ -594,17 +518,17 @@
     }
 
     .dur-btn.active {
-      border-color: var(--cyan);
-      color: #071318;
-      background: linear-gradient(90deg, var(--cyan), #66f7ff);
-      font-weight: 700;
-      box-shadow: 0 0 20px var(--cyan-glow);
+      border-color: var(--emerald);
+      color: #061812;
+      background: linear-gradient(90deg, var(--emerald), var(--cyan));
+      font-weight: 800;
+      box-shadow: 0 0 20px rgba(0, 245, 155, 0.42);
     }
 
     .btn-start {
       width: 100%;
-      background: linear-gradient(90deg, var(--primary), #ff5e3a, var(--gold));
-      background-size: 160% auto;
+      background: linear-gradient(90deg, var(--primary), #ff6b3d, var(--gold), var(--magenta));
+      background-size: 200% auto;
       border: none;
       color: #fff;
       font-family: 'Orbitron', sans-serif;
@@ -614,23 +538,23 @@
       padding: 14px 24px;
       border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 8px 26px var(--primary-glow);
+      box-shadow: 0 8px 28px var(--primary-glow);
     }
 
     .btn-start:hover {
       transform: translateY(-2px);
       background-position: right center;
-      box-shadow: 0 12px 35px rgba(255, 42, 85, 0.72), 0 0 22px rgba(247, 183, 51, 0.35);
+      box-shadow: 0 12px 35px rgba(255, 42, 85, 0.72), 0 0 24px rgba(255, 193, 59, 0.38);
     }
 
     .btn-gold {
-      background: linear-gradient(90deg, #e09612, var(--gold), #ffe082);
+      background: linear-gradient(90deg, #ff9f1c, var(--gold), #ffe58f);
       color: #090a0f;
-      box-shadow: 0 8px 25px rgba(247, 183, 51, 0.42);
+      box-shadow: 0 8px 25px rgba(255, 193, 59, 0.45);
     }
 
     .btn-ghost {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.07);
       border: 1px solid var(--border);
       color: #fff;
       font-family: 'Orbitron', sans-serif;
@@ -640,21 +564,10 @@
       cursor: pointer;
     }
 
-    .btn-ghost:hover {
-      border-color: var(--cyan);
-      background: rgba(0, 243, 255, 0.12);
-    }
-
-    /* Liderlik & Görevler */
-    .lb-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
+    .lb-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
 
     .lb-tab {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       color: var(--text-muted);
       padding: 5px 10px;
@@ -666,17 +579,17 @@
     }
 
     .lb-tab.active {
-      background: linear-gradient(90deg, rgba(247, 183, 51, 0.25), rgba(255, 42, 85, 0.18));
+      background: linear-gradient(90deg, rgba(255, 193, 59, 0.28), rgba(192, 108, 255, 0.22));
       border-color: var(--gold);
       color: var(--gold);
-      box-shadow: 0 0 14px rgba(247, 183, 51, 0.25);
+      box-shadow: 0 0 15px rgba(255, 193, 59, 0.28);
     }
 
     .lb-list {
       display: flex;
       flex-direction: column;
       gap: 7px;
-      max-height: 235px;
+      max-height: 230px;
       overflow-y: auto;
       padding-right: 4px;
       margin-bottom: 14px;
@@ -693,11 +606,11 @@
     }
 
     .lb-row.top-1 {
-      border-color: rgba(247, 183, 51, 0.65);
-      background: linear-gradient(90deg, rgba(247, 183, 51, 0.14), rgba(0, 0, 0, 0.45));
+      border-color: rgba(255, 193, 59, 0.7);
+      background: linear-gradient(90deg, rgba(255, 193, 59, 0.16), rgba(255, 42, 85, 0.08));
     }
-    .lb-row.top-2 { border-color: rgba(0, 243, 255, 0.42); }
-    .lb-row.top-3 { border-color: rgba(179, 102, 255, 0.42); }
+    .lb-row.top-2 { border-color: rgba(0, 243, 255, 0.46); }
+    .lb-row.top-3 { border-color: rgba(192, 108, 255, 0.46); }
 
     .lb-left { display: flex; align-items: center; gap: 9px; }
     .lb-pos { font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 0.85rem; width: 24px; color: var(--gold); }
@@ -706,199 +619,78 @@
     .lb-score { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--cyan); }
 
     .quest-box {
-      background: rgba(0, 0, 0, 0.38);
-      border: 1px solid rgba(0, 243, 255, 0.22);
+      background: linear-gradient(135deg, rgba(0, 243, 255, 0.07), rgba(192, 108, 255, 0.07));
+      border: 1px solid rgba(0, 243, 255, 0.28);
       border-radius: 10px;
       padding: 11px 13px;
     }
 
-    .quest-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.78rem;
-      color: var(--cyan);
-      letter-spacing: 1px;
-      margin-bottom: 7px;
-    }
+    .quest-title { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; color: var(--cyan); letter-spacing: 1px; margin-bottom: 7px; }
+    .quest-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.84rem; padding: 4px 0; color: var(--text-muted); }
+    .quest-item.done { color: var(--emerald); text-decoration: line-through; }
 
-    .quest-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.84rem;
-      padding: 4px 0;
-      color: var(--text-muted);
-    }
+    /* Atölye */
+    .workshop-box { max-width: 740px; width: 100%; text-align: left; }
+    .workshop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0 18px; }
+    @media (max-width: 680px) { .workshop-grid { grid-template-columns: 1fr; } }
 
-    .quest-item.done {
-      color: var(--emerald);
-      text-decoration: line-through;
-    }
+    .ws-section { background: rgba(0, 0, 0, 0.44); border: 1px solid var(--border); border-radius: 11px; padding: 14px; }
+    .ws-section h4 { font-family: 'Orbitron', sans-serif; font-size: 0.84rem; color: var(--gold); margin-bottom: 10px; letter-spacing: 1px; }
 
-    /* Profil & Ekipman Atölyesi Modalı */
-    .workshop-box {
-      max-width: 720px;
-      width: 100%;
-      text-align: left;
-    }
-
-    .workshop-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin: 16px 0 20px;
-    }
-
-    @media (max-width: 680px) {
-      .workshop-grid { grid-template-columns: 1fr; }
-    }
-
-    .ws-section {
-      background: rgba(0, 0, 0, 0.42);
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      padding: 14px;
-    }
-
-    .ws-section h4 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.86rem;
-      color: var(--gold);
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-    }
-
-    .avatar-presets {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin: 10px 0;
-    }
-
+    .avatar-presets, .ch-presets { display: flex; gap: 7px; flex-wrap: wrap; margin: 8px 0; }
     .preset-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.06);
-      font-size: 1.15rem;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.07); font-size: 1.1rem; cursor: pointer; display: grid; place-items: center;
     }
+    .ch-preset-btn {
+      padding: 4px 9px; border-radius: 6px; border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.07); color: #fff; font-size: 0.76rem; font-weight: 700; cursor: pointer;
+    }
+    .ch-preset-btn:hover { border-color: var(--cyan); color: var(--cyan); }
 
-    .preset-btn:hover, .preset-btn.selected {
-      border-color: var(--gold);
-      box-shadow: 0 0 14px var(--gold-glow);
-    }
-
-    .slider-row {
-      margin-bottom: 10px;
-    }
-
-    .slider-row label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      color: #dce3f0;
-      margin-bottom: 4px;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--gold);
-      cursor: pointer;
-    }
+    .slider-row { margin-bottom: 9px; }
+    .slider-row label { display: flex; justify-content: space-between; font-size: 0.84rem; color: #dce3f0; margin-bottom: 3px; }
+    input[type="range"] { width: 100%; accent-color: var(--gold); cursor: pointer; }
 
     .crosshair-preview-box {
-      height: 76px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.65));
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      height: 70px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.7));
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 8px;
       display: grid;
       place-items: center;
       margin-bottom: 10px;
     }
 
-    /* Çıkış & Sonuç Panelleri */
-    .modal-box {
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
-    }
+    .modal-box { max-width: 600px; width: 100%; text-align: center; }
+    .exit-actions { display: grid; grid-template-columns: 1fr; gap: 11px; margin-top: 20px; }
+    .result-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
+    @media (max-width: 560px) { .result-grid { grid-template-columns: repeat(2, 1fr); } }
 
-    .exit-actions {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 11px;
-      margin-top: 20px;
-    }
-
-    .result-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin: 16px 0;
-    }
-
-    @media (max-width: 560px) {
-      .result-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .res-item {
-      background: rgba(0, 0, 0, 0.48);
-      border: 1px solid var(--border);
-      padding: 12px 8px;
-      border-radius: 9px;
-    }
-
+    .res-item { background: rgba(0, 0, 0, 0.48); border: 1px solid var(--border); padding: 12px 8px; border-radius: 9px; }
     .res-item span { display: block; font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
     .res-item strong { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #fff; }
 
     .rank-badge {
-      display: inline-block;
-      padding: 7px 20px;
-      border-radius: 999px;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
-      font-size: 0.96rem;
-      letter-spacing: 1.6px;
-      background: linear-gradient(90deg, rgba(247, 183, 51, 0.24), rgba(255, 42, 85, 0.22));
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      margin-bottom: 10px;
-      box-shadow: 0 0 22px var(--gold-glow);
+      display: inline-block; padding: 7px 20px; border-radius: 999px; font-family: 'Orbitron', sans-serif;
+      font-weight: 900; font-size: 0.96rem; letter-spacing: 1.6px;
+      background: linear-gradient(90deg, rgba(255, 193, 59, 0.25), rgba(255, 42, 85, 0.24));
+      border: 1px solid var(--gold); color: var(--gold); margin-bottom: 10px;
     }
 
-    .xp-gain-text {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.9rem;
-      color: var(--emerald);
-      margin-bottom: 10px;
-    }
+    .xp-gain-text { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: var(--emerald); margin-bottom: 10px; }
 
     .heatmap-wrap {
-      margin: 10px auto 16px;
-      background: rgba(0, 0, 0, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      padding: 8px;
-      max-width: 340px;
+      margin: 10px auto 16px; background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; padding: 8px; max-width: 340px;
     }
-
-    .heatmap-wrap canvas {
-      width: 100%;
-      height: 110px;
-      display: block;
-      border-radius: 6px;
-      background: #090b12;
-    }
+    .heatmap-wrap canvas { width: 100%; height: 105px; display: block; border-radius: 6px; background: #090b12; }
 
     .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
-  <!-- Dinamik Özel Crosshair SVG -->
   <svg id="custom-crosshair" width="48" height="48" viewBox="0 0 48 48"></svg>
 
   <header>
@@ -911,6 +703,10 @@
       <div class="stat-box">
         <div class="stat-label">SKOR</div>
         <div class="stat-value gold" id="hud-score">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">KOMBO</div>
+        <div class="stat-value emerald" id="hud-combo">0x</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">SÜRE</div>
@@ -930,7 +726,6 @@
       <button class="icon-btn glow-interact" id="btn-sound" title="Sesi Aç/Kapat">🔊 Ses</button>
       <button class="icon-btn exit-btn glow-interact" id="btn-exit-top" title="Çıkış Ekranı (ESC)">⎋ Çıkış</button>
 
-      <!-- Sağ Üst Kalıcı Oyuncu Profili -->
       <div class="header-profile-chip glow-interact" id="btn-open-profile" title="Profil, Fotoğraf, Sens ve Nişangah Ayarları">
         <div class="avatar-circle" id="header-avatar">🎯</div>
         <div class="chip-info">
@@ -963,10 +758,9 @@
   <div id="arena-wrapper">
     <canvas id="gameCanvas"></canvas>
 
-    <!-- 2. ANA MENÜ & LİDERLİK TABLOSU -->
+    <!-- 2. ANA MENÜ -->
     <div class="overlay hidden" id="start-menu">
       <div class="hub-container">
-        <!-- Sol: Profil, Mod ve Süre Seçimi -->
         <div class="panel">
           <div class="player-banner">
             <div class="player-left">
@@ -992,7 +786,7 @@
           </div>
 
           <h2 class="section-heading">ANTRENMAN MODU SEÇ</h2>
-          <p class="subtitle">Modunu ve süreni seçerek antrenmana başla.</p>
+          <p class="subtitle">10x kombo yakalayınca OVERDRIVE ateşiyle ekstra puan kazan!</p>
 
           <div class="mode-grid">
             <div class="mode-card glow-interact active" data-mode="gridshot">
@@ -1026,7 +820,6 @@
           <button class="btn-start glow-interact" id="btn-play">ANTRENMANI BAŞLAT</button>
         </div>
 
-        <!-- Sağ: Liderlik Tablosu & Görevler -->
         <div class="panel">
           <h2 class="section-heading">LİDERLİK TABLOSU</h2>
           <p class="subtitle">Mod bazlı rekorlar ve genel toplam puan sıralaması.</p>
@@ -1049,7 +842,7 @@
       </div>
     </div>
 
-    <!-- 3. PROFİL, FOTOĞRAF, SENS & NİŞANGAH ATÖLYESİ -->
+    <!-- 3. PROFİL & EKİPMAN ATÖLYESİ -->
     <div class="overlay hidden" id="profile-modal">
       <div class="panel workshop-box">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
@@ -1059,7 +852,6 @@
         <p class="subtitle">Tüm ayarların kullanıcı adına özel olarak kalıcı kaydedilir.</p>
 
         <div class="workshop-grid">
-          <!-- Sol: Profil & Fotoğraf & Sens -->
           <div class="ws-section">
             <h4>KİMLİK & PROFİL FOTOĞRAFI</h4>
             <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
@@ -1083,14 +875,14 @@
               <button type="button" class="preset-btn" data-emoji="💀">💀</button>
             </div>
 
-            <h4 style="margin-top:12px;">FARE HASSASİYETİ & TEMA</h4>
+            <h4 style="margin-top:10px;">SENS ÇARPANI & HEDEF RENGİ</h4>
             <div class="slider-row">
-              <label><span>Hassasiyet (Sens)</span><strong id="ws-sens-val" style="color:var(--gold);">1.00x</strong></label>
-              <input type="range" id="ws-sens" min="0.3" max="2.5" step="0.05" value="1.0" />
+              <label><span>Hassasiyet Puan Çarpanı</span><strong id="ws-sens-val" style="color:var(--gold);">1.00x</strong></label>
+              <input type="range" id="ws-sens" min="0.5" max="2.0" step="0.05" value="1.0" />
             </div>
 
             <div class="slider-row" style="margin-bottom:0;">
-              <label><span>Hedef Rengi</span></label>
+              <label><span>Hedef Teması</span></label>
               <select id="ws-target-theme" style="width:100%;background:#0c0f1a;border:1px solid var(--border);color:#fff;padding:7px;border-radius:7px;font-family:'Rajdhani',sans-serif;font-weight:700;">
                 <option value="cyan">Neon Camgöbeği</option>
                 <option value="gold">Altın Efsane</option>
@@ -1100,21 +892,27 @@
             </div>
           </div>
 
-          <!-- Sağ: Nişangah (Crosshair) Özelleştirme -->
           <div class="ws-section">
             <h4>NİŞANGAH (CROSSHAIR) AYARLARI</h4>
+            <div class="ch-presets">
+              <button type="button" class="ch-preset-btn" data-preset="dot">Nokta</button>
+              <button type="button" class="ch-preset-btn" data-preset="classic">CS Klasik</button>
+              <button type="button" class="ch-preset-btn" data-preset="goldpro">Altın Pro</button>
+              <button type="button" class="ch-preset-btn" data-preset="neon">Neon Lazer</button>
+            </div>
+
             <div class="crosshair-preview-box">
               <svg id="ws-crosshair-preview" width="48" height="48" viewBox="0 0 48 48"></svg>
             </div>
 
             <div class="slider-row">
               <label><span>Nişangah Rengi</span></label>
-              <input type="color" id="ws-ch-color" value="#00f3ff" style="width:100%;height:32px;border:none;background:none;cursor:pointer;" />
+              <input type="color" id="ws-ch-color" value="#00f3ff" style="width:100%;height:30px;border:none;background:none;cursor:pointer;" />
             </div>
 
             <div class="slider-row">
               <label><span>Çizgi Uzunluğu</span><span id="ws-ch-size-val">8px</span></label>
-              <input type="range" id="ws-ch-size" min="3" max="18" step="1" value="8" />
+              <input type="range" id="ws-ch-size" min="2" max="16" step="1" value="8" />
             </div>
 
             <div class="slider-row">
@@ -1127,8 +925,8 @@
               <input type="range" id="ws-ch-gap" min="0" max="12" step="1" value="4" />
             </div>
 
-            <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;color:#dce3f0;">
-              <input type="checkbox" id="ws-ch-dot" checked style="accent-color:var(--gold);width:16px;height:16px;" />
+            <label style="display:flex;align-items:center;gap:8px;font-size:0.86rem;cursor:pointer;color:#dce3f0;">
+              <input type="checkbox" id="ws-ch-dot" checked style="accent-color:var(--gold);width:15px;height:15px;" />
               Merkez Nokta Göster
             </label>
           </div>
@@ -1138,7 +936,7 @@
       </div>
     </div>
 
-    <!-- 4. ÇIKIŞ / DURAKLATMA EKRANI -->
+    <!-- 4. ÇIKIŞ EKRANI -->
     <div class="overlay hidden" id="exit-menu">
       <div class="panel modal-box">
         <div class="shimmer-badge">ANTRENMAN DURAKLATILDI</div>
@@ -1183,7 +981,7 @@
 
         <div class="heatmap-wrap">
           <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:4px;letter-spacing:1px;">ATIŞ ISI HARİTASI (YEŞİL: İSABET • KIRMIZI: ISKA)</div>
-          <canvas id="heatmapCanvas" width="320" height="110"></canvas>
+          <canvas id="heatmapCanvas" width="320" height="105"></canvas>
         </div>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap;">
@@ -1207,6 +1005,7 @@
     const resultMenu = document.getElementById('result-menu');
 
     const hudScore = document.getElementById('hud-score');
+    const hudCombo = document.getElementById('hud-combo');
     const hudTime = document.getElementById('hud-time');
     const hudAcc = document.getElementById('hud-acc');
     const hudMs = document.getElementById('hud-ms');
@@ -1220,12 +1019,11 @@
 
     const TARGET_THEMES = {
       cyan: { inner: '#00f3ff', mid: '#0088ff', outer: 'rgba(0, 243, 255, 0.16)', particle: '#00f3ff' },
-      gold: { inner: '#ffe082', mid: '#f7b733', outer: 'rgba(247, 183, 51, 0.18)', particle: '#f7b733' },
-      crimson: { inner: '#ff859d', mid: '#ff2a55', outer: 'rgba(255, 42, 85, 0.18)', particle: '#ff2a55' },
-      emerald: { inner: '#69f0ae', mid: '#00c853', outer: 'rgba(0, 230, 118, 0.18)', particle: '#00e676' }
+      gold: { inner: '#fff0a6', mid: '#ffc13b', outer: 'rgba(255, 193, 59, 0.2)', particle: '#ffc13b' },
+      crimson: { inner: '#ff9bb0', mid: '#ff2a55', outer: 'rgba(255, 42, 85, 0.2)', particle: '#ff2a55' },
+      emerald: { inner: '#80ffcb', mid: '#00d67e', outer: 'rgba(0, 245, 155, 0.2)', particle: '#00f59b' }
     };
 
-    // Kademeli Rütbe Sistemi (Bronz 1-4 -> Gümüş 1-4 -> Altın 1-4 -> Elmas 1-4 -> Ölümsüz -> Radyant)
     const RANKS = [
       { minXp: 0, name: 'BRONZ 1' },
       { minXp: 400, name: 'BRONZ 2' },
@@ -1247,8 +1045,7 @@
       { minXp: 24500, name: 'RADYANT // AIMS PRO' }
     ];
 
-    // Çoklu Kalıcı Oyuncu Veritabanı (Her ismin kendi rank, sens, foto ve crosshair kaydı korunur)
-    const DB_KEY = 'aims_pro_profiles_db_v3';
+    const DB_KEY = 'aims_pro_profiles_db_v4';
 
     function createDefaultUser(name) {
       return {
@@ -1259,27 +1056,15 @@
         avatarPhoto: '',
         sens: 1.0,
         targetTheme: 'cyan',
-        crosshair: {
-          color: '#00f3ff',
-          size: 8,
-          thick: 2,
-          gap: 4,
-          dot: true
-        },
-        quests: {
-          q25hits: false,
-          q80acc: false,
-          q3000score: false
-        }
+        crosshair: { color: '#00f3ff', size: 8, thick: 2, gap: 4, dot: true },
+        quests: { q25hits: false, q80acc: false, q3000score: false }
       };
     }
 
     function loadDB() {
       const initialDB = {
         activeUser: 'Kaan',
-        users: {
-          'kaan': createDefaultUser('Kaan')
-        },
+        users: { 'kaan': createDefaultUser('Kaan') },
         entries: [
           { name: 'ProAim_TR', mode: 'gridshot', score: 3450, acc: 92 },
           { name: 'FlickMaster', mode: 'flick', score: 2680, acc: 88 },
@@ -1346,14 +1131,17 @@
       const t = Number(ch.thick) || 2;
       const g = Number(ch.gap) || 4;
       const mid = 24;
-      let html = `
-        <line x1="${mid}" y1="${mid - g - s}" x2="${mid}" y2="${mid - g}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
-        <line x1="${mid}" y1="${mid + g}" x2="${mid}" y2="${mid + g + s}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
-        <line x1="${mid - g - s}" y1="${mid}" x2="${mid - g}" y2="${mid}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
-        <line x1="${mid + g}" y1="${mid}" x2="${mid + g + s}" y2="${mid}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
-      `;
+      let html = '';
+      if (s > 0) {
+        html += `
+          <line x1="${mid}" y1="${Math.max(2, mid - g - s)}" x2="${mid}" y2="${mid - g}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
+          <line x1="${mid}" y1="${mid + g}" x2="${mid}" y2="${Math.min(46, mid + g + s)}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
+          <line x1="${Math.max(2, mid - g - s)}" y1="${mid}" x2="${mid - g}" y2="${mid}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
+          <line x1="${mid + g}" y1="${mid}" x2="${Math.min(46, mid + g + s)}" y2="${mid}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
+        `;
+      }
       if (ch.dot) {
-        html += `<circle cx="${mid}" cy="${mid}" r="${Math.max(1.5, t * 0.85)}" fill="#ff2a55" />`;
+        html += `<circle cx="${mid}" cy="${mid}" r="${Math.max(1.8, t * 0.9)}" fill="#ff2a55" />`;
       }
       svgEl.innerHTML = html;
     }
@@ -1361,8 +1149,7 @@
     function renderSavedProfilesList() {
       const container = document.getElementById('saved-profiles-list');
       container.innerHTML = '';
-      const keys = Object.keys(db.users);
-      keys.forEach(k => {
+      Object.keys(db.users).forEach(k => {
         const u = db.users[k];
         const { current } = getRankInfo(u.xp);
         const btn = document.createElement('button');
@@ -1433,14 +1220,12 @@
         const totalsMap = {};
         for (const e of db.entries) {
           const key = e.name.toLowerCase();
-          if (!totalsMap[key]) {
-            totalsMap[key] = { name: e.name, total: 0, games: 0 };
-          }
+          if (!totalsMap[key]) totalsMap[key] = { name: e.name, total: 0, games: 0 };
           totalsMap[key].total += e.score;
           totalsMap[key].games += 1;
         }
         const sortedTotal = Object.values(totalsMap).sort((a, b) => b.total - a.total).slice(0, 8);
-        if (sortedTotal.length === 0) {
+        if (!sortedTotal.length) {
           listEl.innerHTML = '<div class="lb-sub" style="text-align:center;padding:20px;">Henüz skor kaydı yok.</div>';
           return;
         }
@@ -1460,11 +1245,8 @@
           listEl.appendChild(row);
         });
       } else {
-        const filtered = db.entries
-          .filter(e => e.mode === activeLbTab)
-          .sort((a, b) => b.score - a.score)
-          .slice(0, 8);
-        if (filtered.length === 0) {
+        const filtered = db.entries.filter(e => e.mode === activeLbTab).sort((a, b) => b.score - a.score).slice(0, 8);
+        if (!filtered.length) {
           listEl.innerHTML = '<div class="lb-sub" style="text-align:center;padding:20px;">Bu modda henüz kayıt yok.</div>';
           return;
         }
@@ -1487,12 +1269,10 @@
     }
 
     function escapeHtml(str) {
-      return String(str).replace(/[&<>"']/g, m => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-      }[m]));
+      return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
     }
 
-    // Oyun Değişkenleri & Sens Hesabı
+    // Oyun Durumu
     let isPlaying = false;
     let isPausedForExit = false;
     let selectedMode = 'gridshot';
@@ -1507,15 +1287,10 @@
     let shotLog = [];
     let targets = [];
     let particles = [];
+    let shockwaves = [];
     let floatingTexts = [];
     let soundEnabled = true;
     let lastFrameTime = 0;
-
-    // Sens çarpanına göre sanal nişangah koordinatı
-    let aimX = 0;
-    let aimY = 0;
-    let lastRawMouseX = null;
-    let lastRawMouseY = null;
 
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playSound(type) {
@@ -1530,20 +1305,20 @@
       const now = audioCtx.currentTime;
       if (type === 'hit') {
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(640 + Math.min(combo * 18, 520), now);
-        osc.frequency.exponentialRampToValueAtTime(1240, now + 0.08);
-        gain.gain.setValueAtTime(0.22, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+        osc.frequency.setValueAtTime(650 + Math.min(combo * 20, 560), now);
+        osc.frequency.exponentialRampToValueAtTime(1280, now + 0.075);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.085);
         osc.start(now);
-        osc.stop(now + 0.09);
+        osc.stop(now + 0.085);
       } else if (type === 'miss') {
         osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(140, now);
-        osc.frequency.exponentialRampToValueAtTime(60, now + 0.12);
-        gain.gain.setValueAtTime(0.15, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.frequency.setValueAtTime(145, now);
+        osc.frequency.exponentialRampToValueAtTime(62, now + 0.11);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
         osc.start(now);
-        osc.stop(now + 0.12);
+        osc.stop(now + 0.11);
       }
     }
 
@@ -1554,35 +1329,21 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    arenaWrapper.addEventListener('mousemove', (e) => {
-      if (!isPlaying || isPausedForExit) return;
-      const rect = canvas.getBoundingClientRect();
-      const rawX = e.clientX - rect.left;
-      const rawY = e.clientY - rect.top;
-      const user = getCurrentUser();
-      const sens = Number(user.sens) || 1.0;
-
-      if (lastRawMouseX === null || Math.abs(sens - 1.0) < 0.01) {
-        aimX = rawX;
-        aimY = rawY;
+    // Birebir tam hizalı fare imleci (sapma yok)
+    window.addEventListener('mousemove', (e) => {
+      if (isPlaying && !isPausedForExit) {
+        const rect = canvas.getBoundingClientRect();
+        const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+        if (inside) {
+          crosshair.style.display = 'block';
+          crosshair.style.left = e.clientX + 'px';
+          crosshair.style.top = e.clientY + 'px';
+        } else {
+          crosshair.style.display = 'none';
+        }
       } else {
-        const dx = (rawX - lastRawMouseX) * sens;
-        const dy = (rawY - lastRawMouseY) * sens;
-        aimX = Math.max(10, Math.min(canvas.width - 10, aimX + dx));
-        aimY = Math.max(10, Math.min(canvas.height - 10, aimY + dy));
+        crosshair.style.display = 'none';
       }
-      lastRawMouseX = rawX;
-      lastRawMouseY = rawY;
-
-      crosshair.style.display = 'block';
-      crosshair.style.left = (rect.left + aimX) + 'px';
-      crosshair.style.top = (rect.top + aimY) + 'px';
-    });
-
-    arenaWrapper.addEventListener('mouseleave', () => {
-      crosshair.style.display = 'none';
-      lastRawMouseX = null;
-      lastRawMouseY = null;
     });
 
     document.getElementById('btn-sound').addEventListener('click', (e) => {
@@ -1590,7 +1351,6 @@
       e.target.textContent = soundEnabled ? '🔊 Ses' : '🔇 Sessiz';
     });
 
-    // Açılış Ekranı -> Giriş
     document.getElementById('btn-enter-hub').addEventListener('click', () => {
       const val = document.getElementById('welcome-nick').value.trim();
       const finalName = val || db.activeUser || 'Kaan';
@@ -1608,7 +1368,6 @@
       renderSavedProfilesList();
     });
 
-    // Profil & Ekipman Atölyesi Kontrolleri
     let tempPhotoData = '';
     function openProfileWorkshop() {
       const user = getCurrentUser();
@@ -1631,6 +1390,30 @@
       updateWorkshopCrosshairPreview();
       profileModal.classList.remove('hidden');
     }
+
+    function applyCrosshairPreset(preset) {
+      const map = {
+        dot: { color: '#00f59b', size: 0, thick: 2, gap: 2, dot: true },
+        classic: { color: '#00f3ff', size: 8, thick: 2, gap: 4, dot: false },
+        goldpro: { color: '#ffc13b', size: 7, thick: 2, gap: 3, dot: true },
+        neon: { color: '#ff3df0', size: 10, thick: 2, gap: 5, dot: true }
+      };
+      const p = map[preset];
+      if (!p) return;
+      document.getElementById('ws-ch-color').value = p.color;
+      document.getElementById('ws-ch-size').value = p.size;
+      document.getElementById('ws-ch-thick').value = p.thick;
+      document.getElementById('ws-ch-gap').value = p.gap;
+      document.getElementById('ws-ch-dot').checked = p.dot;
+      document.getElementById('ws-ch-size-val').textContent = p.size + 'px';
+      document.getElementById('ws-ch-thick-val').textContent = p.thick + 'px';
+      document.getElementById('ws-ch-gap-val').textContent = p.gap + 'px';
+      updateWorkshopCrosshairPreview();
+    }
+
+    document.querySelectorAll('.ch-preset-btn').forEach(b => {
+      b.addEventListener('click', () => applyCrosshairPreset(b.dataset.preset));
+    });
 
     function updateWorkshopCrosshairPreview() {
       const previewCh = {
@@ -1732,7 +1515,6 @@
       profileModal.classList.add('hidden');
     });
 
-    // Mod ve Süre Seçimleri
     document.querySelectorAll('.mode-card').forEach(card => {
       card.addEventListener('click', () => {
         document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
@@ -1760,20 +1542,20 @@
     });
 
     function spawnTarget() {
-      const padding = 80;
+      const padding = 76;
       let radius = 34;
       let vx = 0;
       let vy = 0;
       let lifeTime = null;
 
       if (selectedMode === 'precision') {
-        radius = 16;
+        radius = 17;
       } else if (selectedMode === 'flick') {
-        radius = 28;
-        lifeTime = 1400;
+        radius = 29;
+        lifeTime = 1450;
       } else if (selectedMode === 'tracking') {
-        radius = 30;
-        const speed = 210 + Math.random() * 130;
+        radius = 31;
+        const speed = 195 + Math.random() * 125;
         const angle = Math.random() * Math.PI * 2;
         vx = Math.cos(angle) * speed;
         vy = Math.sin(angle) * speed;
@@ -1786,7 +1568,7 @@
         x = padding + Math.random() * Math.max(40, canvas.width - padding * 2);
         y = padding + Math.random() * Math.max(40, canvas.height - padding * 2);
         for (const t of targets) {
-          if (Math.hypot(x - t.x, y - t.y) < radius + t.radius + 25) {
+          if (Math.hypot(x - t.x, y - t.y) < radius + t.radius + 26) {
             safe = false;
             break;
           }
@@ -1796,7 +1578,7 @@
 
       targets.push({
         x, y, radius,
-        currentRadius: 6,
+        currentRadius: Math.max(10, radius * 0.45),
         vx, vy,
         spawnTime: performance.now(),
         lifeTime
@@ -1804,22 +1586,25 @@
     }
 
     function createExplosion(x, y, color) {
-      for (let i = 0; i < 16; i++) {
-        const angle = (Math.PI * 2 / 16) * i + Math.random() * 0.3;
-        const speed = 120 + Math.random() * 240;
+      if (particles.length > 140) particles.splice(0, 40);
+      for (let i = 0; i < 14; i++) {
+        const angle = (Math.PI * 2 / 14) * i + Math.random() * 0.25;
+        const speed = 120 + Math.random() * 220;
         particles.push({
           x, y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           alpha: 1,
-          size: 3 + Math.random() * 3,
+          size: 3 + Math.random() * 2.5,
           color
         });
       }
+      shockwaves.push({ x, y, r: 10, maxR: 58, alpha: 0.85, color });
     }
 
     function addFloatingText(x, y, text, color) {
-      floatingTexts.push({ x, y, text, color, alpha: 1, vy: -50 });
+      if (floatingTexts.length > 35) floatingTexts.shift();
+      floatingTexts.push({ x, y, text, color, alpha: 1, vy: -52 });
     }
 
     function startGame() {
@@ -1835,13 +1620,12 @@
       shotLog = [];
       targets = [];
       particles = [];
+      shockwaves = [];
       floatingTexts = [];
       timeLeft = selectedDuration;
-      aimX = canvas.width / 2;
-      aimY = canvas.height / 2;
-      lastRawMouseX = null;
-      lastRawMouseY = null;
 
+      arenaWrapper.classList.add('playing-cursor');
+      arenaWrapper.classList.remove('overdrive-glow');
       startMenu.classList.add('hidden');
       exitMenu.classList.add('hidden');
       resultMenu.classList.add('hidden');
@@ -1859,6 +1643,7 @@
       if (!isPlaying || isPausedForExit) return;
       isPausedForExit = true;
       crosshair.style.display = 'none';
+      arenaWrapper.classList.remove('playing-cursor');
       exitMenu.classList.remove('hidden');
     }
 
@@ -1866,6 +1651,7 @@
       if (!isPlaying || !isPausedForExit) return;
       isPausedForExit = false;
       exitMenu.classList.add('hidden');
+      arenaWrapper.classList.add('playing-cursor');
       lastFrameTime = performance.now();
       requestAnimationFrame(gameLoop);
     }
@@ -1895,6 +1681,8 @@
       isPlaying = false;
       isPausedForExit = false;
       crosshair.style.display = 'none';
+      arenaWrapper.classList.remove('playing-cursor');
+      arenaWrapper.classList.remove('overdrive-glow');
       exitMenu.classList.add('hidden');
       startMenu.classList.remove('hidden');
       refreshAllUI();
@@ -1911,10 +1699,7 @@
       const hCanvas = document.getElementById('heatmapCanvas');
       const hCtx = hCanvas.getContext('2d');
       hCtx.clearRect(0, 0, hCanvas.width, hCanvas.height);
-
-      // Izgara çizgisi
-      hCtx.strokeStyle = 'rgba(255,255,255,0.06)';
-      hCtx.lineWidth = 1;
+      hCtx.strokeStyle = 'rgba(255,255,255,0.08)';
       hCtx.strokeRect(1, 1, hCanvas.width - 2, hCanvas.height - 2);
 
       for (const s of shotLog) {
@@ -1922,7 +1707,7 @@
         const py = Math.max(6, Math.min(hCanvas.height - 6, s.ny * hCanvas.height));
         hCtx.beginPath();
         hCtx.arc(px, py, s.hit ? 4.5 : 3.5, 0, Math.PI * 2);
-        hCtx.fillStyle = s.hit ? 'rgba(0, 230, 118, 0.85)' : 'rgba(255, 42, 85, 0.85)';
+        hCtx.fillStyle = s.hit ? 'rgba(0, 245, 155, 0.88)' : 'rgba(255, 42, 85, 0.88)';
         hCtx.fill();
       }
     }
@@ -1931,6 +1716,8 @@
       isPlaying = false;
       isPausedForExit = false;
       crosshair.style.display = 'none';
+      arenaWrapper.classList.remove('playing-cursor');
+      arenaWrapper.classList.remove('overdrive-glow');
 
       const acc = shots > 0 ? Math.round((hits / shots) * 100) : 0;
       const avgMs = reactionTimes.length > 0
@@ -1940,30 +1727,15 @@
       const user = getCurrentUser();
       let gainedXp = hits > 0 ? Math.max(15, Math.round(score / 45) + Math.round(hits * 1.5)) : 10;
 
-      // Görev Kontrolü
-      if (!user.quests.q25hits && hits >= 25) {
-        user.quests.q25hits = true;
-        gainedXp += 120;
-      }
-      if (!user.quests.q80acc && shots >= 10 && acc >= 80) {
-        user.quests.q80acc = true;
-        gainedXp += 150;
-      }
-      if (!user.quests.q3000score && score >= 3000) {
-        user.quests.q3000score = true;
-        gainedXp += 200;
-      }
+      if (!user.quests.q25hits && hits >= 25) { user.quests.q25hits = true; gainedXp += 120; }
+      if (!user.quests.q80acc && shots >= 10 && acc >= 80) { user.quests.q80acc = true; gainedXp += 150; }
+      if (!user.quests.q3000score && score >= 3000) { user.quests.q3000score = true; gainedXp += 200; }
 
       user.xp += gainedXp;
       user.totalScore += score;
 
       if (score > 0 || hits > 0) {
-        db.entries.push({
-          name: user.name,
-          mode: selectedMode,
-          score,
-          acc
-        });
+        db.entries.push({ name: user.name, mode: selectedMode, score, acc });
         db.entries = db.entries.slice(-150);
       }
 
@@ -1985,6 +1757,7 @@
 
     function updateHUD() {
       hudScore.textContent = score;
+      hudCombo.textContent = combo + 'x';
       hudTime.textContent = Math.max(0, timeLeft).toFixed(1) + 's';
       const acc = shots > 0 ? Math.round((hits / shots) * 100) : 100;
       hudAcc.textContent = acc + '%';
@@ -1992,57 +1765,66 @@
         ? Math.round(reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length)
         : 0;
       hudMs.textContent = avgMs + ' ms';
+
+      if (combo >= 10) {
+        arenaWrapper.classList.add('overdrive-glow');
+      } else {
+        arenaWrapper.classList.remove('overdrive-glow');
+      }
     }
 
+    // Doğrudan gerçek tıklama koordinatıyla net vuruş kontrolü
     canvas.addEventListener('mousedown', (e) => {
       if (!isPlaying || isPausedForExit) return;
       const rect = canvas.getBoundingClientRect();
-      const user = getCurrentUser();
-      const sens = Number(user.sens) || 1.0;
-
-      const clickX = Math.abs(sens - 1.0) < 0.01 ? (e.clientX - rect.left) : aimX;
-      const clickY = Math.abs(sens - 1.0) < 0.01 ? (e.clientY - rect.top) : aimY;
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
 
       shots++;
       let hitIndex = -1;
 
       for (let i = targets.length - 1; i >= 0; i--) {
         const t = targets[i];
-        if (Math.hypot(clickX - t.x, clickY - t.y) <= t.radius + 3) {
+        const hitRadius = Math.max(t.radius, t.currentRadius) + 5;
+        if (Math.hypot(clickX - t.x, clickY - t.y) <= hitRadius) {
           hitIndex = i;
           break;
         }
       }
 
+      const user = getCurrentUser();
       const theme = TARGET_THEMES[user.targetTheme] || TARGET_THEMES.cyan;
+      const sensMult = Number(user.sens) || 1.0;
 
       if (hitIndex !== -1) {
         const hitTarget = targets[hitIndex];
         const rawReaction = performance.now() - hitTarget.spawnTime;
-        const reaction = Math.max(120, Math.min(950, Math.round(rawReaction)));
+        const reaction = Math.max(110, Math.min(950, Math.round(rawReaction)));
         reactionTimes.push(reaction);
-        shotLog.push({ nx: clickX / canvas.width, ny: clickY / canvas.height, hit: true });
+        shotLog.push({ nx: clickX / Math.max(1, canvas.width), ny: clickY / Math.max(1, canvas.height), hit: true });
 
         hits++;
         combo++;
         if (combo > maxCombo) maxCombo = combo;
 
+        const overdriveMult = combo >= 10 ? 1.25 : 1.0;
         const speedBonus = Math.max(0, Math.round((850 - reaction) / 8));
-        const gained = 100 + speedBonus + (combo * 5);
+        const gained = Math.round((100 + speedBonus + (combo * 5)) * sensMult * overdriveMult);
         score += gained;
 
         playSound('hit');
-        createExplosion(hitTarget.x, hitTarget.y, theme.particle);
-        addFloatingText(hitTarget.x, hitTarget.y - 15, `+${gained} (${reaction}ms)`, '#f7b733');
+        createExplosion(hitTarget.x, hitTarget.y, combo >= 10 ? '#ffc13b' : theme.particle);
+        addFloatingText(hitTarget.x, hitTarget.y - 16, `+${gained} (${reaction}ms)`, combo >= 10 ? '#00f59b' : '#ffc13b');
 
         targets.splice(hitIndex, 1);
         spawnTarget();
       } else {
-        shotLog.push({ nx: clickX / canvas.width, ny: clickY / canvas.height, hit: false });
+        shotLog.push({ nx: clickX / Math.max(1, canvas.width), ny: clickY / Math.max(1, canvas.height), hit: false });
         combo = 0;
-        score = Math.max(0, score - 30);
+        score = Math.max(0, score - 25);
         playSound('miss');
-        addFloatingText(clickX, clickY - 10, '-30', '#ff2a55');
+        shockwaves.push({ x: clickX, y: clickY, r: 4, maxR: 26, alpha: 0.7, color: '#ff2a55' });
+        addFloatingText(clickX, clickY - 10, '-25', '#ff4d79');
       }
 
       updateHUD();
@@ -2050,7 +1832,7 @@
 
     function gameLoop(now) {
       if (!isPlaying || isPausedForExit) return;
-      const dt = Math.min(0.05, (now - lastFrameTime) / 1000);
+      const dt = Math.min(0.035, (now - lastFrameTime) / 1000);
       lastFrameTime = now;
 
       timeLeft -= dt;
@@ -2069,7 +1851,7 @@
         const t = targets[i];
 
         if (t.currentRadius < t.radius) {
-          t.currentRadius = Math.min(t.radius, t.currentRadius + 280 * dt);
+          t.currentRadius = Math.min(t.radius, t.currentRadius + 420 * dt);
         }
 
         t.x += t.vx * dt;
@@ -2084,53 +1866,69 @@
           continue;
         }
 
-        const grad = ctx.createRadialGradient(t.x, t.y, t.currentRadius * 0.2, t.x, t.y, t.currentRadius);
+        const r = t.currentRadius;
+        const grad = ctx.createRadialGradient(t.x, t.y, r * 0.15, t.x, t.y, r);
         grad.addColorStop(0, theme.inner);
-        grad.addColorStop(0.7, theme.mid);
+        grad.addColorStop(0.68, theme.mid);
         grad.addColorStop(1, theme.outer);
 
         ctx.beginPath();
-        ctx.arc(t.x, t.y, t.currentRadius, 0, Math.PI * 2);
+        ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
         ctx.fillStyle = grad;
         ctx.fill();
 
         ctx.lineWidth = 2;
-        ctx.strokeStyle = '#ffffff';
+        ctx.strokeStyle = combo >= 10 ? '#ffc13b' : '#ffffff';
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(t.x, t.y, t.currentRadius * 0.25, 0, Math.PI * 2);
+        ctx.arc(t.x, t.y, r * 0.24, 0, Math.PI * 2);
         ctx.fillStyle = '#ffffff';
         ctx.fill();
+      }
+
+      for (let i = shockwaves.length - 1; i >= 0; i--) {
+        const sw = shockwaves[i];
+        sw.r += 160 * dt;
+        sw.alpha -= 2.8 * dt;
+        if (sw.alpha <= 0) {
+          shockwaves.splice(i, 1);
+          continue;
+        }
+        ctx.globalAlpha = Math.max(0, sw.alpha);
+        ctx.beginPath();
+        ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
+        ctx.strokeStyle = sw.color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
       }
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.x += p.vx * dt;
         p.y += p.vy * dt;
-        p.alpha -= 2.4 * dt;
+        p.alpha -= 2.6 * dt;
         if (p.alpha <= 0) {
           particles.splice(i, 1);
           continue;
         }
-        ctx.globalAlpha = p.alpha;
+        ctx.globalAlpha = Math.max(0, p.alpha);
         ctx.fillStyle = p.color;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
       }
-      ctx.globalAlpha = 1;
 
       for (let i = floatingTexts.length - 1; i >= 0; i--) {
         const ft = floatingTexts[i];
         ft.y += ft.vy * dt;
-        ft.alpha -= 1.5 * dt;
+        ft.alpha -= 1.6 * dt;
         if (ft.alpha <= 0) {
           floatingTexts.splice(i, 1);
           continue;
         }
-        ctx.globalAlpha = ft.alpha;
-        ctx.font = 'bold 16px Orbitron';
+        ctx.globalAlpha = Math.max(0, ft.alpha);
+        ctx.font = 'bold 15px Orbitron';
         ctx.fillStyle = ft.color;
         ctx.textAlign = 'center';
         ctx.fillText(ft.text, ft.x, ft.y);
@@ -2149,7 +1947,6 @@
       refreshAllUI();
     });
 
-    // İlk yükleme
     refreshAllUI();
   </script>
 </body>
