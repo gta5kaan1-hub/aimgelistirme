@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIMLAB PRO // Refleks & Nişan Akademisi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090a0f;
+      --bg-panel: rgba(18, 20, 30, 0.85);
+      --primary: #ff2a55;
+      --primary-glow: rgba(255, 42, 85, 0.5);
+      --gold: #f5b041;
+      --gold-glow: rgba(245, 176, 65, 0.45);
+      --cyan: #00f3ff;
+      --text-main: #f0f4f8;
+      --text-muted: #8a94a6;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(255, 42, 85, 0.12) 0%, transparent 50%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 40px 40px, 40px 40px;
+      color: var(--text-main);
+      font-family: 'Rajdhani', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Üst HUD Bar */
+    header {
+      height: 70px;
+      background: var(--bg-panel);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      z-index: 20;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--gold);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      color: var(--gold);
+      box-shadow: 0 0 15px var(--gold-glow);
+      transform: rotate(45deg);
+    }
+
+    .brand-logo span {
+      transform: rotate(-45deg);
+    }
+
+    .brand h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, #fff, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hud-stats {
+      display: flex;
+      gap: 28px;
+    }
+
+    .stat-box {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 6px 18px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      min-width: 105px;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+    }
+
+    .stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .stat-value.gold { color: var(--gold); text-shadow: 0 0 10px var(--gold-glow); }
+    .stat-value.cyan { color: var(--cyan); }
+    .stat-value.red { color: var(--primary); }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    select, button.icon-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    select:hover, button.icon-btn:hover {
+      border-color: var(--gold);
+      background: rgba(245, 176, 65, 0.1);
+    }
+
+    select option {
+      background: #12141e;
+      color: #fff;
+    }
+
+    /* Oyun Alanı */
+    #arena-wrapper {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Özel Crosshair */
+    #custom-crosshair {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+
+    /* Menü & Sonuç Ekranı Overlay */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(9, 10, 15, 0.88);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 30;
+      cursor: default;
+    }
+
+    .panel {
+      background: linear-gradient(145deg, #131622, #0c0e16);
+      border: 1px solid rgba(245, 176, 65, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 42, 85, 0.15);
+      border-radius: 14px;
+      padding: 36px;
+      max-width: 780px;
+      width: 92%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--gold), var(--cyan));
+    }
+
+    .panel h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .panel p.subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 26px;
+    }
+
+    /* Mod Kartları */
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    .mode-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: left;
+    }
+
+    .mode-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(245, 176, 65, 0.5);
+    }
+
+    .mode-card.active {
+      background: linear-gradient(145deg, rgba(255, 42, 85, 0.15), rgba(245, 176, 65, 0.12));
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(245, 176, 65, 0.2);
+    }
+
+    .mode-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(255, 42, 85, 0.2);
+      color: var(--primary);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .mode-card.active .mode-tag {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .mode-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .mode-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* Süre Seçimi */
+    .duration-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .dur-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .dur-btn.active {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(0, 243, 255, 0.1);
+    }
+
+    .btn-start {
+      background: linear-gradient(90deg, var(--primary), #ff5e3a);
+      border: none;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 16px 48px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px var(--primary-glow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-start:hover {
+      transform: scale(1.04);
+      box-shadow: 0 12px 35px rgba(255, 42, 85, 0.75);
+    }
+
+    /* Sonuç Ekranı */
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .res-item {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid var(--border);
+      padding: 16px 10px;
+      border-radius: 8px;
+    }
+
+    .res-item span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .res-item strong {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+
+    .rank-badge {
+      display: inline-block;
+      padding: 8px 24px;
+      border-radius: 30px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, rgba(245, 176, 65, 0.2), rgba(255, 42, 85, 0.2));
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      margin-bottom: 22px;
+      box-shadow: 0 0 20px var(--gold-glow);
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- Özel Crosshair SVG -->
+  <svg id="custom-crosshair" width="32" height="32" viewBox="0 0 32 32">
+    <line x1="16" y1="4" x2="16" y2="11" stroke="#00f3ff" stroke-width="2" />
+    <line x1="16" y1="21" x2="16" y2="28" stroke="#00f3ff" stroke-width="2" />
+    <line x1="4" y1="16" x2="11" y2="16" stroke="#00f3ff" stroke-width="2" />
+    <line x1="21" y1="16" x2="28" y2="16" stroke="#00f3ff" stroke-width="2" />
+    <circle cx="16" cy="16" r="1.5" fill="#ff2a55" />
+  </svg>
+
+  <header>
+    <div class="brand">
+      <div class="brand-logo"><span>A</span></div>
+      <h1>AIMLAB PRO</h1>
+    </div>
+
+    <div class="hud-stats">
+      <div class="stat-box">
+        <div class="stat-label">SKOR</div>
+        <div class="stat-value gold" id="hud-score">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">SÜRE</div>
+        <div class="stat-value cyan" id="hud-time">30.0s</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">İSABET</div>
+        <div class="stat-value" id="hud-acc">100%</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">ORT. TEPKİ</div>
+        <div class="stat-value red" id="hud-ms">0 ms</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <select id="crosshair-color" title="Nişangah Rengi">
+        <option value="#00f3ff">Nişangah: Camgöbeği</option>
+        <option value="#00ff66">Nişangah: Neon Yeşil</option>
+        <option value="#ff2a55">Nişangah: Kırmızı</option>
+        <option value="#f5b041">Nişangah: Altın</option>
+        <option value="#ffffff">Nişangah: Beyaz</option>
+      </select>
+      <button class="icon-btn" id="btn-sound" title="Sesi Aç/Kapat">🔊 Ses Açık</button>
+      <button class="icon-btn" id="btn-abort" title="Menüye Dön">⏹ Menü</button>
+    </div>
+  </header>
+
+  <div id="arena-wrapper">
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Başlangıç Menüsü -->
+    <div class="overlay" id="start-menu">
+      <div class="panel">
+        <h2>ANTRENMAN MODU SEÇ</h2>
+        <p class="subtitle">Reflekslerini keskinleştir, kas hafızanı geliştir ve rekorunu kır.</p>
+
+        <div class="mode-grid">
+          <div class="mode-card active" data-mode="gridshot">
+            <span class="mode-tag">HIZ & RİTİM</span>
+            <h3>GRIDSHOT</h3>
+            <p>Ekranda aynı anda 3 hedef belirir. Birini vurduğunda anında yenisi doğar.</p>
+          </div>
+          <div class="mode-card" data-mode="flick">
+            <span class="mode-tag">REFLEKS</span>
+            <h3>FLICK SHOT</h3>
+            <p>Tek bir hedef anlık belirir ve hızla kaybolur. Saf tepki süreni ölçer.</p>
+          </div>
+          <div class="mode-card" data-mode="tracking">
+            <span class="mode-tag">HAREKETLİ</span>
+            <h3>STRAFE TRACK</h3>
+            <p>Sağa sola kaçan hareketli hedefleri takip ederek vurmaya çalış.</p>
+          </div>
+          <div class="mode-card" data-mode="precision">
+            <span class="mode-tag">HEADSHOT</span>
+            <h3>MİKRO NİŞAN</h3>
+            <p>Çok küçük hedeflerle fare hakimiyetini ve nokta atışı keskinliğini artır.</p>
+          </div>
+        </div>
+
+        <div class="duration-bar">
+          <button class="dur-btn" data-time="15">15 SANİYE</button>
+          <button class="dur-btn active" data-time="30">30 SANİYE</button>
+          <button class="dur-btn" data-time="60">60 SANİYE</button>
+        </div>
+
+        <button class="btn-start" id="btn-play">ANTRENMANI BAŞLAT</button>
+      </div>
+    </div>
+
+    <!-- Sonuç Ekranı -->
+    <div class="overlay hidden" id="result-menu">
+      <div class="panel">
+        <h2>ANTRENMAN TAMAMLANDI</h2>
+        <p class="subtitle">Performans Analizi & Nişancılık Rütben</p>
+
+        <div class="rank-badge" id="final-rank">RÜTBE: ELMAS NİŞANCI</div>
+
+        <div class="result-grid">
+          <div class="res-item">
+            <span>Toplam Skor</span>
+            <strong id="res-score" style="color: var(--gold);">0</strong>
+          </div>
+          <div class="res-item">
+            <span>İsabet Oranı</span>
+            <strong id="res-acc" style="color: var(--cyan);">0%</strong>
+          </div>
+          <div class="res-item">
+            <span>Ort. Tepki</span>
+            <strong id="res-ms" style="color: var(--primary);">0 ms</strong>
+          </div>
+          <div class="res-item">
+            <span>Maks. Kombo</span>
+            <strong id="res-combo">0x</strong>
+          </div>
+        </div>
+
+        <button class="btn-start" id="btn-restart">TEKRAR OYNA</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const arenaWrapper = document.getElementById('arena-wrapper');
+    const crosshair = document.getElementById('custom-crosshair');
+
+    // UI Elemanları
+    const startMenu = document.getElementById('start-menu');
+    const resultMenu = document.getElementById('result-menu');
+    const hudScore = document.getElementById('hud-score');
+    const hudTime = document.getElementById('hud-time');
+    const hudAcc = document.getElementById('hud-acc');
+    const hudMs = document.getElementById('hud-ms');
+
+    // Oyun Durumu
+    let isPlaying = false;
+    let selectedMode = 'gridshot';
+    let selectedDuration = 30;
+    let timeLeft = 30;
+    let score = 0;
+    let hits = 0;
+    let shots = 0;
+    let combo = 0;
+    let maxCombo = 0;
+    let reactionTimes = [];
+    let targets = [];
+    let particles = [];
+    let floatingTexts = [];
+    let soundEnabled = true;
+    let lastFrameTime = 0;
+
+    // Web Audio API ile Gecikmesiz Ses Efekti
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSound(type) {
+      if (!soundEnabled) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      const now = audioCtx.currentTime;
+      if (type === 'hit') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(620 + Math.min(combo * 18, 500), now);
+        osc.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
+        gain.gain.setValueAtTime(0.22, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+        osc.start(now);
+        osc.stop(now + 0.09);
+      } else if (type === 'miss') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(140, now);
+        osc.frequency.exponentialRampToValueAtTime(60, now + 0.12);
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      }
+    }
+
+    // Canvas Boyutlandırma
+    function resizeCanvas() {
+      canvas.width = arenaWrapper.clientWidth;
+      canvas.height = arenaWrapper.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Crosshair Hareketi & Rengi
+    arenaWrapper.addEventListener('mousemove', (e) => {
+      if (isPlaying) {
+        crosshair.style.display = 'block';
+        crosshair.style.left = e.clientX + 'px';
+        crosshair.style.top = e.clientY + 'px';
+      }
+    });
+    arenaWrapper.addEventListener('mouseleave', () => {
+      crosshair.style.display = 'none';
+    });
+
+    document.getElementById('crosshair-color').addEventListener('change', (e) => {
+      const color = e.target.value;
+      crosshair.querySelectorAll('line').forEach(l => l.setAttribute('stroke', color));
+    });
+
+    document.getElementById('btn-sound').addEventListener('click', (e) => {
+      soundEnabled = !soundEnabled;
+      e.target.textContent = soundEnabled ? '🔊 Ses Açık' : '🔇 Ses Kapalı';
+    });
+
+    // Mod ve Süre Seçimleri
+    document.querySelectorAll('.mode-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        selectedMode = card.dataset.mode;
+      });
+    });
+
+    document.querySelectorAll('.dur-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.dur-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedDuration = parseInt(btn.dataset.time);
+        hudTime.textContent = selectedDuration.toFixed(1) + 's';
+      });
+    });
+
+    // Hedef Oluşturma
+    function spawnTarget() {
+      const padding = 80;
+      let radius = 34;
+      let vx = 0;
+      let vy = 0;
+      let lifeTime = null;
+
+      if (selectedMode === 'precision') {
+        radius = 16;
+      } else if (selectedMode === 'flick') {
+        radius = 28;
+        lifeTime = 1350; // ms sonra kaybolur
+      } else if (selectedMode === 'tracking') {
+        radius = 30;
+        const speed = 220 + Math.random() * 140;
+        const angle = Math.random() * Math.PI * 2;
+        vx = Math.cos(angle) * speed;
+        vy = Math.sin(angle) * speed;
+      }
+
+      let x, y, safe;
+      let attempts = 0;
+      do {
+        safe = true;
+        x = padding + Math.random() * (canvas.width - padding * 2);
+        y = padding + Math.random() * (canvas.height - padding * 2);
+        for (let t of targets) {
+          if (Math.hypot(x - t.x, y - t.y) < radius + t.radius + 25) {
+            safe = false;
+            break;
+          }
+        }
+        attempts++;
+      } while (!safe && attempts < 30);
+
+      targets.push({
+        x, y, radius,
+        currentRadius: 4,
+        vx, vy,
+        spawnTime: performance.now(),
+        lifeTime
+      });
+    }
+
+    // Parçacık Efekti
+    function createExplosion(x, y, color) {
+      for (let i = 0; i < 16; i++) {
+        const angle = (Math.PI * 2 / 16) * i + Math.random() * 0.3;
+        const speed = 120 + Math.random() * 240;
+        particles.push({
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          alpha: 1,
+          size: 3 + Math.random() * 3,
+          color
+        });
+      }
+    }
+
+    function addFloatingText(x, y, text, color) {
+      floatingTexts.push({ x, y, text, color, alpha: 1, vy: -50 });
+    }
+
+    // Oyunu Başlat
+    function startGame() {
+      resizeCanvas();
+      isPlaying = true;
+      score = 0;
+      hits = 0;
+      shots = 0;
+      combo = 0;
+      maxCombo = 0;
+      reactionTimes = [];
+      targets = [];
+      particles = [];
+      floatingTexts = [];
+      timeLeft = selectedDuration;
+
+      startMenu.classList.add('hidden');
+      resultMenu.classList.add('hidden');
+      updateHUD();
+
+      const initialCount = selectedMode === 'gridshot' ? 3 : (selectedMode === 'tracking' ? 2 : 1);
+      for (let i = 0; i < initialCount; i++) spawnTarget();
+
+      lastFrameTime = performance.now();
+      requestAnimationFrame(gameLoop);
+    }
+
+    function endGame() {
+      isPlaying = false;
+      crosshair.style.display = 'none';
+
+      const acc = shots > 0 ? Math.round((hits / shots) * 100) : 0;
+      const avgMs = reactionTimes.length > 0
+        ? Math.round(reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length)
+        : 0;
+
+      document.getElementById('res-score').textContent = score;
+      document.getElementById('res-acc').textContent = acc + '%';
+      document.getElementById('res-ms').textContent = avgMs + ' ms';
+      document.getElementById('res-combo').textContent = maxCombo + 'x';
+
+      // Rütbe Hesaplama
+      let rank = 'BRONZ NİŞANCI';
+      if (score >= 4500 && acc >= 85) rank = 'RADYANT // EFSANE';
+      else if (score >= 3200 && acc >= 80) rank = 'ÖLÜMSÜZ (IMMORTAL)';
+      else if (score >= 2200) rank = 'ELMAS NİŞANCI';
+      else if (score >= 1300) rank = 'ALTIN NİŞANCI';
+      else if (score >= 600) rank = 'GÜMÜŞ NİŞANCI';
+
+      document.getElementById('final-rank').textContent = 'RÜTBE: ' + rank;
+      resultMenu.classList.remove('hidden');
+    }
+
+    function updateHUD() {
+      hudScore.textContent = score;
+      hudTime.textContent = Math.max(0, timeLeft).toFixed(1) + 's';
+      const acc = shots > 0 ? Math.round((hits / shots) * 100) : 100;
+      hudAcc.textContent = acc + '%';
+      const avgMs = reactionTimes.length > 0
+        ? Math.round(reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length)
+        : 0;
+      hudMs.textContent = avgMs + ' ms';
+    }
+
+    // Ateş Etme (Mousedown daha hızlı tepki verir)
+    canvas.addEventListener('mousedown', (e) => {
+      if (!isPlaying) return;
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      shots++;
+      let hitIndex = -1;
+
+      for (let i = targets.length - 1; i >= 0; i--) {
+        const t = targets[i];
+        if (Math.hypot(clickX - t.x, clickY - t.y) <= t.radius + 3) {
+          hitIndex = i;
+          break;
+        }
+      }
+
+      if (hitIndex !== -1) {
+        const hitTarget = targets[hitIndex];
+        const reaction = Math.round(performance.now() - hitTarget.spawnTime);
+        reactionTimes.push(reaction);
+
+        hits++;
+        combo++;
+        if (combo > maxCombo) maxCombo = combo;
+
+        const speedBonus = Math.max(0, Math.round((800 - reaction) / 8));
+        const gained = 100 + speedBonus + (combo * 5);
+        score += gained;
+
+        playSound('hit');
+        createExplosion(hitTarget.x, hitTarget.y, '#00f3ff');
+        addFloatingText(hitTarget.x, hitTarget.y - 15, `+${gained} (${reaction}ms)`, '#f5b041');
+
+        targets.splice(hitIndex, 1);
+        spawnTarget();
+      } else {
+        combo = 0;
+        score = Math.max(0, score - 30);
+        playSound('miss');
+        addFloatingText(clickX, clickY - 10, '-30', '#ff2a55');
+      }
+
+      updateHUD();
+    });
+
+    // Ana Oyun Döngüsü
+    function gameLoop(now) {
+      if (!isPlaying) return;
+      const dt = (now - lastFrameTime) / 1000;
+      lastFrameTime = now;
+
+      timeLeft -= dt;
+      if (timeLeft <= 0) {
+        timeLeft = 0;
+        updateHUD();
+        endGame();
+        return;
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Hedefleri Güncelle ve Çiz
+      for (let i = targets.length - 1; i >= 0; i--) {
+        const t = targets[i];
+
+        // Büyüme animasyonu
+        if (t.currentRadius < t.radius) {
+          t.currentRadius = Math.min(t.radius, t.currentRadius + 240 * dt);
+        }
+
+        // Hareket (Tracking modu)
+        t.x += t.vx * dt;
+        t.y += t.vy * dt;
+        if (t.x - t.radius < 30 || t.x + t.radius > canvas.width - 30) t.vx *= -1;
+        if (t.y - t.radius < 30 || t.y + t.radius > canvas.height - 30) t.vy *= -1;
+
+        // Flick modu süre kontrolü
+        if (t.lifeTime && (now - t.spawnTime > t.lifeTime)) {
+          combo = 0;
+          targets.splice(i, 1);
+          spawnTarget();
+          continue;
+        }
+
+        // Dış Neon Hale
+        const grad = ctx.createRadialGradient(t.x, t.y, t.currentRadius * 0.2, t.x, t.y, t.currentRadius);
+        grad.addColorStop(0, '#00f3ff');
+        grad.addColorStop(0.7, '#0088ff');
+        grad.addColorStop(1, 'rgba(0, 243, 255, 0.15)');
+
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, t.currentRadius, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#ffffff';
+        ctx.stroke();
+
+        // Merkez Nokta (Bullseye)
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, t.currentRadius * 0.25, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+      }
+
+      // Parçacıkları Çiz
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx * dt;
+        p.y += p.vy * dt;
+        p.alpha -= 2.4 * dt;
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+      // Uçan Skor Yazıları
+      for (let i = floatingTexts.length - 1; i >= 0; i--) {
+        const ft = floatingTexts[i];
+        ft.y += ft.vy * dt;
+        ft.alpha -= 1.5 * dt;
+        if (ft.alpha <= 0) {
+          floatingTexts.splice(i, 1);
+          continue;
+        }
+        ctx.globalAlpha = ft.alpha;
+        ctx.font = 'bold 16px Orbitron';
+        ctx.fillStyle = ft.color;
+        ctx.textAlign = 'center';
+        ctx.fillText(ft.text, ft.x, ft.y);
+      }
+      ctx.globalAlpha = 1;
+
+      hudTime.textContent = timeLeft.toFixed(1) + 's';
+      requestAnimationFrame(gameLoop);
+    }
+
+    document.getElementById('btn-play').addEventListener('click', startGame);
+    document.getElementById('btn-restart').addEventListener('click', startGame);
+    document.getElementById('btn-abort').addEventListener('click', () => {
+      isPlaying = false;
+      crosshair.style.display = 'none';
+      resultMenu.classList.add('hidden');
+      startMenu.classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
