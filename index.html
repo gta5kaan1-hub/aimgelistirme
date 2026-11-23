@@ -9,19 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #07080f;
+      --bg-dark: #07080e;
       --primary: #ff2a55;
-      --primary-glow: rgba(255, 42, 85, 0.52);
+      --primary-glow: rgba(255, 42, 85, 0.45);
       --gold: #ffc13b;
-      --gold-glow: rgba(255, 193, 59, 0.48);
-      --cyan: #00f3ff;
-      --cyan-glow: rgba(0, 243, 255, 0.44);
-      --emerald: #00f59b;
-      --violet: #c06cff;
-      --magenta: #ff3df0;
-      --text-main: #f5f7fb;
-      --text-muted: #9da8c2;
-      --border: rgba(255, 255, 255, 0.13);
+      --gold-glow: rgba(255, 193, 59, 0.45);
+      --cyan: #18e0ff;
+      --cyan-glow: rgba(24, 224, 255, 0.35);
+      --emerald: #00e699;
+      --text-main: #f4f6fb;
+      --text-muted: #9aa5be;
+      --border: rgba(255, 255, 255, 0.12);
       --font-display: 'Space Grotesk', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -41,20 +39,71 @@
     }
 
     body {
+      position: relative;
       background-color: var(--bg-dark);
       background-image:
-        radial-gradient(circle at 12% 14%, rgba(255, 193, 59, 0.22) 0%, transparent 40%),
-        radial-gradient(circle at 86% 15%, rgba(255, 42, 85, 0.23) 0%, transparent 42%),
-        radial-gradient(circle at 75% 85%, rgba(192, 108, 255, 0.19) 0%, transparent 45%),
-        radial-gradient(circle at 22% 88%, rgba(0, 243, 255, 0.18) 0%, transparent 45%),
-        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 44px 44px, 44px 44px;
+        radial-gradient(circle at 15% 18%, rgba(255, 193, 59, 0.16) 0%, transparent 42%),
+        radial-gradient(circle at 85% 20%, rgba(255, 42, 85, 0.16) 0%, transparent 44%),
+        radial-gradient(circle at 50% 85%, rgba(24, 224, 255, 0.11) 0%, transparent 48%),
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 44px 44px, 44px 44px;
       color: var(--text-main);
       font-family: var(--font-body);
       display: flex;
       flex-direction: column;
-      letter-spacing: -0.01em;
+    }
+
+    /* İlk fotoğraftaki arka plan ışık geçişleri ve yanıp sönen / nefes alan spotlar */
+    .ambient-lights {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .light-beam {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(85px);
+      opacity: 0.35;
+      animation: strobePulse 6.5s ease-in-out infinite alternate;
+    }
+
+    .light-beam.beam-gold {
+      width: 420px;
+      height: 420px;
+      top: -90px;
+      left: 8%;
+      background: radial-gradient(circle, rgba(255, 193, 59, 0.65), transparent 70%);
+      animation-duration: 4.8s;
+    }
+
+    .light-beam.beam-crimson {
+      width: 460px;
+      height: 460px;
+      bottom: -110px;
+      right: 10%;
+      background: radial-gradient(circle, rgba(255, 42, 85, 0.6), transparent 70%);
+      animation-delay: -2.2s;
+      animation-duration: 5.6s;
+    }
+
+    .light-beam.beam-cyan {
+      width: 360px;
+      height: 360px;
+      top: 38%;
+      left: 52%;
+      background: radial-gradient(circle, rgba(24, 224, 255, 0.45), transparent 70%);
+      animation-delay: -1.1s;
+      animation-duration: 3.7s;
+    }
+
+    @keyframes strobePulse {
+      0% { opacity: 0.16; transform: scale(0.94) translate(0, 0); }
+      50% { opacity: 0.46; transform: scale(1.06) translate(14px, -10px); }
+      100% { opacity: 0.22; transform: scale(0.98) translate(-10px, 12px); }
     }
 
     .glow-interact {
@@ -62,76 +111,53 @@
     }
 
     .glow-interact:hover {
-      box-shadow: 0 0 22px rgba(0, 243, 255, 0.22), 0 0 14px rgba(255, 193, 59, 0.18);
+      box-shadow: 0 0 20px rgba(255, 193, 59, 0.22), 0 0 12px rgba(24, 224, 255, 0.15);
     }
 
     .glow-interact:active {
       transform: scale(0.97) !important;
-      box-shadow: 0 0 28px var(--gold-glow), 0 0 18px var(--cyan-glow) !important;
-      border-color: var(--gold) !important;
     }
 
     /* Üst HUD Bar */
     header {
       height: 72px;
-      background: linear-gradient(90deg, rgba(15, 18, 34, 0.96), rgba(40, 14, 34, 0.94), rgba(14, 24, 42, 0.96));
+      background: linear-gradient(90deg, rgba(13, 15, 28, 0.96), rgba(34, 14, 26, 0.95), rgba(13, 17, 30, 0.96));
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 193, 59, 0.34);
+      border-bottom: 1px solid rgba(255, 193, 59, 0.32);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 20px;
       z-index: 40;
-      box-shadow: 0 6px 34px rgba(0, 0, 0, 0.75);
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.75);
       flex-shrink: 0;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 11px;
       cursor: pointer;
     }
 
-    .brand-logo {
-      width: 36px;
-      height: 36px;
-      border: 2px solid var(--gold);
-      border-radius: 9px;
-      display: grid;
-      place-items: center;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: #090b12;
-      background: linear-gradient(135deg, var(--gold), #ff6b3d, var(--magenta));
-      box-shadow: 0 0 20px var(--gold-glow);
-      transform: rotate(45deg);
-    }
-
-    .brand-logo span { transform: rotate(-45deg); }
-
     .brand h1 {
       font-family: var(--font-display);
-      font-size: 1.28rem;
+      font-size: 1.26rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      background: linear-gradient(90deg, #ffffff, var(--gold), var(--cyan), #ff5c8a);
+      letter-spacing: 0.05em;
+      background: linear-gradient(90deg, #ffffff, var(--gold), #ff6b8b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hud-stats {
-      display: flex;
-      gap: 10px;
-    }
+    .hud-stats { display: flex; gap: 10px; }
 
     .stat-box {
       text-align: center;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(8, 10, 18, 0.84));
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.045), rgba(8, 10, 18, 0.85));
       padding: 5px 12px;
       border-radius: 9px;
-      border: 1px solid rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       min-width: 84px;
     }
 
@@ -145,62 +171,52 @@
 
     .stat-value {
       font-family: var(--font-mono);
-      font-size: 1.08rem;
+      font-size: 1.06rem;
       font-weight: 700;
       color: #fff;
     }
 
-    .stat-value.gold { color: var(--gold); text-shadow: 0 0 12px var(--gold-glow); }
-    .stat-value.cyan { color: var(--cyan); text-shadow: 0 0 12px var(--cyan-glow); }
-    .stat-value.red { color: #ff5277; text-shadow: 0 0 12px var(--primary-glow); }
-    .stat-value.emerald { color: var(--emerald); text-shadow: 0 0 12px rgba(0, 245, 155, 0.42); }
+    .stat-value.gold { color: var(--gold); }
+    .stat-value.cyan { color: var(--cyan); }
+    .stat-value.red { color: #ff5277; }
+    .stat-value.emerald { color: var(--emerald); }
 
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .controls { display: flex; align-items: center; gap: 8px; }
 
     button.icon-btn {
-      background: rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border);
       color: #fff;
       padding: 7px 11px;
       border-radius: 8px;
       font-family: var(--font-body);
       font-weight: 700;
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       cursor: pointer;
     }
 
     button.icon-btn:hover {
       border-color: var(--gold);
-      background: rgba(255, 193, 59, 0.15);
+      background: rgba(255, 193, 59, 0.14);
     }
 
     button.vs-top-btn {
-      background: linear-gradient(135deg, rgba(0, 243, 255, 0.18), rgba(192, 108, 255, 0.2));
-      border-color: rgba(0, 243, 255, 0.55);
-      color: var(--cyan);
+      background: linear-gradient(135deg, rgba(255, 193, 59, 0.16), rgba(255, 42, 85, 0.18));
+      border-color: rgba(255, 193, 59, 0.5);
+      color: var(--gold);
     }
 
     button.exit-btn {
-      border-color: rgba(255, 42, 85, 0.55);
+      border-color: rgba(255, 42, 85, 0.5);
       color: #ff8ca4;
-    }
-
-    button.exit-btn:hover {
-      background: rgba(255, 42, 85, 0.25);
-      border-color: var(--primary);
-      color: #fff;
     }
 
     .header-profile-chip {
       display: flex;
       align-items: center;
       gap: 9px;
-      background: linear-gradient(135deg, rgba(255, 193, 59, 0.2), rgba(192, 108, 255, 0.16), rgba(0, 243, 255, 0.12));
-      border: 1px solid rgba(255, 193, 59, 0.52);
+      background: linear-gradient(135deg, rgba(255, 193, 59, 0.16), rgba(255, 42, 85, 0.12));
+      border: 1px solid rgba(255, 193, 59, 0.48);
       padding: 5px 12px 5px 6px;
       border-radius: 999px;
       cursor: pointer;
@@ -211,10 +227,10 @@
       height: 35px;
       border-radius: 50%;
       border: 2px solid var(--gold);
-      background: linear-gradient(135deg, #1b1530, #0d1b2a);
+      background: linear-gradient(135deg, #1b1528, #0e1624);
       display: grid;
       place-items: center;
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       font-weight: 800;
       color: var(--gold);
       overflow: hidden;
@@ -242,11 +258,12 @@
       flex: 1;
       width: 100%;
       overflow: hidden;
+      z-index: 5;
     }
 
     #arena-wrapper.playing-cursor { cursor: none; }
     #arena-wrapper.overdrive-glow {
-      box-shadow: inset 0 0 65px rgba(255, 193, 59, 0.28), inset 0 0 35px rgba(255, 42, 85, 0.25);
+      box-shadow: inset 0 0 60px rgba(255, 193, 59, 0.25), inset 0 0 32px rgba(255, 42, 85, 0.22);
     }
 
     canvas#gameCanvas { display: block; width: 100%; height: 100%; }
@@ -262,8 +279,8 @@
     .overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 45%, rgba(38, 20, 56, 0.86), rgba(6, 7, 14, 0.96));
-      backdrop-filter: blur(13px);
+      background: radial-gradient(circle at 50% 42%, rgba(28, 19, 38, 0.84), rgba(6, 7, 13, 0.95));
+      backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -281,26 +298,17 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      background: radial-gradient(circle at 50% 40%, rgba(36, 18, 38, 0.72), rgba(6, 7, 13, 0.92));
     }
 
-    .welcome-card {
+    /* 3. fotodaki üst ışık geçiş çizgisinin parlayan / akan hali */
+    .welcome-card, .panel {
       position: relative;
-      max-width: 620px;
-      width: 100%;
-      margin: auto;
-      background: linear-gradient(155deg, rgba(26, 25, 48, 0.97), rgba(10, 12, 24, 0.99));
-      border: 1px solid rgba(255, 193, 59, 0.52);
-      border-radius: 20px;
-      padding: 42px 36px;
-      text-align: center;
-      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(192, 108, 255, 0.22);
+      background: linear-gradient(155deg, rgba(22, 21, 38, 0.97), rgba(10, 12, 22, 0.99));
+      border: 1px solid rgba(255, 193, 59, 0.34);
+      border-radius: 16px;
+      box-shadow: 0 24px 65px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 193, 59, 0.09);
       overflow: hidden;
-      animation: cardEntrance 0.38s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes cardEntrance {
-      from { opacity: 0; transform: translateY(14px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .welcome-card::before, .panel::before {
@@ -308,118 +316,133 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3.5px;
-      background: linear-gradient(90deg, var(--primary), var(--gold), var(--emerald), var(--cyan), var(--violet), var(--primary));
+      background: linear-gradient(90deg, #ff2a55, #ffc13b, #00e699, #18e0ff, #ff2a55);
+      background-size: 220% 100%;
+      box-shadow: 0 0 18px rgba(255, 193, 59, 0.75), 0 0 26px rgba(24, 224, 255, 0.55);
+      animation: topLightSweep 3.6s linear infinite;
     }
 
-    .shimmer-badge {
-      display: inline-block;
+    @keyframes topLightSweep {
+      0% { background-position: 0% 50%; filter: brightness(1); }
+      50% { background-position: 100% 50%; filter: brightness(1.35); }
+      100% { background-position: 200% 50%; filter: brightness(1); }
+    }
+
+    .welcome-card {
+      max-width: 560px;
+      width: 100%;
+      margin: auto;
+      padding: 36px 34px;
+      text-align: center;
+      animation: cardEntrance 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes cardEntrance {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 5px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .auth-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
       font-family: var(--font-display);
-      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.14em;
-      padding: 5px 15px;
-      border-radius: 999px;
-      color: var(--cyan);
-      border: 1px solid rgba(0, 243, 255, 0.45);
-      background: linear-gradient(90deg, rgba(0, 243, 255, 0.12), rgba(192, 108, 255, 0.14));
-      margin-bottom: 14px;
+      font-size: 0.9rem;
+      padding: 9px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .auth-tab.active {
+      background: linear-gradient(90deg, var(--gold), #ff9f1c);
+      color: #090b12;
+      box-shadow: 0 0 16px rgba(255, 193, 59, 0.35);
     }
 
     .welcome-title {
       font-family: var(--font-display);
-      font-size: 2.2rem;
+      font-size: 2.05rem;
       font-weight: 700;
-      letter-spacing: 0.02em;
-      line-height: 1.15;
-      margin-bottom: 12px;
-      background: linear-gradient(120deg, #ffffff 10%, var(--gold) 42%, var(--cyan) 72%, var(--magenta) 100%);
-      background-size: 220% auto;
+      margin-bottom: 8px;
+      background: linear-gradient(120deg, #ffffff 15%, var(--gold) 55%, #ff6b8b 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: shineText 4.5s linear infinite;
     }
-
-    @keyframes shineText { to { background-position: 220% center; } }
 
     .welcome-desc {
       color: var(--text-muted);
-      font-size: 1.02rem;
-      font-weight: 500;
-      max-width: 470px;
-      margin: 0 auto 22px;
-      line-height: 1.5;
+      font-size: 0.96rem;
+      max-width: 440px;
+      margin: 0 auto 18px;
+      line-height: 1.48;
     }
 
-    .nick-box { max-width: 390px; margin: 0 auto 14px; }
+    .form-stack {
+      max-width: 380px;
+      margin: 0 auto 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-    .nick-input {
+    .auth-input {
       width: 100%;
       background: rgba(0, 0, 0, 0.58);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 10px;
-      padding: 12px 16px;
+      padding: 11px 15px;
       color: #fff;
-      text-align: center;
-      font-family: var(--font-display);
-      font-size: 0.98rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
       outline: none;
     }
 
-    .nick-input:focus {
+    .auth-input:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 20px rgba(255, 193, 59, 0.34);
+      box-shadow: 0 0 18px rgba(255, 193, 59, 0.28);
     }
 
-    .saved-profiles-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .saved-pill {
-      background: linear-gradient(135deg, rgba(255, 193, 59, 0.12), rgba(0, 243, 255, 0.08));
-      border: 1px solid rgba(255, 193, 59, 0.35);
-      color: #f1f5f9;
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 0.82rem;
+    .auth-error {
+      min-height: 20px;
+      color: #ff5c7c;
+      font-size: 0.86rem;
       font-weight: 700;
-      cursor: pointer;
+      margin-bottom: 10px;
     }
 
+    /* 2. fotodaki gibi uyumlu, göz yormayan 2 sütunlu ana menü */
     .hub-container {
-      max-width: 1180px;
+      max-width: 1160px;
       width: 100%;
       display: grid;
-      grid-template-columns: 1.48fr 1fr;
+      grid-template-columns: 1.46fr 1fr;
       gap: 18px;
       align-items: stretch;
     }
 
-    @media (max-width: 940px) {
-      .hub-container { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 940px) { .hub-container { grid-template-columns: 1fr; } }
 
-    .panel {
-      background: linear-gradient(155deg, rgba(24, 24, 46, 0.96), rgba(11, 13, 24, 0.98));
-      border: 1px solid rgba(255, 193, 59, 0.34);
-      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8), 0 0 32px rgba(192, 108, 255, 0.1);
-      border-radius: 16px;
-      padding: 20px 22px;
-      position: relative;
-      overflow: hidden;
-    }
+    .panel { padding: 20px 22px; }
 
     .player-banner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(125deg, rgba(255, 193, 59, 0.14), rgba(192, 108, 255, 0.12), rgba(0, 243, 255, 0.08));
-      border: 1px solid rgba(255, 193, 59, 0.34);
+      background: linear-gradient(125deg, rgba(255, 193, 59, 0.11), rgba(255, 255, 255, 0.025));
+      border: 1px solid rgba(255, 193, 59, 0.28);
       border-radius: 12px;
       padding: 11px 15px;
       margin-bottom: 14px;
@@ -429,18 +452,17 @@
 
     .player-left { display: flex; align-items: center; gap: 11px; }
     .player-meta h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: #fff; }
-    .player-meta span { font-size: 0.84rem; color: var(--text-muted); font-weight: 500; }
+    .player-meta span { font-size: 0.83rem; color: var(--text-muted); }
 
     .rank-pill {
-      padding: 6px 13px;
+      padding: 5px 13px;
       border-radius: 999px;
       font-family: var(--font-display);
       font-size: 0.74rem;
       font-weight: 700;
-      letter-spacing: 0.05em;
       border: 1px solid var(--gold);
       color: #090b12;
-      background: linear-gradient(90deg, var(--gold), #ff8a3d);
+      background: linear-gradient(90deg, var(--gold), #ff9f1c);
     }
 
     .xp-wrap { width: 100%; margin-top: 2px; }
@@ -449,33 +471,31 @@
     .xp-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--emerald), var(--cyan), var(--gold), var(--primary));
+      background: linear-gradient(90deg, var(--gold), var(--primary));
       transition: width 0.4s ease;
     }
 
     .section-heading {
       font-family: var(--font-display);
-      font-size: 1.16rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      letter-spacing: 0.02em;
       margin-bottom: 3px;
       color: #fff;
     }
-    .subtitle { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 12px; font-weight: 500; }
+    .subtitle { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 12px; }
 
-    /* 5 Modlu Izgara (Gridshot, Flick, Tracking, Precision, Hold Track) */
     .mode-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 9px;
-      margin-bottom: 14px;
+      margin-bottom: 13px;
     }
 
     @media (max-width: 720px) { .mode-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .mode-grid { grid-template-columns: 1fr; } }
 
     .mode-card {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       border-radius: 11px;
       padding: 11px 12px;
@@ -485,14 +505,13 @@
 
     .mode-card:hover {
       transform: translateY(-2px);
-      border-color: var(--cyan);
-      box-shadow: 0 6px 20px rgba(0, 243, 255, 0.18);
+      border-color: rgba(255, 193, 59, 0.65);
     }
 
     .mode-card.active {
-      background: linear-gradient(145deg, rgba(255, 42, 85, 0.24), rgba(255, 193, 59, 0.18), rgba(192, 108, 255, 0.16));
+      background: linear-gradient(145deg, rgba(255, 193, 59, 0.16), rgba(255, 42, 85, 0.12));
       border-color: var(--gold);
-      box-shadow: 0 0 24px rgba(255, 193, 59, 0.34), inset 0 0 12px rgba(255, 193, 59, 0.12);
+      box-shadow: 0 0 20px rgba(255, 193, 59, 0.25);
     }
 
     .mode-tag {
@@ -501,10 +520,10 @@
       font-weight: 800;
       padding: 2px 7px;
       border-radius: 4px;
-      background: rgba(192, 108, 255, 0.22);
-      color: #e8c2ff;
+      background: rgba(255, 255, 255, 0.09);
+      color: #d6deee;
       margin-bottom: 4px;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
     }
 
     .mode-card.active .mode-tag {
@@ -513,16 +532,7 @@
     }
 
     .mode-card h3 { font-family: var(--font-display); font-size: 0.92rem; font-weight: 700; margin-bottom: 2px; color: #fff; }
-    .mode-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.28; }
-
-    .action-row-hub {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    @media (max-width: 560px) { .action-row-hub { grid-template-columns: 1fr; } }
+    .mode-card p { font-size: 0.79rem; color: var(--text-muted); line-height: 1.28; }
 
     .duration-bar { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
 
@@ -539,61 +549,59 @@
     }
 
     .dur-btn.active {
-      border-color: var(--emerald);
-      color: #061812;
-      background: linear-gradient(90deg, var(--emerald), var(--cyan));
-      box-shadow: 0 0 18px rgba(0, 245, 155, 0.38);
+      border-color: var(--gold);
+      color: #090b12;
+      background: var(--gold);
     }
+
+    .action-row-hub {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 560px) { .action-row-hub { grid-template-columns: 1fr; } }
 
     .btn-start {
       width: 100%;
-      background: linear-gradient(90deg, var(--primary), #ff6b3d, var(--gold), var(--magenta));
-      background-size: 200% auto;
+      background: linear-gradient(90deg, #ff2a55, #ff7b39, #ffc13b);
+      background-size: 180% auto;
       border: none;
       color: #fff;
       font-family: var(--font-display);
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       padding: 13px 20px;
       border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 8px 26px var(--primary-glow);
+      box-shadow: 0 8px 24px var(--primary-glow);
     }
 
-    .btn-start:hover {
-      transform: translateY(-2px);
-      background-position: right center;
-    }
+    .btn-start:hover { transform: translateY(-2px); background-position: right center; }
 
     .btn-vs {
-      background: linear-gradient(135deg, rgba(0, 243, 255, 0.2), rgba(192, 108, 255, 0.24));
-      border: 1px solid rgba(0, 243, 255, 0.6);
-      color: #fff;
+      background: linear-gradient(135deg, rgba(255, 193, 59, 0.14), rgba(255, 42, 85, 0.16));
+      border: 1px solid rgba(255, 193, 59, 0.55);
+      color: var(--gold);
       font-family: var(--font-display);
-      font-size: 0.94rem;
+      font-size: 0.92rem;
       font-weight: 700;
-      letter-spacing: 0.05em;
-      padding: 13px 18px;
+      padding: 13px 16px;
       border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 0 22px rgba(0, 243, 255, 0.2);
     }
 
-    .btn-vs:hover {
-      transform: translateY(-2px);
-      border-color: var(--gold);
-      box-shadow: 0 0 26px rgba(255, 193, 59, 0.35);
-    }
+    .btn-vs:hover { transform: translateY(-2px); border-color: var(--gold); }
 
     .btn-gold {
       background: linear-gradient(90deg, #ff9f1c, var(--gold), #ffe58f);
       color: #090a0f;
-      box-shadow: 0 8px 25px rgba(255, 193, 59, 0.42);
+      box-shadow: 0 8px 24px rgba(255, 193, 59, 0.36);
     }
 
     .btn-ghost {
-      background: rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border);
       color: #fff;
       font-family: var(--font-body);
@@ -607,7 +615,7 @@
     .lb-tabs { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
 
     .lb-tab {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       color: var(--text-muted);
       padding: 5px 9px;
@@ -619,7 +627,7 @@
     }
 
     .lb-tab.active {
-      background: linear-gradient(90deg, rgba(255, 193, 59, 0.28), rgba(192, 108, 255, 0.22));
+      background: rgba(255, 193, 59, 0.2);
       border-color: var(--gold);
       color: var(--gold);
     }
@@ -638,7 +646,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.44);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 9px;
       padding: 7px 12px;
@@ -646,45 +654,43 @@
 
     .lb-row.top-1 {
       border-color: rgba(255, 193, 59, 0.7);
-      background: linear-gradient(90deg, rgba(255, 193, 59, 0.16), rgba(255, 42, 85, 0.08));
+      background: linear-gradient(90deg, rgba(255, 193, 59, 0.14), rgba(255, 42, 85, 0.06));
     }
-    .lb-row.top-2 { border-color: rgba(0, 243, 255, 0.45); }
-    .lb-row.top-3 { border-color: rgba(192, 108, 255, 0.45); }
 
     .lb-left { display: flex; align-items: center; gap: 9px; }
     .lb-pos { font-family: var(--font-mono); font-weight: 700; font-size: 0.84rem; width: 24px; color: var(--gold); }
     .lb-name { font-weight: 700; font-size: 0.92rem; color: #fff; }
     .lb-sub { font-size: 0.74rem; color: var(--text-muted); }
-    .lb-score { font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem; color: var(--cyan); }
+    .lb-score { font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem; color: var(--gold); }
 
     .quest-box {
-      background: linear-gradient(135deg, rgba(0, 243, 255, 0.07), rgba(192, 108, 255, 0.07));
-      border: 1px solid rgba(0, 243, 255, 0.26);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 193, 59, 0.25);
       border-radius: 10px;
       padding: 10px 12px;
     }
 
-    .quest-title { font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--cyan); letter-spacing: 0.08em; margin-bottom: 5px; }
+    .quest-title { font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--gold); letter-spacing: 0.07em; margin-bottom: 5px; }
     .quest-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; padding: 3px 0; color: var(--text-muted); }
     .quest-item.done { color: var(--emerald); text-decoration: line-through; }
 
-    /* Online VS Odası Modalı */
+    /* VS Modal */
     .vs-modal-box { max-width: 680px; width: 100%; text-align: left; }
     .vs-grid-setup { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
     @media (max-width: 600px) { .vs-grid-setup { grid-template-columns: 1fr; } }
 
     .vs-card {
       background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(0, 243, 255, 0.25);
+      border: 1px solid rgba(255, 193, 59, 0.24);
       border-radius: 12px;
       padding: 14px;
     }
 
-    .vs-card h4 { font-family: var(--font-display); font-size: 0.92rem; color: var(--cyan); margin-bottom: 6px; }
+    .vs-card h4 { font-family: var(--font-display); font-size: 0.92rem; color: var(--gold); margin-bottom: 6px; }
 
     .room-code-display {
       font-family: var(--font-mono);
-      font-size: 1.45rem;
+      font-size: 1.42rem;
       font-weight: 800;
       letter-spacing: 0.2em;
       color: var(--gold);
@@ -701,17 +707,32 @@
       grid-template-columns: 1fr auto 1fr;
       gap: 10px;
       align-items: center;
-      background: linear-gradient(120deg, rgba(0, 243, 255, 0.08), rgba(255, 42, 85, 0.1));
+      background: rgba(0, 0, 0, 0.45);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px;
-      margin: 12px 0 16px;
+      margin: 12px 0 10px;
       text-align: center;
     }
 
     .vs-fighter-name { font-family: var(--font-display); font-weight: 700; font-size: 0.96rem; color: #fff; }
-    .vs-fighter-score { font-family: var(--font-mono); font-weight: 800; font-size: 1.2rem; color: var(--gold); margin-top: 2px; }
+    .vs-fighter-score { font-family: var(--font-mono); font-weight: 800; font-size: 1.18rem; color: var(--gold); margin-top: 2px; }
     .vs-badge-mid { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--primary); padding: 4px 10px; border: 1px solid rgba(255, 42, 85, 0.45); border-radius: 8px; }
+
+    .vs-status-note {
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #ff8ca4;
+    }
+    .vs-status-note.ready { color: var(--emerald); }
+
+    .btn-start:disabled {
+      opacity: 0.42;
+      cursor: not-allowed;
+      transform: none !important;
+    }
 
     /* Atölye */
     .workshop-box { max-width: 740px; width: 100%; text-align: left; }
@@ -719,7 +740,7 @@
     @media (max-width: 680px) { .workshop-grid { grid-template-columns: 1fr; } }
 
     .ws-section { background: rgba(0, 0, 0, 0.44); border: 1px solid var(--border); border-radius: 11px; padding: 14px; }
-    .ws-section h4 { font-family: var(--font-display); font-size: 0.84rem; color: var(--gold); margin-bottom: 10px; letter-spacing: 0.06em; }
+    .ws-section h4 { font-family: var(--font-display); font-size: 0.84rem; color: var(--gold); margin-bottom: 10px; }
 
     .avatar-presets, .ch-presets { display: flex; gap: 7px; flex-wrap: wrap; margin: 8px 0; }
     .preset-btn {
@@ -756,8 +777,8 @@
 
     .rank-badge {
       display: inline-block; padding: 7px 20px; border-radius: 999px; font-family: var(--font-display);
-      font-weight: 700; font-size: 0.92rem; letter-spacing: 0.06em;
-      background: linear-gradient(90deg, rgba(255, 193, 59, 0.25), rgba(255, 42, 85, 0.24));
+      font-weight: 700; font-size: 0.92rem;
+      background: rgba(255, 193, 59, 0.16);
       border: 1px solid var(--gold); color: var(--gold); margin-bottom: 8px;
     }
 
@@ -774,11 +795,31 @@
 </head>
 <body>
 
+  <!-- İlk ekran & arka plan için yanıp sönen / dalgalanan ışık geçişleri -->
+  <div class="ambient-lights">
+    <div class="light-beam beam-gold"></div>
+    <div class="light-beam beam-crimson"></div>
+    <div class="light-beam beam-cyan"></div>
+  </div>
+
   <svg id="custom-crosshair" width="48" height="48" viewBox="0 0 48 48"></svg>
 
   <header>
     <div class="brand glow-interact" id="brand-home" title="Ana Menüye Dön">
-      <div class="brand-logo"><span>A</span></div>
+      <!-- Özel Şık SVG Logo -->
+      <svg width="38" height="38" viewBox="0 0 48 48" fill="none">
+        <defs>
+          <linearGradient id="aimsLogoGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ffc13b"/>
+            <stop offset="55%" stop-color="#ff2a55"/>
+            <stop offset="100%" stop-color="#18e0ff"/>
+          </linearGradient>
+        </defs>
+        <polygon points="24,3 44,14 44,34 24,45 4,34 4,14" fill="#101322" stroke="url(#aimsLogoGrad)" stroke-width="2.5"/>
+        <circle cx="24" cy="24" r="9.5" stroke="#ffc13b" stroke-width="2" stroke-dasharray="18 5"/>
+        <path d="M24 10V16M24 32V38M10 24H16M32 24H38" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="24" cy="24" r="3.2" fill="#ff2a55"/>
+      </svg>
       <h1>AIMS PRO</h1>
     </div>
 
@@ -820,22 +861,43 @@
     </div>
   </header>
 
-  <!-- 1. TAM ORTALI AÇILIŞ EKRANI -->
+  <!-- 1. GİRİŞ YAP / KAYIT OL EKRANI -->
   <div class="overlay" id="welcome-screen">
     <div class="welcome-card">
-      <div class="shimmer-badge">RESMİ E-SPOR NİŞAN PLATFORMU</div>
-      <h2 class="welcome-title">AIMS PRO'YA HOŞ GELDİNİZ</h2>
-      <p class="welcome-desc">
-        Oyuncu adını girerek kalıcı profilini oluştur; rütben, nişangahın, sens ayarın ve skorların her girişinde korunsun.
-      </p>
-
-      <div class="nick-box">
-        <input type="text" id="welcome-nick" class="nick-input" maxlength="18" placeholder="OYUNCU ADINI GİR" />
+      <div style="display:flex;justify-content:center;margin-bottom:10px;">
+        <svg width="56" height="56" viewBox="0 0 48 48" fill="none">
+          <defs>
+            <linearGradient id="welcomeLogoGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ffc13b"/>
+              <stop offset="60%" stop-color="#ff2a55"/>
+              <stop offset="100%" stop-color="#18e0ff"/>
+            </linearGradient>
+          </defs>
+          <polygon points="24,3 44,14 44,34 24,45 4,34 4,14" fill="#0d101d" stroke="url(#welcomeLogoGrad)" stroke-width="2.6"/>
+          <circle cx="24" cy="24" r="10" stroke="#ffc13b" stroke-width="2"/>
+          <path d="M24 9V16M24 32V39M9 24H16M32 24H39" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="24" cy="24" r="3.5" fill="#ff2a55"/>
+        </svg>
       </div>
 
-      <div class="saved-profiles-row" id="saved-profiles-list"></div>
+      <h2 class="welcome-title">AIMS PRO</h2>
+      <p class="welcome-desc">
+        İlk defa katılıyorsan <strong>Kayıt Ol</strong> ile benzersiz kullanıcı adını ve şifreni oluştur; hesabın varsa <strong>Giriş Yap</strong>.
+      </p>
 
-      <button class="btn-start btn-gold glow-interact" id="btn-enter-hub">AKADEMİYE GİRİŞ YAP</button>
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" id="tab-auth-login">GİRİŞ YAP</button>
+        <button type="button" class="auth-tab" id="tab-auth-register">KAYIT OL</button>
+      </div>
+
+      <div class="form-stack">
+        <input type="text" id="auth-username" class="auth-input" maxlength="18" placeholder="Kullanıcı Adı" />
+        <input type="password" id="auth-password" class="auth-input" maxlength="32" placeholder="Şifre" />
+      </div>
+
+      <div class="auth-error" id="auth-error-msg"></div>
+
+      <button class="btn-start btn-gold glow-interact" id="btn-auth-submit">GİRİŞ YAP</button>
     </div>
   </div>
 
@@ -861,7 +923,7 @@
             <div class="xp-wrap">
               <div class="xp-labels">
                 <span id="xp-progress-text">Sonraki Kademe (BRONZ 2): 0 / 400 XP</span>
-                <button type="button" id="btn-switch-account" style="background:none;border:none;color:var(--gold);font-weight:700;cursor:pointer;font-family:var(--font-body);font-size:0.78rem;">Hesap Değiştir</button>
+                <button type="button" id="btn-switch-account" style="background:none;border:none;color:var(--gold);font-weight:700;cursor:pointer;font-family:var(--font-body);font-size:0.78rem;">Çıkış / Hesap Değiştir</button>
               </div>
               <div class="xp-bar">
                 <div class="xp-fill" id="xp-fill-bar"></div>
@@ -894,7 +956,7 @@
               <p>Küçük hedeflerle nokta hassasiyeti.</p>
             </div>
             <div class="mode-card glow-interact" data-mode="holdtrack" style="grid-column: span 2;">
-              <span class="mode-tag" style="background:rgba(0,243,255,0.22);color:var(--cyan);">BASILI TUT & TAKİP</span>
+              <span class="mode-tag">BASILI TUT & TAKİP</span>
               <h3>HOLD TRACK (BASILI TUTMA TAKİBİ)</h3>
               <p>Hedefin üzerinde <strong>fare sol tuşunu basılı tut</strong>; nişangah hedefte kaldığı her an sürekli puan ve akıcı takip kombosu kazan!</p>
             </div>
@@ -914,7 +976,7 @@
 
         <div class="panel">
           <h2 class="section-heading">LİDERLİK TABLOSU</h2>
-          <p class="subtitle">Mod bazlı rekorlar ve genel toplam puan sıralaması.</p>
+          <p class="subtitle">Toplam puan sıralaması ve mod bazlı en yüksek skorlar.</p>
 
           <div class="lb-tabs">
             <button class="lb-tab glow-interact active" data-lb="total">TOPLAM</button>
@@ -935,19 +997,19 @@
       </div>
     </div>
 
-    <!-- 3. ONLINE VS ODA EKRANI (ODA OLUŞTUR & KOD İLE KATIL) -->
+    <!-- 3. ONLINE VS ODA EKRANI -->
     <div class="overlay hidden" id="vs-modal">
       <div class="panel vs-modal-box">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
           <h2 class="section-heading">⚔ ONLINE VS ARENASI</h2>
           <button class="btn-ghost glow-interact" id="btn-close-vs" style="padding:6px 12px;">✕ Kapat</button>
         </div>
-        <p class="subtitle">Oda kodu oluşturup arkadaşına gönder veya oda koduyla mevcut VS odasına katıl.</p>
+        <p class="subtitle">VS maçı yalnızca odada gerçek bir rakip varken başlar.</p>
 
         <div class="vs-grid-setup">
           <div class="vs-card">
             <h4>1. YENİ VS ODA OLUŞTUR</h4>
-            <p style="font-size:0.82rem;color:var(--text-muted);">Seçili mod ve süreyle özel 6 haneli oda kodu aç.</p>
+            <p style="font-size:0.82rem;color:var(--text-muted);">6 haneli oda kodu oluştur ve rakibine gönder.</p>
             <div class="room-code-display" id="vs-created-code">------</div>
             <div style="display:flex;gap:8px;">
               <button type="button" class="btn-start btn-gold glow-interact" id="btn-generate-room" style="padding:10px;font-size:0.84rem;">ODA KODU ÜRET</button>
@@ -957,27 +1019,29 @@
 
           <div class="vs-card">
             <h4>2. KOD İLE ODAYA KATIL</h4>
-            <p style="font-size:0.82rem;color:var(--text-muted);">Arkadaşının 6 haneli oda kodunu gir ve bağlan.</p>
-            <input type="text" id="vs-join-code-input" class="nick-input" maxlength="6" placeholder="ODA KODU (ÖRN: A7K92M)" style="margin:10px 0;padding:10px;text-transform:uppercase;" />
+            <p style="font-size:0.82rem;color:var(--text-muted);">Rakibinin oluşturduğu oda kodunu girerek odaya bağlan.</p>
+            <input type="text" id="vs-join-code-input" class="auth-input" maxlength="6" placeholder="ODA KODU (ÖRN: A7K92M)" style="margin:10px 0;padding:10px;text-transform:uppercase;text-align:center;font-family:var(--font-mono);" />
             <button type="button" class="btn-vs glow-interact" id="btn-join-room" style="width:100%;padding:10px;font-size:0.86rem;">KOD İLE KATIL</button>
           </div>
         </div>
 
         <div class="vs-players-board">
           <div>
-            <div style="font-size:0.72rem;color:var(--cyan);font-weight:700;">SEN (OYUNCU 1)</div>
+            <div style="font-size:0.72rem;color:var(--gold);font-weight:700;">SEN (OYUNCU 1)</div>
             <div class="vs-fighter-name" id="vs-p1-name">OYUNCU</div>
             <div class="vs-fighter-score" id="vs-p1-score">0 PTS</div>
           </div>
           <div class="vs-badge-mid">VS</div>
           <div>
             <div style="font-size:0.72rem;color:var(--primary);font-weight:700;">RAKİP (ODA: <span id="vs-active-room-label">-</span>)</div>
-            <div class="vs-fighter-name" id="vs-p2-name">Rakip Bekleniyor...</div>
+            <div class="vs-fighter-name" id="vs-p2-name">Rakip Bağlanmadı</div>
             <div class="vs-fighter-score" id="vs-p2-score">0 PTS</div>
           </div>
         </div>
 
-        <button class="btn-start glow-interact" id="btn-start-vs-match">⚔ VS MAÇINI BAŞLAT</button>
+        <div class="vs-status-note" id="vs-status-note">Tek başına VS başlatılamaz. Odaya rakip bağlanmasını bekle veya bir odaya katıl.</div>
+
+        <button class="btn-start glow-interact" id="btn-start-vs-match" disabled>⚔ VS MAÇINI BAŞLAT</button>
       </div>
     </div>
 
@@ -988,15 +1052,16 @@
           <h2 class="section-heading">PROFİL & EKİPMAN ATÖLYESİ</h2>
           <button class="btn-ghost glow-interact" id="btn-close-profile" style="padding:6px 12px;">✕ Kapat</button>
         </div>
-        <p class="subtitle">Tüm ayarların kullanıcı adına özel olarak kalıcı kaydedilir.</p>
+        <p class="subtitle">Profil fotoğrafın, hassasiyet çarpanın ve nişangahın hesabına kaydedilir.</p>
 
         <div class="workshop-grid">
           <div class="ws-section">
-            <h4>KİMLİK & PROFİL FOTOĞRAFI</h4>
+            <h4>PROFİL FOTOĞRAFI & AYARLAR</h4>
             <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
               <div class="avatar-circle" id="ws-avatar-preview" style="width:52px;height:52px;font-size:1.5rem;">🎯</div>
-              <div style="flex:1;">
-                <input type="text" id="ws-nick-input" class="nick-input" style="text-align:left;padding:8px 12px;font-size:0.92rem;" maxlength="18" />
+              <div>
+                <div style="font-family:var(--font-display);font-weight:700;font-size:1rem;color:#fff;" id="ws-fixed-nick">OYUNCU</div>
+                <div style="font-size:0.78rem;color:var(--text-muted);">Kullanıcı adı başkası tarafından alınamaz.</div>
               </div>
             </div>
 
@@ -1071,14 +1136,13 @@
           </div>
         </div>
 
-        <button class="btn-start btn-gold glow-interact" id="btn-save-profile">AYARLARI KALICI OLARAK KAYDET</button>
+        <button class="btn-start btn-gold glow-interact" id="btn-save-profile">AYARLARI KAYDET</button>
       </div>
     </div>
 
     <!-- 5. ÇIKIŞ EKRANI -->
     <div class="overlay hidden" id="exit-menu">
       <div class="panel modal-box">
-        <div class="shimmer-badge">ANTRENMAN DURAKLATILDI</div>
         <h2 class="section-heading" style="font-size: 1.65rem;">ÇIKIŞ EKRANI</h2>
         <p class="subtitle">Oyun şu an duraklatıldı. Nasıl devam etmek istersin?</p>
 
@@ -1119,7 +1183,7 @@
         </div>
 
         <div class="heatmap-wrap">
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:4px;letter-spacing:0.06em;">ATIŞ / TAKİP ISI HARİTASI</div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:4px;">ATIŞ / TAKİP ISI HARİTASI</div>
           <canvas id="heatmapCanvas" width="320" height="100"></canvas>
         </div>
 
@@ -1186,43 +1250,46 @@
       { minXp: 24500, name: 'RADYANT // AIMS PRO' }
     ];
 
-    const DB_KEY = 'aims_pro_profiles_db_v5';
+    const DB_KEY = 'aims_pro_auth_db_v6';
 
-    function createDefaultUser(name) {
+    function hashPassword(pw) {
+      let h = 2166136261;
+      for (let i = 0; i < pw.length; i++) {
+        h ^= pw.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return (h >>> 0).toString(16);
+    }
+
+    function createUserAccount(name, password) {
       return {
         name,
+        passwordHash: hashPassword(password),
         xp: 0,
         totalScore: 0,
         avatarEmoji: '🎯',
         avatarPhoto: '',
         sens: 1.0,
-        targetTheme: 'cyan',
-        crosshair: { color: '#00f3ff', size: 8, thick: 2, gap: 4, dot: true },
+        targetTheme: 'gold',
+        crosshair: { color: '#ffc13b', size: 8, thick: 2, gap: 4, dot: true },
         quests: { q25hits: false, q80acc: false, q3000score: false }
       };
     }
 
     function loadDB() {
       const initialDB = {
-        activeUser: 'Kaan',
-        users: { 'kaan': createDefaultUser('Kaan') },
-        entries: [
-          { name: 'ProAim_TR', mode: 'gridshot', score: 3450, acc: 92 },
-          { name: 'FlickMaster', mode: 'flick', score: 2680, acc: 88 },
-          { name: 'TrackKing', mode: 'tracking', score: 2910, acc: 85 },
-          { name: 'OneTapPRO', mode: 'precision', score: 2240, acc: 90 },
-          { name: 'BeamHold_TR', mode: 'holdtrack', score: 3120, acc: 89 }
-        ]
+        loggedInUser: null,
+        users: {},
+        entries: []
       };
       try {
         const raw = localStorage.getItem(DB_KEY);
         if (!raw) return initialDB;
         const parsed = JSON.parse(raw);
-        if (!parsed.users || typeof parsed.users !== 'object') return initialDB;
         return {
-          activeUser: parsed.activeUser || 'Kaan',
-          users: parsed.users,
-          entries: Array.isArray(parsed.entries) ? parsed.entries : initialDB.entries
+          loggedInUser: parsed.loggedInUser || null,
+          users: parsed.users && typeof parsed.users === 'object' ? parsed.users : {},
+          entries: Array.isArray(parsed.entries) ? parsed.entries : []
         };
       } catch {
         return initialDB;
@@ -1235,16 +1302,9 @@
     }
 
     function getCurrentUser() {
-      const key = (db.activeUser || 'Kaan').trim().toLowerCase();
-      if (!db.users[key]) {
-        db.users[key] = createDefaultUser(db.activeUser || 'Kaan');
-      }
-      const u = db.users[key];
-      u.crosshair = { color: '#00f3ff', size: 8, thick: 2, gap: 4, dot: true, ...(u.crosshair || {}) };
-      u.quests = { q25hits: false, q80acc: false, q3000score: false, ...(u.quests || {}) };
-      if (!u.sens) u.sens = 1.0;
-      if (!u.targetTheme) u.targetTheme = 'cyan';
-      return u;
+      if (!db.loggedInUser) return null;
+      const key = db.loggedInUser.trim().toLowerCase();
+      return db.users[key] || null;
     }
 
     function getRankInfo(xp) {
@@ -1260,15 +1320,13 @@
     }
 
     function renderAvatarInto(el, user) {
-      if (user.avatarPhoto) {
-        el.innerHTML = `<img src="${user.avatarPhoto}" alt="avatar" />`;
-      } else {
-        el.textContent = user.avatarEmoji || '🎯';
-      }
+      if (!user) return;
+      if (user.avatarPhoto) el.innerHTML = `<img src="${user.avatarPhoto}" alt="avatar" />`;
+      else el.textContent = user.avatarEmoji || '🎯';
     }
 
     function renderCrosshairSVG(svgEl, ch) {
-      const c = ch.color || '#00f3ff';
+      const c = ch.color || '#ffc13b';
       const s = Number(ch.size) || 8;
       const t = Number(ch.thick) || 2;
       const g = Number(ch.gap) || 4;
@@ -1282,42 +1340,102 @@
           <line x1="${mid + g}" y1="${mid}" x2="${Math.min(46, mid + g + s)}" y2="${mid}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
         `;
       }
-      if (ch.dot) {
-        html += `<circle cx="${mid}" cy="${mid}" r="${Math.max(1.8, t * 0.9)}" fill="#ff2a55" />`;
-      }
+      if (ch.dot) html += `<circle cx="${mid}" cy="${mid}" r="${Math.max(1.8, t * 0.9)}" fill="#ff2a55" />`;
       svgEl.innerHTML = html;
     }
 
-    function renderSavedProfilesList() {
-      const container = document.getElementById('saved-profiles-list');
-      container.innerHTML = '';
-      Object.keys(db.users).forEach(k => {
-        const u = db.users[k];
-        const { current } = getRankInfo(u.xp);
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'saved-pill glow-interact';
-        btn.textContent = `${u.avatarEmoji || '🎯'} ${u.name} (${current.name})`;
-        btn.addEventListener('click', () => {
-          document.getElementById('welcome-nick').value = u.name;
-        });
-        container.appendChild(btn);
-      });
+    // Giriş / Kayıt Ol mantığı
+    let authMode = 'login';
+    const tabLogin = document.getElementById('tab-auth-login');
+    const tabRegister = document.getElementById('tab-auth-register');
+    const btnAuthSubmit = document.getElementById('btn-auth-submit');
+    const authErrorMsg = document.getElementById('auth-error-msg');
+
+    function setAuthMode(mode) {
+      authMode = mode;
+      authErrorMsg.textContent = '';
+      if (mode === 'login') {
+        tabLogin.classList.add('active');
+        tabRegister.classList.remove('active');
+        btnAuthSubmit.textContent = 'GİRİŞ YAP';
+      } else {
+        tabRegister.classList.add('active');
+        tabLogin.classList.remove('active');
+        btnAuthSubmit.textContent = 'HESAP OLUŞTUR VE KAYIT OL';
+      }
     }
+
+    tabLogin.addEventListener('click', () => setAuthMode('login'));
+    tabRegister.addEventListener('click', () => setAuthMode('register'));
+
+    btnAuthSubmit.addEventListener('click', () => {
+      const username = document.getElementById('auth-username').value.trim();
+      const password = document.getElementById('auth-password').value;
+      authErrorMsg.textContent = '';
+
+      if (username.length < 2) {
+        authErrorMsg.textContent = 'Kullanıcı adı en az 2 karakter olmalıdır.';
+        return;
+      }
+      if (password.length < 4) {
+        authErrorMsg.textContent = 'Şifre en az 4 karakter olmalıdır.';
+        return;
+      }
+
+      const key = username.toLowerCase();
+
+      if (authMode === 'register') {
+        if (db.users[key]) {
+          authErrorMsg.textContent = `"${username}" kullanıcı adı zaten alınmış! Başka bir ad seç veya Giriş Yap.`;
+          return;
+        }
+        db.users[key] = createUserAccount(username, password);
+        db.loggedInUser = username;
+        saveDB();
+        document.getElementById('auth-password').value = '';
+        welcomeScreen.classList.add('hidden');
+        startMenu.classList.remove('hidden');
+        refreshAllUI();
+      } else {
+        const existing = db.users[key];
+        if (!existing) {
+          authErrorMsg.textContent = 'Bu kullanıcı adına ait kayıt bulunamadı. Önce Kayıt Ol sekmesinden hesap aç.';
+          return;
+        }
+        if (existing.passwordHash !== hashPassword(password)) {
+          authErrorMsg.textContent = 'Şifre hatalı! Lütfen tekrar dene.';
+          return;
+        }
+        db.loggedInUser = existing.name;
+        saveDB();
+        document.getElementById('auth-password').value = '';
+        welcomeScreen.classList.add('hidden');
+        startMenu.classList.remove('hidden');
+        refreshAllUI();
+      }
+    });
+
+    document.getElementById('btn-switch-account').addEventListener('click', () => {
+      db.loggedInUser = null;
+      saveDB();
+      startMenu.classList.add('hidden');
+      welcomeScreen.classList.remove('hidden');
+      setAuthMode('login');
+    });
 
     let activeLbTab = 'total';
     function refreshAllUI() {
       const user = getCurrentUser();
+      if (!user) return;
       const { current, next } = getRankInfo(user.xp);
 
-      document.getElementById('welcome-nick').value = user.name;
       document.getElementById('header-nick').textContent = user.name.toUpperCase();
       document.getElementById('header-rank').textContent = current.name;
       renderAvatarInto(document.getElementById('header-avatar'), user);
 
       document.getElementById('menu-player-name').textContent = user.name.toUpperCase();
       document.getElementById('menu-total-xp-label').textContent =
-        `XP: ${user.xp.toLocaleString('tr-TR')} • Sens: ${Number(user.sens).toFixed(2)}x • Skor: ${user.totalScore.toLocaleString('tr-TR')}`;
+        `XP: ${user.xp.toLocaleString('tr-TR')} • Sens: ${Number(user.sens).toFixed(2)}x • Toplam Skor: ${user.totalScore.toLocaleString('tr-TR')}`;
       document.getElementById('menu-rank-badge').textContent = current.name;
       renderAvatarInto(document.getElementById('menu-avatar'), user);
 
@@ -1325,18 +1443,16 @@
         const spanXp = next.minXp - current.minXp;
         const gainedInTier = user.xp - current.minXp;
         const pct = Math.min(100, Math.max(0, Math.round((gainedInTier / spanXp) * 100)));
-        document.getElementById('xp-progress-text').textContent =
-          `Sonraki Kademe (${next.name}): ${gainedInTier} / ${spanXp} XP`;
+        document.getElementById('xp-progress-text').textContent = `Sonraki Kademe (${next.name}): ${gainedInTier} / ${spanXp} XP`;
         document.getElementById('xp-fill-bar').style.width = pct + '%';
       } else {
-        document.getElementById('xp-progress-text').textContent = 'ZİRVE RÜTBE ULAŞILDI (MAKS)';
+        document.getElementById('xp-progress-text').textContent = 'ZİRVE RÜTBE ULAŞILDI';
         document.getElementById('xp-fill-bar').style.width = '100%';
       }
 
       renderCrosshairSVG(crosshair, user.crosshair);
       renderLeaderboard();
       renderQuests(user);
-      renderSavedProfilesList();
       syncVsBoardUI();
     }
 
@@ -1355,32 +1471,44 @@
       `).join('');
     }
 
+    // Liderlik Tablosu: TOPLAM sekmesinde hepsinin puanlarının toplamı
     function renderLeaderboard() {
       const listEl = document.getElementById('leaderboard-list');
       listEl.innerHTML = '';
 
       if (activeLbTab === 'total') {
-        const totalsMap = {};
-        for (const e of db.entries) {
-          const key = e.name.toLowerCase();
-          if (!totalsMap[key]) totalsMap[key] = { name: e.name, total: 0, games: 0 };
-          totalsMap[key].total += e.score;
-          totalsMap[key].games += 1;
+        const combinedTotals = {};
+
+        for (const k of Object.keys(db.users)) {
+          const u = db.users[k];
+          combinedTotals[k] = { name: u.name, total: Number(u.totalScore) || 0, games: 0 };
         }
-        const sortedTotal = Object.values(totalsMap).sort((a, b) => b.total - a.total).slice(0, 8);
+        for (const e of db.entries) {
+          const k = e.name.toLowerCase();
+          if (!combinedTotals[k]) combinedTotals[k] = { name: e.name, total: 0, games: 0 };
+          combinedTotals[k].games += 1;
+          if (!db.users[k]) combinedTotals[k].total += Number(e.score) || 0;
+        }
+
+        const sortedTotal = Object.values(combinedTotals)
+          .filter(item => item.total > 0 || item.games > 0)
+          .sort((a, b) => b.total - a.total)
+          .slice(0, 8);
+
         if (!sortedTotal.length) {
-          listEl.innerHTML = '<div class="lb-sub" style="text-align:center;padding:20px;">Henüz skor kaydı yok.</div>';
+          listEl.innerHTML = '<div class="lb-sub" style="text-align:center;padding:20px;">Henüz puan kaydı yok. Antrenman yaparak ilk sırayı al!</div>';
           return;
         }
+
         sortedTotal.forEach((item, idx) => {
           const row = document.createElement('div');
-          row.className = `lb-row ${idx < 3 ? 'top-' + (idx + 1) : ''}`;
+          row.className = `lb-row ${idx === 0 ? 'top-1' : ''}`;
           row.innerHTML = `
             <div class="lb-left">
               <div class="lb-pos">#${idx + 1}</div>
               <div>
                 <div class="lb-name">${escapeHtml(item.name)}</div>
-                <div class="lb-sub">${item.games} antrenman toplamı</div>
+                <div class="lb-sub">Tüm maçların toplam puanı (${item.games} tur)</div>
               </div>
             </div>
             <div class="lb-score">${item.total.toLocaleString('tr-TR')} PTS</div>
@@ -1388,14 +1516,19 @@
           listEl.appendChild(row);
         });
       } else {
-        const filtered = db.entries.filter(e => e.mode === activeLbTab).sort((a, b) => b.score - a.score).slice(0, 8);
+        const filtered = db.entries
+          .filter(e => e.mode === activeLbTab)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 8);
+
         if (!filtered.length) {
           listEl.innerHTML = '<div class="lb-sub" style="text-align:center;padding:20px;">Bu modda henüz kayıt yok.</div>';
           return;
         }
+
         filtered.forEach((item, idx) => {
           const row = document.createElement('div');
-          row.className = `lb-row ${idx < 3 ? 'top-' + (idx + 1) : ''}`;
+          row.className = `lb-row ${idx === 0 ? 'top-1' : ''}`;
           row.innerHTML = `
             <div class="lb-left">
               <div class="lb-pos">#${idx + 1}</div>
@@ -1415,13 +1548,14 @@
       return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
     }
 
-    // Online VS Oda Durumu & Sekme Senkronizasyonu
+    // Online VS Oda Sistemi (Gerçek rakip olmadan VS başlatılamaz)
     let vsRoomCode = '';
     let vsMatchActive = false;
-    let vsOpponentName = 'Rakip Bekleniyor...';
+    let vsOpponentConnected = false;
+    let vsOpponentName = 'Rakip Bağlanmadı';
     let vsOpponentScore = 0;
 
-    const vsChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('aims_pro_vs_channel') : null;
+    const vsChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('aims_pro_vs_v6') : null;
 
     function broadcastVsMessage(payload) {
       if (!vsRoomCode) return;
@@ -1433,14 +1567,15 @@
     function handleIncomingVsMessage(msg) {
       if (!msg || !msg.roomCode || msg.roomCode !== vsRoomCode) return;
       const me = getCurrentUser();
-      if (msg.sender === me.name) return;
+      if (!me || msg.sender === me.name) return;
 
-      if (msg.type === 'join' || msg.type === 'score') {
-        vsOpponentName = msg.sender || 'Rakip Oyuncu';
+      if (msg.type === 'join' || msg.type === 'score' || msg.type === 'start') {
+        vsOpponentConnected = true;
+        vsOpponentName = msg.sender;
         if (typeof msg.score === 'number') vsOpponentScore = msg.score;
         syncVsBoardUI();
       }
-      if (msg.type === 'start' && !isPlaying) {
+      if (msg.type === 'start' && !isPlaying && vsOpponentConnected) {
         selectedMode = msg.mode || selectedMode;
         selectedDuration = msg.duration || selectedDuration;
         vsMatchActive = true;
@@ -1449,9 +1584,7 @@
       }
     }
 
-    if (vsChannel) {
-      vsChannel.onmessage = (ev) => handleIncomingVsMessage(ev.data);
-    }
+    if (vsChannel) vsChannel.onmessage = (ev) => handleIncomingVsMessage(ev.data);
     window.addEventListener('storage', (ev) => {
       if (ev.key && ev.key.startsWith('aims_pro_vs_room_') && ev.newValue) {
         try { handleIncomingVsMessage(JSON.parse(ev.newValue)); } catch {}
@@ -1460,11 +1593,28 @@
 
     function syncVsBoardUI() {
       const me = getCurrentUser();
-      document.getElementById('vs-p1-name').textContent = me.name.toUpperCase();
+      document.getElementById('vs-p1-name').textContent = me ? me.name.toUpperCase() : 'OYUNCU';
       document.getElementById('vs-p1-score').textContent = (isPlaying && vsMatchActive ? score : 0).toLocaleString('tr-TR') + ' PTS';
       document.getElementById('vs-active-room-label').textContent = vsRoomCode || '-';
-      document.getElementById('vs-p2-name').textContent = vsOpponentName;
+      document.getElementById('vs-p2-name').textContent = vsOpponentConnected ? vsOpponentName : 'Rakip Bağlanmadı';
       document.getElementById('vs-p2-score').textContent = vsOpponentScore.toLocaleString('tr-TR') + ' PTS';
+
+      const startBtn = document.getElementById('btn-start-vs-match');
+      const statusNote = document.getElementById('vs-status-note');
+
+      if (vsRoomCode && vsOpponentConnected) {
+        startBtn.disabled = false;
+        statusNote.textContent = `Rakip (${vsOpponentName}) odaya bağlandı! VS maçını başlatabilirsin.`;
+        statusNote.classList.add('ready');
+      } else if (vsRoomCode) {
+        startBtn.disabled = true;
+        statusNote.textContent = `Oda (${vsRoomCode}) açık. Rakibinin kodu girip odaya katılması bekleniyor...`;
+        statusNote.classList.remove('ready');
+      } else {
+        startBtn.disabled = true;
+        statusNote.textContent = 'Tek başına VS başlatılamaz. Oda oluşturup rakip bekle veya oda kodu ile katıl.';
+        statusNote.classList.remove('ready');
+      }
     }
 
     function generateRoomCode() {
@@ -1474,134 +1624,13 @@
       return code;
     }
 
-    // Oyun Durumu
-    let isPlaying = false;
-    let isPausedForExit = false;
-    let isMouseDown = false;
-    let pointerX = 0;
-    let pointerY = 0;
-    let holdTickAccum = 0;
-    let holdActiveTicks = 0;
-    let holdTotalTicks = 0;
-
-    let selectedMode = 'gridshot';
-    let selectedDuration = 30;
-    let timeLeft = 30;
-    let score = 0;
-    let hits = 0;
-    let shots = 0;
-    let combo = 0;
-    let maxCombo = 0;
-    let reactionTimes = [];
-    let shotLog = [];
-    let targets = [];
-    let particles = [];
-    let shockwaves = [];
-    let floatingTexts = [];
-    let soundEnabled = true;
-    let lastFrameTime = 0;
-    let lastVsBroadcast = 0;
-
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    function playSound(type) {
-      if (!soundEnabled) return;
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      const now = audioCtx.currentTime;
-      if (type === 'hit') {
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(650 + Math.min(combo * 20, 560), now);
-        osc.frequency.exponentialRampToValueAtTime(1280, now + 0.075);
-        gain.gain.setValueAtTime(0.18, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.085);
-        osc.start(now);
-        osc.stop(now + 0.085);
-      } else if (type === 'tick') {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(880 + Math.min(combo * 15, 420), now);
-        gain.gain.setValueAtTime(0.08, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
-        osc.start(now);
-        osc.stop(now + 0.045);
-      } else if (type === 'miss') {
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(145, now);
-        osc.frequency.exponentialRampToValueAtTime(62, now + 0.11);
-        gain.gain.setValueAtTime(0.14, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
-        osc.start(now);
-        osc.stop(now + 0.11);
-      }
-    }
-
-    function resizeCanvas() {
-      canvas.width = arenaWrapper.clientWidth;
-      canvas.height = arenaWrapper.clientHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    window.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      pointerX = e.clientX - rect.left;
-      pointerY = e.clientY - rect.top;
-
-      if (isPlaying && !isPausedForExit) {
-        const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
-        if (inside) {
-          crosshair.style.display = 'block';
-          crosshair.style.left = e.clientX + 'px';
-          crosshair.style.top = e.clientY + 'px';
-        } else {
-          crosshair.style.display = 'none';
-        }
-      } else {
-        crosshair.style.display = 'none';
-      }
-    });
-
-    window.addEventListener('mouseup', () => {
-      isMouseDown = false;
-    });
-
-    document.getElementById('btn-sound').addEventListener('click', (e) => {
-      soundEnabled = !soundEnabled;
-      e.target.textContent = soundEnabled ? '🔊 Ses' : '🔇 Sessiz';
-    });
-
-    // Açılış Ekranı -> Giriş
-    document.getElementById('btn-enter-hub').addEventListener('click', () => {
-      const val = document.getElementById('welcome-nick').value.trim();
-      const finalName = val || db.activeUser || 'Kaan';
-      db.activeUser = finalName;
-      getCurrentUser().name = finalName;
-      saveDB();
-      refreshAllUI();
-      welcomeScreen.classList.add('hidden');
-      startMenu.classList.remove('hidden');
-    });
-
-    document.getElementById('btn-switch-account').addEventListener('click', () => {
-      startMenu.classList.add('hidden');
-      welcomeScreen.classList.remove('hidden');
-      renderSavedProfilesList();
-    });
-
-    // Online VS Oda Butonları
     function openVsModal() {
       if (isPlaying && !isPausedForExit) openExitModal();
-      if (!vsRoomCode) {
-        const urlParams = new URLSearchParams(window.location.search);
-        const paramCode = (urlParams.get('vs') || '').trim().toUpperCase();
-        if (paramCode) {
-          vsRoomCode = paramCode;
-          document.getElementById('vs-join-code-input').value = paramCode;
-        }
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramCode = (urlParams.get('vs') || '').trim().toUpperCase();
+      if (paramCode && !vsRoomCode) {
+        vsRoomCode = paramCode;
+        document.getElementById('vs-join-code-input').value = paramCode;
       }
       document.getElementById('vs-created-code').textContent = vsRoomCode || '------';
       syncVsBoardUI();
@@ -1614,22 +1643,27 @@
 
     document.getElementById('btn-generate-room').addEventListener('click', () => {
       vsRoomCode = generateRoomCode();
-      vsOpponentName = 'Rakip Bekleniyor...';
+      vsOpponentConnected = false;
+      vsOpponentName = 'Rakip Bağlanmadı';
       vsOpponentScore = 0;
       document.getElementById('vs-created-code').textContent = vsRoomCode;
       document.getElementById('vs-join-code-input').value = vsRoomCode;
       const me = getCurrentUser();
-      broadcastVsMessage({ type: 'join', sender: me.name, score: 0, mode: selectedMode, duration: selectedDuration });
+      if (me) broadcastVsMessage({ type: 'join', sender: me.name, score: 0, mode: selectedMode, duration: selectedDuration });
       syncVsBoardUI();
     });
 
     document.getElementById('btn-copy-invite').addEventListener('click', async () => {
-      if (!vsRoomCode) vsRoomCode = generateRoomCode();
+      if (!vsRoomCode) {
+        vsRoomCode = generateRoomCode();
+        vsOpponentConnected = false;
+      }
       document.getElementById('vs-created-code').textContent = vsRoomCode;
+      syncVsBoardUI();
       const inviteUrl = `${window.location.origin}${window.location.pathname}?vs=${vsRoomCode}`;
       try {
         await navigator.clipboard.writeText(`AIMS PRO VS Oda Kodu: ${vsRoomCode} | Link: ${inviteUrl}`);
-        alert(`Oda Kodu (${vsRoomCode}) ve davet linki panoya kopyalandı!`);
+        alert(`Oda Kodu (${vsRoomCode}) ve davet linki kopyalandı!`);
       } catch {
         alert(`Oda Kodu: ${vsRoomCode}`);
       }
@@ -1644,17 +1678,29 @@
       vsRoomCode = code;
       document.getElementById('vs-created-code').textContent = vsRoomCode;
       const me = getCurrentUser();
-      broadcastVsMessage({ type: 'join', sender: me.name, score: 0, mode: selectedMode, duration: selectedDuration });
+      if (me) broadcastVsMessage({ type: 'join', sender: me.name, score: 0, mode: selectedMode, duration: selectedDuration });
+
+      const existingRoomRaw = localStorage.getItem('aims_pro_vs_room_' + vsRoomCode);
+      if (existingRoomRaw) {
+        try {
+          const parsed = JSON.parse(existingRoomRaw);
+          if (parsed.sender && me && parsed.sender !== me.name) {
+            vsOpponentConnected = true;
+            vsOpponentName = parsed.sender;
+            vsOpponentScore = parsed.score || 0;
+          }
+        } catch {}
+      }
+
       syncVsBoardUI();
-      alert(`${vsRoomCode} VS odasına bağlandın! Hazırsan "VS Maçını Başlat" butonuna bas.`);
     });
 
     document.getElementById('btn-start-vs-match').addEventListener('click', () => {
-      if (!vsRoomCode) vsRoomCode = generateRoomCode();
+      if (!vsRoomCode || !vsOpponentConnected) return;
       const me = getCurrentUser();
       vsMatchActive = true;
       vsOpponentScore = 0;
-      broadcastVsMessage({ type: 'start', sender: me.name, mode: selectedMode, duration: selectedDuration, score: 0 });
+      if (me) broadcastVsMessage({ type: 'start', sender: me.name, mode: selectedMode, duration: selectedDuration, score: 0 });
       vsModal.classList.add('hidden');
       startGame(true);
     });
@@ -1663,11 +1709,12 @@
     let tempPhotoData = '';
     function openProfileWorkshop() {
       const user = getCurrentUser();
+      if (!user) return;
       tempPhotoData = user.avatarPhoto || '';
-      document.getElementById('ws-nick-input').value = user.name;
+      document.getElementById('ws-fixed-nick').textContent = user.name.toUpperCase();
       document.getElementById('ws-sens').value = user.sens;
       document.getElementById('ws-sens-val').textContent = Number(user.sens).toFixed(2) + 'x';
-      document.getElementById('ws-target-theme').value = user.targetTheme || 'cyan';
+      document.getElementById('ws-target-theme').value = user.targetTheme || 'gold';
 
       document.getElementById('ws-ch-color').value = user.crosshair.color;
       document.getElementById('ws-ch-size').value = user.crosshair.size;
@@ -1685,10 +1732,10 @@
 
     function applyCrosshairPreset(preset) {
       const map = {
-        dot: { color: '#00f59b', size: 0, thick: 2, gap: 2, dot: true },
-        classic: { color: '#00f3ff', size: 8, thick: 2, gap: 4, dot: false },
+        dot: { color: '#00e699', size: 0, thick: 2, gap: 2, dot: true },
+        classic: { color: '#18e0ff', size: 8, thick: 2, gap: 4, dot: false },
         goldpro: { color: '#ffc13b', size: 7, thick: 2, gap: 3, dot: true },
-        neon: { color: '#ff3df0', size: 10, thick: 2, gap: 5, dot: true }
+        neon: { color: '#ff2a55', size: 10, thick: 2, gap: 5, dot: true }
       };
       const p = map[preset];
       if (!p) return;
@@ -1761,21 +1808,8 @@
     });
 
     document.getElementById('btn-save-profile').addEventListener('click', () => {
-      const oldUser = getCurrentUser();
-      const newName = document.getElementById('ws-nick-input').value.trim() || oldUser.name;
-      const oldKey = oldUser.name.trim().toLowerCase();
-      const newKey = newName.trim().toLowerCase();
-
-      if (oldKey !== newKey) {
-        if (!db.users[newKey]) {
-          db.users[newKey] = { ...oldUser, name: newName };
-          delete db.users[oldKey];
-        }
-        db.activeUser = newName;
-      }
-
       const user = getCurrentUser();
-      user.name = newName;
+      if (!user) return;
       user.sens = parseFloat(document.getElementById('ws-sens').value) || 1.0;
       user.targetTheme = document.getElementById('ws-target-theme').value;
       const chosenEmoji = document.getElementById('ws-avatar-preview').dataset.selectedEmoji;
@@ -1792,13 +1826,13 @@
         gap: parseInt(document.getElementById('ws-ch-gap').value, 10),
         dot: document.getElementById('ws-ch-dot').checked
       };
-
       saveDB();
       refreshAllUI();
       profileModal.classList.add('hidden');
     });
 
     document.getElementById('btn-open-profile').addEventListener('click', () => {
+      if (!getCurrentUser()) return;
       if (isPlaying && !isPausedForExit) openExitModal();
       openProfileWorkshop();
     });
@@ -1831,6 +1865,103 @@
       });
     });
 
+    // Oyun Motoru
+    let isPlaying = false;
+    let isPausedForExit = false;
+    let isMouseDown = false;
+    let pointerX = 0;
+    let pointerY = 0;
+    let holdTickAccum = 0;
+    let holdActiveTicks = 0;
+    let holdTotalTicks = 0;
+
+    let selectedMode = 'gridshot';
+    let selectedDuration = 30;
+    let timeLeft = 30;
+    let score = 0;
+    let hits = 0;
+    let shots = 0;
+    let combo = 0;
+    let maxCombo = 0;
+    let reactionTimes = [];
+    let shotLog = [];
+    let targets = [];
+    let particles = [];
+    let shockwaves = [];
+    let floatingTexts = [];
+    let soundEnabled = true;
+    let lastFrameTime = 0;
+    let lastVsBroadcast = 0;
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSound(type) {
+      if (!soundEnabled) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      const now = audioCtx.currentTime;
+
+      if (type === 'hit') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(650 + Math.min(combo * 20, 560), now);
+        osc.frequency.exponentialRampToValueAtTime(1280, now + 0.075);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.085);
+        osc.start(now);
+        osc.stop(now + 0.085);
+      } else if (type === 'tick') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880 + Math.min(combo * 15, 420), now);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+        osc.start(now);
+        osc.stop(now + 0.045);
+      } else if (type === 'miss') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(145, now);
+        osc.frequency.exponentialRampToValueAtTime(62, now + 0.11);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
+        osc.start(now);
+        osc.stop(now + 0.11);
+      }
+    }
+
+    function resizeCanvas() {
+      canvas.width = arenaWrapper.clientWidth;
+      canvas.height = arenaWrapper.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    window.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      pointerX = e.clientX - rect.left;
+      pointerY = e.clientY - rect.top;
+
+      if (isPlaying && !isPausedForExit) {
+        const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+        if (inside) {
+          crosshair.style.display = 'block';
+          crosshair.style.left = e.clientX + 'px';
+          crosshair.style.top = e.clientY + 'px';
+        } else {
+          crosshair.style.display = 'none';
+        }
+      } else {
+        crosshair.style.display = 'none';
+      }
+    });
+
+    window.addEventListener('mouseup', () => { isMouseDown = false; });
+
+    document.getElementById('btn-sound').addEventListener('click', (e) => {
+      soundEnabled = !soundEnabled;
+      e.target.textContent = soundEnabled ? '🔊 Ses' : '🔇 Sessiz';
+    });
+
     function spawnTarget() {
       const padding = 82;
       let radius = 34;
@@ -1857,8 +1988,7 @@
         vy = Math.sin(angle) * speed;
       }
 
-      let x, y, safe;
-      let attempts = 0;
+      let x, y, safe, attempts = 0;
       do {
         safe = true;
         x = padding + Math.random() * Math.max(40, canvas.width - padding * 2);
@@ -1904,6 +2034,7 @@
     }
 
     function startGame(fromVs = false) {
+      if (!getCurrentUser()) return;
       resizeCanvas();
       isPlaying = true;
       isPausedForExit = false;
@@ -1935,7 +2066,7 @@
       vsModal.classList.add('hidden');
       updateHUD();
 
-      const initialCount = selectedMode === 'gridshot' ? 3 : ((selectedMode === 'tracking' || selectedMode === 'holdtrack') ? 1 : 1);
+      const initialCount = selectedMode === 'gridshot' ? 3 : 1;
       for (let i = 0; i < initialCount; i++) spawnTarget();
 
       lastFrameTime = performance.now();
@@ -1965,6 +2096,7 @@
     });
 
     document.getElementById('brand-home').addEventListener('click', () => {
+      if (!getCurrentUser()) return;
       if (isPlaying) {
         openExitModal();
       } else if (welcomeScreen.classList.contains('hidden')) {
@@ -2014,7 +2146,7 @@
         const py = Math.max(5, Math.min(hCanvas.height - 5, s.ny * hCanvas.height));
         hCtx.beginPath();
         hCtx.arc(px, py, s.hit ? 4 : 3.2, 0, Math.PI * 2);
-        hCtx.fillStyle = s.hit ? 'rgba(0, 245, 155, 0.88)' : 'rgba(255, 42, 85, 0.88)';
+        hCtx.fillStyle = s.hit ? 'rgba(0, 230, 153, 0.88)' : 'rgba(255, 42, 85, 0.88)';
         hCtx.fill();
       }
     }
@@ -2028,6 +2160,8 @@
       arenaWrapper.classList.remove('overdrive-glow');
 
       const user = getCurrentUser();
+      if (!user) return;
+
       if (vsMatchActive && vsRoomCode) {
         broadcastVsMessage({ type: 'score', sender: user.name, score, finished: true });
       }
@@ -2051,7 +2185,7 @@
 
       if (score > 0 || hits > 0) {
         db.entries.push({ name: user.name, mode: selectedMode, score, acc });
-        db.entries = db.entries.slice(-160);
+        db.entries = db.entries.slice(-180);
       }
 
       saveDB();
@@ -2120,8 +2254,8 @@
       }
 
       const user = getCurrentUser();
-      const theme = TARGET_THEMES[user.targetTheme] || TARGET_THEMES.cyan;
-      const sensMult = Number(user.sens) || 1.0;
+      const theme = TARGET_THEMES[user?.targetTheme] || TARGET_THEMES.gold;
+      const sensMult = Number(user?.sens) || 1.0;
 
       if (hitIndex !== -1) {
         const hitTarget = targets[hitIndex];
@@ -2141,7 +2275,7 @@
 
         playSound('hit');
         createExplosion(hitTarget.x, hitTarget.y, combo >= 10 ? '#ffc13b' : theme.particle);
-        addFloatingText(hitTarget.x, hitTarget.y - 16, `+${gained} (${reaction}ms)`, combo >= 10 ? '#00f59b' : '#ffc13b');
+        addFloatingText(hitTarget.x, hitTarget.y - 16, `+${gained} (${reaction}ms)`, combo >= 10 ? '#00e699' : '#ffc13b');
 
         targets.splice(hitIndex, 1);
         spawnTarget();
@@ -2172,10 +2306,9 @@
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const user = getCurrentUser();
-      const theme = TARGET_THEMES[user.targetTheme] || TARGET_THEMES.cyan;
-      const sensMult = Number(user.sens) || 1.0;
+      const theme = TARGET_THEMES[user?.targetTheme] || TARGET_THEMES.gold;
+      const sensMult = Number(user?.sens) || 1.0;
 
-      // HOLD TRACK: Basılı tutarak hedef takip mantığı
       if (selectedMode === 'holdtrack' && isMouseDown) {
         holdTickAccum += dt;
         if (holdTickAccum >= 0.09) {
@@ -2209,7 +2342,7 @@
             lockedTarget.hp = (lockedTarget.hp || 100) - 7;
 
             if (holdActiveTicks % 2 === 0) playSound('tick');
-            addFloatingText(pointerX, pointerY - 14, `+${gained}`, '#00f59b');
+            addFloatingText(pointerX, pointerY - 14, `+${gained}`, '#00e699');
 
             if (lockedTarget.hp <= 0) {
               createExplosion(lockedTarget.x, lockedTarget.y, '#ffc13b');
@@ -2224,8 +2357,7 @@
         }
       }
 
-      // Online VS canlı skor yayını
-      if (vsMatchActive && vsRoomCode && (now - lastVsBroadcast > 220)) {
+      if (vsMatchActive && vsRoomCode && user && (now - lastVsBroadcast > 220)) {
         lastVsBroadcast = now;
         broadcastVsMessage({ type: 'score', sender: user.name, score });
         syncVsBoardUI();
@@ -2233,10 +2365,7 @@
 
       for (let i = targets.length - 1; i >= 0; i--) {
         const t = targets[i];
-
-        if (t.currentRadius < t.radius) {
-          t.currentRadius = Math.min(t.radius, t.currentRadius + 420 * dt);
-        }
+        if (t.currentRadius < t.radius) t.currentRadius = Math.min(t.radius, t.currentRadius + 420 * dt);
 
         t.x += t.vx * dt;
         t.y += t.vy * dt;
@@ -2255,7 +2384,7 @@
 
         const grad = ctx.createRadialGradient(t.x, t.y, r * 0.15, t.x, t.y, r);
         grad.addColorStop(0, isBeingHeld ? '#ffffff' : theme.inner);
-        grad.addColorStop(0.68, isBeingHeld ? '#00f59b' : theme.mid);
+        grad.addColorStop(0.68, isBeingHeld ? '#00e699' : theme.mid);
         grad.addColorStop(1, theme.outer);
 
         ctx.beginPath();
@@ -2264,7 +2393,7 @@
         ctx.fill();
 
         ctx.lineWidth = isBeingHeld ? 3 : 2;
-        ctx.strokeStyle = isBeingHeld ? '#00f59b' : (combo >= 10 ? '#ffc13b' : '#ffffff');
+        ctx.strokeStyle = isBeingHeld ? '#00e699' : (combo >= 10 ? '#ffc13b' : '#ffffff');
         ctx.stroke();
 
         ctx.beginPath();
@@ -2331,7 +2460,11 @@
       refreshAllUI();
     });
 
-    refreshAllUI();
+    if (getCurrentUser()) {
+      welcomeScreen.classList.add('hidden');
+      startMenu.classList.remove('hidden');
+      refreshAllUI();
+    }
   </script>
 </body>
 </html>
