@@ -6,21 +6,22 @@
   <title>AIMS PRO // Refleks, Takip & Online VS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=JetBrains+Mono:wght@600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #070811;
-      --primary: #ff2a55;
-      --primary-glow: rgba(255, 42, 85, 0.48);
+      --bg-void: #060711;
       --gold: #ffc13b;
+      --crimson: #ff2a55;
+      --crimson-glow: rgba(255, 42, 85, 0.48);
+      --burgundy: #5e1329;
       --cyan: #18e0ff;
       --emerald: #00e699;
       --purple: #b84dff;
-      --text-main: #f4f6fb;
-      --text-muted: #b0bad0;
+      --text-main: #f5f7fc;
+      --text-muted: #aeb8d0;
       --border: rgba(255, 255, 255, 0.14);
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-body: 'Outfit', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
 
@@ -39,19 +40,50 @@
 
     body {
       position: relative;
-      background-color: var(--bg-dark);
+      background-color: var(--bg-void);
       background-image:
-        radial-gradient(circle at 12% 18%, rgba(255, 193, 59, 0.34) 0%, transparent 45%),
-        radial-gradient(circle at 88% 20%, rgba(255, 42, 85, 0.34) 0%, transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(24, 224, 255, 0.28) 0%, transparent 50%),
-        radial-gradient(circle at 75% 70%, rgba(184, 77, 255, 0.22) 0%, transparent 45%),
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+        radial-gradient(circle at 14% 18%, rgba(255, 193, 59, 0.35) 0%, transparent 46%),
+        radial-gradient(circle at 86% 20%, rgba(255, 42, 85, 0.35) 0%, transparent 46%),
+        radial-gradient(circle at 52% 84%, rgba(24, 224, 255, 0.28) 0%, transparent 50%),
+        radial-gradient(circle at 76% 68%, rgba(94, 19, 41, 0.58) 0%, transparent 52%),
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 42px 42px, 42px 42px;
       color: var(--text-main);
       font-family: var(--font-body);
       display: flex;
       flex-direction: column;
+    }
+
+    /* Canlı Kayan Akış Bandı */
+    .live-ticker-bar {
+      height: 28px;
+      background: linear-gradient(90deg, rgba(255, 193, 59, 0.16), rgba(94, 19, 41, 0.45), rgba(24, 224, 255, 0.16));
+      border-bottom: 1px solid rgba(255, 193, 59, 0.28);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      z-index: 42;
+      position: relative;
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 42px;
+      white-space: nowrap;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #ffe8ad;
+      animation: tickerScroll 26s linear infinite;
+      padding-left: 100%;
+    }
+
+    @keyframes tickerScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
     }
 
     .ambient-lights {
@@ -65,43 +97,43 @@
     .light-beam {
       position: absolute;
       border-radius: 50%;
-      filter: blur(75px);
+      filter: blur(78px);
       animation: beamFloat 6s ease-in-out infinite alternate;
     }
 
     .light-beam.beam-gold {
-      width: 460px;
-      height: 460px;
-      top: -60px;
+      width: 480px;
+      height: 480px;
+      top: -40px;
       left: 5%;
-      background: radial-gradient(circle, rgba(255, 193, 59, 0.68), transparent 70%);
+      background: radial-gradient(circle, rgba(255, 193, 59, 0.7), transparent 70%);
       animation-duration: 4.6s;
     }
 
     .light-beam.beam-crimson {
-      width: 500px;
-      height: 500px;
+      width: 520px;
+      height: 520px;
       bottom: -80px;
       right: 6%;
-      background: radial-gradient(circle, rgba(255, 42, 85, 0.65), transparent 70%);
+      background: radial-gradient(circle, rgba(255, 42, 85, 0.68), transparent 70%);
       animation-delay: -2s;
       animation-duration: 5.5s;
     }
 
     .light-beam.beam-cyan {
-      width: 420px;
-      height: 420px;
+      width: 440px;
+      height: 440px;
       top: 22%;
       right: 28%;
-      background: radial-gradient(circle, rgba(24, 224, 255, 0.52), transparent 70%);
+      background: radial-gradient(circle, rgba(24, 224, 255, 0.56), transparent 70%);
       animation-delay: -1.3s;
       animation-duration: 4s;
     }
 
     .breath-light {
       position: fixed;
-      width: 680px;
-      height: 680px;
+      width: 700px;
+      height: 700px;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -126,7 +158,7 @@
 
     .welcome-toast {
       position: fixed;
-      top: 86px;
+      top: 106px;
       left: 50%;
       transform: translateX(-50%) translateY(-16px);
       z-index: 80;
@@ -147,6 +179,30 @@
     .welcome-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     .welcome-toast span { color: var(--gold); }
 
+    .pb-live-badge {
+      position: fixed;
+      top: 108px;
+      right: 22px;
+      z-index: 45;
+      background: linear-gradient(135deg, rgba(255, 193, 59, 0.22), rgba(255, 42, 85, 0.24));
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 24px rgba(255, 193, 59, 0.42);
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      pointer-events: none;
+      animation: pulseBadge 1.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseBadge {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
     .glow-interact {
       transition: transform 0.15s ease, box-shadow 0.22s ease, border-color 0.2s ease, background 0.22s ease;
     }
@@ -158,14 +214,14 @@
     .glow-interact:active { transform: scale(0.97) !important; }
 
     header {
-      height: 72px;
-      background: linear-gradient(90deg, rgba(13, 15, 30, 0.94), rgba(38, 14, 30, 0.93), rgba(13, 20, 34, 0.94));
+      height: 70px;
+      background: linear-gradient(90deg, rgba(13, 15, 30, 0.95), rgba(44, 14, 32, 0.94), rgba(13, 20, 34, 0.95));
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 193, 59, 0.36);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 18px;
       z-index: 40;
       box-shadow: 0 6px 32px rgba(0, 0, 0, 0.72);
       flex-shrink: 0;
@@ -182,21 +238,22 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .hud-stats { display: flex; gap: 10px; }
+    .hud-stats { display: flex; gap: 8px; flex-wrap: wrap; }
     .stat-box {
       text-align: center;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(8, 10, 18, 0.85));
-      padding: 5px 12px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(8, 10, 18, 0.86));
+      padding: 4px 10px;
       border-radius: 9px;
       border: 1px solid rgba(255, 255, 255, 0.14);
-      min-width: 84px;
+      min-width: 74px;
     }
-    .stat-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
-    .stat-value { font-family: var(--font-mono); font-size: 1.06rem; font-weight: 700; color: #fff; }
+    .stat-label { font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); }
+    .stat-value { font-family: var(--font-mono); font-size: 0.98rem; font-weight: 700; color: #fff; }
     .stat-value.gold { color: var(--gold); }
     .stat-value.cyan { color: var(--cyan); }
     .stat-value.red { color: #ff5277; }
     .stat-value.emerald { color: var(--emerald); }
+    .stat-value.purple { color: #d599ff; }
 
     .controls { display: flex; align-items: center; gap: 8px; }
     button.icon-btn {
@@ -271,7 +328,7 @@
     .welcome-card, .panel {
       position: relative;
       background: linear-gradient(155deg, rgba(24, 21, 44, 0.92), rgba(11, 13, 25, 0.95));
-      border: 1px solid rgba(255, 193, 59, 0.4);
+      border: 1px solid rgba(255, 193, 59, 0.42);
       border-radius: 16px;
       box-shadow: 0 24px 65px rgba(0, 0, 0, 0.78), 0 0 38px rgba(255, 193, 59, 0.14);
       overflow: hidden;
@@ -325,7 +382,7 @@
 
     .player-banner {
       display: flex; align-items: center; justify-content: space-between;
-      background: linear-gradient(125deg, rgba(255, 193, 59, 0.15), rgba(255, 42, 85, 0.08));
+      background: linear-gradient(125deg, rgba(255, 193, 59, 0.15), rgba(94, 19, 41, 0.28));
       border: 1px solid rgba(255, 193, 59, 0.34); border-radius: 12px; padding: 11px 15px; margin-bottom: 14px; gap: 10px; flex-wrap: wrap;
     }
     .player-left { display: flex; align-items: center; gap: 11px; }
@@ -336,7 +393,7 @@
     .xp-wrap { width: 100%; margin-top: 2px; }
     .xp-labels { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600; }
     .xp-bar { width: 100%; height: 7px; background: rgba(255, 255, 255, 0.12); border-radius: 999px; overflow: hidden; }
-    .xp-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--primary)); transition: width 0.4s ease; }
+    .xp-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--crimson)); transition: width 0.4s ease; }
 
     .section-heading { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; margin-bottom: 3px; color: #fff; }
     .subtitle { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 12px; }
@@ -360,7 +417,7 @@
     .mode-card[data-mode="gridshot"] .mode-tag { background: rgba(255, 193, 59, 0.24); color: #ffd470; }
 
     .mode-card[data-mode="flick"] {
-      background: linear-gradient(145deg, rgba(255, 42, 85, 0.17), rgba(255, 107, 139, 0.08));
+      background: linear-gradient(145deg, rgba(255, 42, 85, 0.17), rgba(94, 19, 41, 0.22));
       border-color: rgba(255, 42, 85, 0.44);
     }
     .mode-card[data-mode="flick"] .mode-tag { background: rgba(255, 42, 85, 0.25); color: #ff8ca4; }
@@ -408,7 +465,7 @@
 
     .btn-start {
       width: 100%; background: linear-gradient(90deg, #ff2a55, #ff7b39, #ffc13b); background-size: 180% auto; border: none;
-      color: #fff; font-family: var(--font-display); font-size: 0.96rem; font-weight: 700; letter-spacing: 0.05em; padding: 13px 20px; border-radius: 10px; cursor: pointer; box-shadow: 0 8px 24px var(--primary-glow);
+      color: #fff; font-family: var(--font-display); font-size: 0.96rem; font-weight: 700; letter-spacing: 0.05em; padding: 13px 20px; border-radius: 10px; cursor: pointer; box-shadow: 0 8px 24px var(--crimson-glow);
     }
     .btn-start:hover { transform: translateY(-2px); background-position: right center; }
 
@@ -448,7 +505,7 @@
     .vs-players-board { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; background: rgba(0, 0, 0, 0.45); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin: 12px 0 10px; text-align: center; }
     .vs-fighter-name { font-family: var(--font-display); font-weight: 700; font-size: 0.96rem; color: #fff; }
     .vs-fighter-score { font-family: var(--font-mono); font-weight: 800; font-size: 1.18rem; color: var(--gold); margin-top: 2px; }
-    .vs-badge-mid { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--primary); padding: 4px 10px; border: 1px solid rgba(255, 42, 85, 0.45); border-radius: 8px; }
+    .vs-badge-mid { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--crimson); padding: 4px 10px; border: 1px solid rgba(255, 42, 85, 0.45); border-radius: 8px; }
     .vs-status-note { font-size: 0.84rem; font-weight: 700; text-align: center; margin-bottom: 12px; color: #ff8ca4; }
     .vs-status-note.ready { color: var(--emerald); }
     .btn-start:disabled { opacity: 0.42; cursor: not-allowed; transform: none !important; }
@@ -466,14 +523,14 @@
     input[type="range"] { width: 100%; accent-color: var(--gold); cursor: pointer; }
     .crosshair-preview-box { height: 70px; background: radial-gradient(circle, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.7)); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; display: grid; place-items: center; margin-bottom: 10px; }
 
-    .modal-box { max-width: 600px; width: 100%; text-align: center; }
+    .modal-box { max-width: 620px; width: 100%; text-align: center; }
     .exit-actions { display: grid; grid-template-columns: 1fr; gap: 11px; margin-top: 20px; }
     .result-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 14px 0; }
     @media (max-width: 560px) { .result-grid { grid-template-columns: repeat(2, 1fr); } }
     .res-item { background: rgba(0, 0, 0, 0.48); border: 1px solid var(--border); padding: 12px 8px; border-radius: 9px; }
     .res-item span { display: block; font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 700; }
     .res-item strong { font-family: var(--font-mono); font-size: 1.15rem; color: #fff; }
-    .rank-badge { display: inline-block; padding: 7px 20px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; background: rgba(255, 193, 59, 0.16); border: 1px solid var(--gold); color: var(--gold); margin-bottom: 8px; }
+    .rank-badge { display: inline-block; padding: 7px 20px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; background: rgba(255, 193, 59, 0.16); border: 1px solid var(--gold); color: var(--gold); margin-bottom: 6px; }
     .xp-gain-text { font-family: var(--font-mono); font-size: 0.88rem; color: var(--emerald); margin-bottom: 8px; font-weight: 700; }
     .heatmap-wrap { margin: 8px auto 14px; background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; padding: 8px; max-width: 340px; }
     .heatmap-wrap canvas { width: 100%; height: 100px; display: block; border-radius: 6px; background: #090b12; }
@@ -483,6 +540,15 @@
 </head>
 <body>
 
+  <div class="live-ticker-bar">
+    <div class="ticker-track" id="live-ticker-track">
+      <span>⚡ AIMS PRO // ALTIN • BORDO • CAMGÖBEĞİ ARENA AKTİF</span>
+      <span>🎯 CANLI METRİKLER: SKOR • KOMBO • HPS • KİŞİSEL REKOR (PB)</span>
+      <span>⚔ ONLINE VS: ODA KODU İLE RAKİBE BAĞLAN VE YARIŞ</span>
+      <span>🏆 LİDERLİK TABLOSU SEKMELER ARASI ANLIK SENKRONİZE</span>
+    </div>
+  </div>
+
   <div class="ambient-lights">
     <div class="light-beam beam-gold"></div>
     <div class="light-beam beam-crimson"></div>
@@ -491,6 +557,7 @@
   <div class="breath-light"></div>
 
   <div class="welcome-toast" id="welcome-toast">HOŞ GELDİNİZ, <span id="welcome-toast-name">OYUNCU</span>!</div>
+  <div class="pb-live-badge hidden" id="pb-live-badge">🏆 YENİ KİŞİSEL REKOR (PB)!</div>
 
   <svg id="custom-crosshair" width="48" height="48" viewBox="0 0 48 48"></svg>
 
@@ -514,7 +581,9 @@
 
     <div class="hud-stats">
       <div class="stat-box"><div class="stat-label">SKOR</div><div class="stat-value gold" id="hud-score">0</div></div>
+      <div class="stat-box"><div class="stat-label">PB</div><div class="stat-value purple" id="hud-pb">0</div></div>
       <div class="stat-box"><div class="stat-label">KOMBO</div><div class="stat-value emerald" id="hud-combo">0x</div></div>
+      <div class="stat-box"><div class="stat-label">HPS</div><div class="stat-value gold" id="hud-hps">0.0</div></div>
       <div class="stat-box"><div class="stat-label">SÜRE</div><div class="stat-value cyan" id="hud-time">30.0s</div></div>
       <div class="stat-box"><div class="stat-label">İSABET</div><div class="stat-value" id="hud-acc">100%</div></div>
       <div class="stat-box"><div class="stat-label">ORT. TEPKİ</div><div class="stat-value red" id="hud-ms">0 ms</div></div>
@@ -685,7 +754,7 @@
           </div>
           <div class="vs-badge-mid">VS</div>
           <div>
-            <div style="font-size:0.72rem;color:var(--primary);font-weight:700;">RAKİP (ODA: <span id="vs-active-room-label">-</span>)</div>
+            <div style="font-size:0.72rem;color:var(--crimson);font-weight:700;">RAKİP (ODA: <span id="vs-active-room-label">-</span>)</div>
             <div class="vs-fighter-name" id="vs-p2-name">Rakip Bağlanmadı</div>
             <div class="vs-fighter-score" id="vs-p2-score">0 PTS</div>
           </div>
@@ -794,11 +863,12 @@
 
         <div class="rank-badge" id="final-rank">RÜTBE: BRONZ 1</div>
         <div class="xp-gain-text" id="res-xp-gained">+0 XP KAZANILDI</div>
+        <div id="res-pb-note" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--gold);margin-bottom:8px;"></div>
 
         <div class="result-grid">
           <div class="res-item"><span>Toplam Skor</span><strong id="res-score" style="color: var(--gold);">0</strong></div>
           <div class="res-item"><span>İsabet Oranı</span><strong id="res-acc" style="color: var(--cyan);">0%</strong></div>
-          <div class="res-item"><span>Ort. Tepki</span><strong id="res-ms" style="color: var(--primary);">0 ms</strong></div>
+          <div class="res-item"><span>Ort. Tepki</span><strong id="res-ms" style="color: var(--crimson);">0 ms</strong></div>
           <div class="res-item"><span>Maks. Kombo</span><strong id="res-combo">0x</strong></div>
         </div>
 
@@ -827,9 +897,12 @@
     const profileModal = document.getElementById('profile-modal');
     const exitMenu = document.getElementById('exit-menu');
     const resultMenu = document.getElementById('result-menu');
+    const pbLiveBadge = document.getElementById('pb-live-badge');
 
     const hudScore = document.getElementById('hud-score');
+    const hudPb = document.getElementById('hud-pb');
     const hudCombo = document.getElementById('hud-combo');
+    const hudHps = document.getElementById('hud-hps');
     const hudTime = document.getElementById('hud-time');
     const hudAcc = document.getElementById('hud-acc');
     const hudMs = document.getElementById('hud-ms');
@@ -857,7 +930,7 @@
       { minXp: 20500, name: 'ÖLÜMSÜZ (IMMORTAL)' }, { minXp: 24500, name: 'RADYANT // AIMS PRO' }
     ];
 
-    const DB_KEY = 'aims_pro_auth_db_v10';
+    const DB_KEY = 'aims_pro_auth_db_v11';
 
     function hashPassword(pw) {
       let h = 2166136261;
@@ -874,6 +947,7 @@
         passwordHash: hashPassword(password),
         xp: 0,
         totalScore: 0,
+        personalBests: {},
         avatarEmoji: '🎯',
         avatarPhoto: '',
         sens: 1.0,
@@ -904,7 +978,18 @@
 
     function getCurrentUser() {
       if (!db.loggedInUser) return null;
-      return db.users[db.loggedInUser.trim().toLowerCase()] || null;
+      const u = db.users[db.loggedInUser.trim().toLowerCase()] || null;
+      if (u && !u.personalBests) u.personalBests = {};
+      return u;
+    }
+
+    function getPbKey(mode, duration) {
+      return `${mode}_${duration}`;
+    }
+
+    function getUserPersonalBest(user, mode, duration) {
+      if (!user || !user.personalBests) return 0;
+      return Number(user.personalBests[getPbKey(mode, duration)]) || 0;
     }
 
     let soundEnabled = true;
@@ -929,8 +1014,6 @@
         osc.stop(now + i * 0.07 + 0.23);
       });
     }
-
-    function playSound() {}
 
     window.addEventListener('DOMContentLoaded', playSiteEntrySound);
     window.addEventListener('pointerdown', playSiteEntrySound, { once: true });
@@ -979,6 +1062,19 @@
       }
       if (ch.dot) html += `<circle cx="${mid}" cy="${mid}" r="${Math.max(1.8, t * 0.9)}" fill="#ff2a55" />`;
       svgEl.innerHTML = html;
+    }
+
+    function updateTicker() {
+      const topEntry = db.entries.slice().sort((a, b) => b.score - a.score)[0];
+      const topText = topEntry
+        ? `🏆 ZİRVE REKOR: ${topEntry.name.toUpperCase()} (${topEntry.score.toLocaleString('tr-TR')} PTS - ${MODE_NAMES[topEntry.mode] || topEntry.mode.toUpperCase()})`
+        : '🏆 İLK ZİRVE REKORUNU SEN KIR';
+      document.getElementById('live-ticker-track').innerHTML = `
+        <span>⚡ AIMS PRO // ALTIN • BORDO • CAMGÖBEĞİ ARENA AKTİF</span>
+        <span>${topText}</span>
+        <span>🎯 CANLI METRİKLER: SKOR • PB • KOMBO • HPS</span>
+        <span>⚔ ONLINE VS: ODA KODU İLE RAKİBE BAĞLAN VE YARIŞ</span>
+      `;
     }
 
     let authMode = 'login';
@@ -1102,10 +1198,12 @@
         document.getElementById('xp-fill-bar').style.width = '100%';
       }
 
+      hudPb.textContent = getUserPersonalBest(user, selectedMode, selectedDuration);
       renderCrosshairSVG(crosshair, user.crosshair);
       renderLeaderboard();
       renderQuests(user);
       syncVsBoardUI();
+      updateTicker();
     }
 
     function renderQuests(user) {
@@ -1199,7 +1297,7 @@
     let vsOpponentName = 'Rakip Bağlanmadı';
     let vsOpponentScore = 0;
 
-    const vsChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('aims_pro_vs_v10') : null;
+    const vsChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('aims_pro_vs_v11') : null;
 
     function broadcastVsMessage(payload) {
       if (!vsRoomCode) return;
@@ -1220,6 +1318,7 @@
             passwordHash: '',
             xp: 0,
             totalScore: Number(msg.score) || 0,
+            personalBests: {},
             avatarEmoji: '🎯',
             avatarPhoto: '',
             sens: 1.0,
@@ -1244,6 +1343,7 @@
         }
         saveDB();
         renderLeaderboard();
+        updateTicker();
       }
 
       if (!msg.roomCode || msg.roomCode !== vsRoomCode) return;
@@ -1520,6 +1620,8 @@
         document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
         card.classList.add('active');
         selectedMode = card.dataset.mode;
+        const user = getCurrentUser();
+        hudPb.textContent = getUserPersonalBest(user, selectedMode, selectedDuration);
       });
     });
 
@@ -1529,6 +1631,8 @@
         btn.classList.add('active');
         selectedDuration = parseInt(btn.dataset.time, 10);
         hudTime.textContent = selectedDuration.toFixed(1) + 's';
+        const user = getCurrentUser();
+        hudPb.textContent = getUserPersonalBest(user, selectedMode, selectedDuration);
       });
     });
 
@@ -1553,6 +1657,8 @@
     let selectedMode = 'gridshot';
     let selectedDuration = 30;
     let timeLeft = 30;
+    let sessionPbStart = 0;
+    let newPbBrokenInRun = false;
     let score = 0;
     let hits = 0;
     let shots = 0;
@@ -1650,11 +1756,16 @@
     }
 
     function startGame(fromVs = false) {
-      if (!getCurrentUser()) return;
+      const user = getCurrentUser();
+      if (!user) return;
       resizeCanvas();
       isPlaying = true; isPausedForExit = false; isMouseDown = false;
       holdTickAccum = 0; holdActiveTicks = 0; holdTotalTicks = 0;
       vsMatchActive = !!fromVs;
+
+      sessionPbStart = getUserPersonalBest(user, selectedMode, selectedDuration);
+      newPbBrokenInRun = false;
+      pbLiveBadge.classList.add('hidden');
 
       score = 0; hits = 0; shots = 0; combo = 0; maxCombo = 0;
       reactionTimes = []; shotLog = []; targets = []; particles = []; shockwaves = []; floatingTexts = [];
@@ -1712,6 +1823,7 @@
     document.getElementById('btn-finish-now').addEventListener('click', () => { exitMenu.classList.add('hidden'); endGame(); });
     document.getElementById('btn-quit-to-menu').addEventListener('click', () => {
       isPlaying = false; isPausedForExit = false; isMouseDown = false; vsMatchActive = false;
+      pbLiveBadge.classList.add('hidden');
       crosshair.style.display = 'none';
       arenaWrapper.classList.remove('playing-cursor');
       arenaWrapper.classList.remove('overdrive-glow');
@@ -1745,6 +1857,7 @@
 
     function endGame() {
       isPlaying = false; isPausedForExit = false; isMouseDown = false;
+      pbLiveBadge.classList.add('hidden');
       crosshair.style.display = 'none';
       arenaWrapper.classList.remove('playing-cursor');
       arenaWrapper.classList.remove('overdrive-glow');
@@ -1754,6 +1867,14 @@
 
       if (vsMatchActive && vsRoomCode) {
         broadcastVsMessage({ type: 'score', sender: user.name, score, finished: true });
+      }
+
+      const pbKey = getPbKey(selectedMode, selectedDuration);
+      const prevPb = getUserPersonalBest(user, selectedMode, selectedDuration);
+      let pbMessage = `Kişisel Rekor (PB): ${prevPb.toLocaleString('tr-TR')}`;
+      if (score > prevPb && score > 0) {
+        user.personalBests[pbKey] = score;
+        pbMessage = `🏆 YENİ KİŞİSEL REKOR! (Önceki: ${prevPb.toLocaleString('tr-TR')} → Yeni: ${score.toLocaleString('tr-TR')})`;
       }
 
       const acc = selectedMode === 'holdtrack'
@@ -1810,6 +1931,7 @@
       document.getElementById('res-mode-label').textContent = `Mod: ${MODE_NAMES[selectedMode]} • Süre: ${selectedDuration}s`;
       document.getElementById('final-rank').textContent = `RÜTBE: ${current.name}`;
       document.getElementById('res-xp-gained').textContent = `+${gainedXp} AIMS XP KAZANILDI`;
+      document.getElementById('res-pb-note').textContent = pbMessage;
       document.getElementById('res-score').textContent = score.toLocaleString('tr-TR');
       document.getElementById('res-acc').textContent = acc + '%';
       document.getElementById('res-ms').textContent = avgMs + ' ms';
@@ -1821,8 +1943,19 @@
     }
 
     function updateHUD() {
+      const elapsed = Math.max(0.25, selectedDuration - Math.max(0, timeLeft));
+      const hps = hits / elapsed;
+      const displayedPb = Math.max(sessionPbStart, score);
+
+      if (sessionPbStart > 0 && score > sessionPbStart && !newPbBrokenInRun) {
+        newPbBrokenInRun = true;
+        pbLiveBadge.classList.remove('hidden');
+      }
+
       hudScore.textContent = score;
+      hudPb.textContent = displayedPb;
       hudCombo.textContent = combo + 'x';
+      hudHps.textContent = hps.toFixed(1);
       hudTime.textContent = Math.max(0, timeLeft).toFixed(1) + 's';
       const acc = selectedMode === 'holdtrack'
         ? (holdTotalTicks > 0 ? Math.round((holdActiveTicks / holdTotalTicks) * 100) : 100)
@@ -1966,6 +2099,15 @@
         ctx.beginPath(); ctx.arc(t.x, t.y, r, 0, Math.PI * 2); ctx.fillStyle = grad; ctx.fill();
         ctx.lineWidth = isBeingHeld ? 3 : 2;
         ctx.strokeStyle = isBeingHeld ? '#00e699' : (combo >= 10 ? '#ffc13b' : '#ffffff'); ctx.stroke();
+
+        // Hız / Kombo göstergeli dış halka
+        const ringRatio = Math.min(1, Math.max(0.15, combo / 15));
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, r + 6, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * ringRatio);
+        ctx.strokeStyle = combo >= 10 ? '#ffc13b' : '#18e0ff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
         ctx.beginPath(); ctx.arc(t.x, t.y, r * 0.24, 0, Math.PI * 2); ctx.fillStyle = '#ffffff'; ctx.fill();
 
         if (selectedMode === 'holdtrack') {
@@ -2014,6 +2156,8 @@
       startMenu.classList.remove('hidden');
       refreshAllUI();
       showWelcomeToast(activeSessionUser.name);
+    } else {
+      updateTicker();
     }
   </script>
 </body>
