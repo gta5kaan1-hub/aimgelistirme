@@ -7,18 +7,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #08090e;
-      --bg-card: rgba(17, 20, 32, 0.9);
+      --bg-dark: #08090f;
+      --bg-card: rgba(18, 22, 36, 0.92);
       --primary: #ff2a55;
-      --primary-glow: rgba(255, 42, 85, 0.45);
-      --burgundy: #591124;
-      --gold: #f5b041;
-      --gold-glow: rgba(245, 176, 65, 0.45);
+      --primary-glow: rgba(255, 42, 85, 0.55);
+      --burgundy: #691229;
+      --gold: #f7b733;
+      --gold-glow: rgba(247, 183, 51, 0.55);
       --cyan: #00f3ff;
+      --cyan-glow: rgba(0, 243, 255, 0.45);
       --emerald: #00e676;
-      --text-main: #f4f7fb;
-      --text-muted: #8c96ab;
-      --border: rgba(255, 255, 255, 0.11);
+      --violet: #b366ff;
+      --text-main: #f6f8fc;
+      --text-muted: #939eb5;
+      --border: rgba(255, 255, 255, 0.12);
     }
 
     * {
@@ -31,11 +33,12 @@
     body {
       background-color: var(--bg-dark);
       background-image:
-        radial-gradient(circle at 20% 0%, rgba(245, 176, 65, 0.14) 0%, transparent 45%),
-        radial-gradient(circle at 85% 15%, rgba(255, 42, 85, 0.16) 0%, transparent 50%),
-        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+        radial-gradient(circle at 15% 10%, rgba(247, 183, 51, 0.18) 0%, transparent 42%),
+        radial-gradient(circle at 85% 12%, rgba(255, 42, 85, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 50% 95%, rgba(0, 243, 255, 0.12) 0%, transparent 50%),
+        linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 42px 42px, 42px 42px;
       color: var(--text-main);
       font-family: 'Rajdhani', sans-serif;
       height: 100vh;
@@ -44,18 +47,29 @@
       flex-direction: column;
     }
 
+    /* Tıklama / Etkileşim Parlaması */
+    .glow-interact {
+      transition: transform 0.18s ease, box-shadow 0.25s ease, border-color 0.22s ease, background 0.22s ease;
+    }
+
+    .glow-interact:active {
+      transform: scale(0.97) !important;
+      box-shadow: 0 0 28px var(--gold-glow), 0 0 18px var(--cyan-glow) !important;
+      border-color: var(--gold) !important;
+    }
+
     /* Üst HUD Bar */
     header {
       height: 70px;
-      background: rgba(12, 14, 23, 0.92);
+      background: linear-gradient(90deg, rgba(14, 17, 29, 0.95), rgba(26, 13, 24, 0.92), rgba(14, 17, 29, 0.95));
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(245, 176, 65, 0.22);
+      border-bottom: 1px solid rgba(247, 183, 51, 0.28);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 24px;
       z-index: 25;
-      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.65);
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.7);
     }
 
     .brand {
@@ -75,8 +89,8 @@
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
       color: var(--gold);
-      background: linear-gradient(135deg, rgba(245, 176, 65, 0.18), rgba(255, 42, 85, 0.15));
-      box-shadow: 0 0 18px var(--gold-glow);
+      background: linear-gradient(135deg, rgba(247, 183, 51, 0.22), rgba(255, 42, 85, 0.2));
+      box-shadow: 0 0 20px var(--gold-glow);
       transform: rotate(45deg);
     }
 
@@ -89,23 +103,24 @@
       font-size: 1.35rem;
       font-weight: 900;
       letter-spacing: 2.5px;
-      background: linear-gradient(90deg, #ffffff, var(--gold), #ff6b81);
+      background: linear-gradient(90deg, #ffffff, var(--gold), #ff5c7c);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hud-stats {
       display: flex;
-      gap: 18px;
+      gap: 16px;
     }
 
     .stat-box {
       text-align: center;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(8, 10, 18, 0.72);
       padding: 5px 15px;
-      border-radius: 7px;
-      border: 1px solid var(--border);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       min-width: 96px;
+      box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.02);
     }
 
     .stat-label {
@@ -122,9 +137,9 @@
       color: #fff;
     }
 
-    .stat-value.gold { color: var(--gold); text-shadow: 0 0 10px var(--gold-glow); }
-    .stat-value.cyan { color: var(--cyan); }
-    .stat-value.red { color: var(--primary); }
+    .stat-value.gold { color: var(--gold); text-shadow: 0 0 12px var(--gold-glow); }
+    .stat-value.cyan { color: var(--cyan); text-shadow: 0 0 12px var(--cyan-glow); }
+    .stat-value.red { color: #ff476e; text-shadow: 0 0 12px var(--primary-glow); }
 
     .controls {
       display: flex;
@@ -133,7 +148,7 @@
     }
 
     select, button.icon-btn {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border);
       color: #fff;
       padding: 7px 12px;
@@ -147,18 +162,20 @@
 
     select:hover, button.icon-btn:hover {
       border-color: var(--gold);
-      background: rgba(245, 176, 65, 0.12);
+      background: rgba(247, 183, 51, 0.14);
+      box-shadow: 0 0 15px rgba(247, 183, 51, 0.22);
     }
 
     button.exit-btn {
-      border-color: rgba(255, 42, 85, 0.45);
-      color: #ff7b93;
+      border-color: rgba(255, 42, 85, 0.5);
+      color: #ff859d;
     }
 
     button.exit-btn:hover {
-      background: rgba(255, 42, 85, 0.2);
+      background: rgba(255, 42, 85, 0.24);
       border-color: var(--primary);
       color: #fff;
+      box-shadow: 0 0 18px var(--primary-glow);
     }
 
     select option {
@@ -189,11 +206,11 @@
       display: none;
     }
 
-    /* Katmanlar (Açılış, Menü, Çıkış, Sonuç) */
+    /* Katmanlar */
     .overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 25%, rgba(28, 32, 52, 0.88), rgba(7, 8, 13, 0.95));
+      background: radial-gradient(circle at 50% 20%, rgba(36, 20, 44, 0.85), rgba(7, 8, 14, 0.95));
       backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
@@ -207,20 +224,20 @@
     /* Şık Açılış Ekranı */
     .welcome-card {
       position: relative;
-      max-width: 660px;
+      max-width: 650px;
       width: 100%;
-      background: linear-gradient(155deg, rgba(22, 26, 42, 0.96), rgba(11, 13, 22, 0.98));
-      border: 1px solid rgba(245, 176, 65, 0.42);
+      background: linear-gradient(155deg, rgba(25, 27, 45, 0.96), rgba(11, 13, 22, 0.98));
+      border: 1px solid rgba(247, 183, 51, 0.48);
       border-radius: 18px;
-      padding: 44px 36px;
+      padding: 42px 34px;
       text-align: center;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 45px rgba(245, 176, 65, 0.14);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.88), 0 0 48px rgba(247, 183, 51, 0.18);
       overflow: hidden;
-      animation: cardEntrance 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: cardEntrance 0.42s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes cardEntrance {
-      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
@@ -229,59 +246,58 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--gold), var(--cyan), var(--gold), var(--primary));
+      background: linear-gradient(90deg, var(--primary), var(--gold), var(--cyan), var(--violet), var(--primary));
     }
 
     .shimmer-badge {
       display: inline-block;
       font-family: 'Orbitron', sans-serif;
       font-size: 0.72rem;
-      letter-spacing: 3px;
+      letter-spacing: 2.5px;
       padding: 5px 14px;
       border-radius: 999px;
       color: var(--gold);
-      border: 1px solid rgba(245, 176, 65, 0.4);
-      background: rgba(245, 176, 65, 0.08);
-      margin-bottom: 16px;
+      border: 1px solid rgba(247, 183, 51, 0.45);
+      background: rgba(247, 183, 51, 0.1);
+      box-shadow: 0 0 16px rgba(247, 183, 51, 0.2);
+      margin-bottom: 14px;
     }
 
     .welcome-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.35rem;
+      font-size: 2.3rem;
       font-weight: 900;
       letter-spacing: 2px;
       line-height: 1.15;
       margin-bottom: 12px;
-      background: linear-gradient(120deg, #fff 15%, var(--gold) 50%, #ff4d6d 85%);
-      background-size: 200% auto;
+      background: linear-gradient(120deg, #ffffff 10%, var(--gold) 45%, var(--cyan) 80%, #ff4d79 100%);
+      background-size: 220% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: shineText 4s linear infinite;
+      animation: shineText 4.5s linear infinite;
     }
 
     @keyframes shineText {
-      to { background-position: 200% center; }
+      to { background-position: 220% center; }
     }
 
     .welcome-desc {
       color: var(--text-muted);
-      font-size: 1.08rem;
-      max-width: 500px;
-      margin: 0 auto 26px;
+      font-size: 1.06rem;
+      max-width: 490px;
+      margin: 0 auto 24px;
       line-height: 1.45;
     }
 
     .nick-box {
-      display: flex;
-      gap: 10px;
-      max-width: 390px;
-      margin: 0 auto 26px;
+      max-width: 380px;
+      margin: 0 auto 24px;
     }
 
     .nick-input {
-      flex: 1;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      width: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 9px;
       padding: 12px 15px;
       color: #fff;
@@ -294,31 +310,29 @@
 
     .nick-input:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 15px rgba(245, 176, 65, 0.2);
+      box-shadow: 0 0 18px rgba(247, 183, 51, 0.28);
     }
 
-    /* Ana Kontrol & Menü Düzeni */
+    /* Ana Menü Düzeni */
     .hub-container {
       max-width: 1120px;
       width: 100%;
       display: grid;
-      grid-template-columns: 1.45fr 1fr;
+      grid-template-columns: 1.42fr 1fr;
       gap: 20px;
       align-items: stretch;
     }
 
     @media (max-width: 900px) {
-      .hub-container {
-        grid-template-columns: 1fr;
-      }
+      .hub-container { grid-template-columns: 1fr; }
     }
 
     .panel {
-      background: linear-gradient(150deg, rgba(20, 24, 38, 0.95), rgba(11, 13, 22, 0.97));
-      border: 1px solid rgba(245, 176, 65, 0.28);
-      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.75);
-      border-radius: 15px;
-      padding: 26px;
+      background: linear-gradient(155deg, rgba(22, 26, 44, 0.96), rgba(11, 13, 22, 0.98));
+      border: 1px solid rgba(247, 183, 51, 0.32);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.78), 0 0 28px rgba(0, 243, 255, 0.06);
+      border-radius: 16px;
+      padding: 24px;
       position: relative;
       overflow: hidden;
     }
@@ -328,18 +342,18 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--gold), var(--cyan));
+      background: linear-gradient(90deg, var(--primary), var(--gold), var(--cyan), var(--violet));
     }
 
     .player-banner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(0, 0, 0, 0.38);
-      border: 1px solid rgba(245, 176, 65, 0.22);
-      border-radius: 11px;
+      background: linear-gradient(120deg, rgba(247, 183, 51, 0.08), rgba(0, 243, 255, 0.05), rgba(0, 0, 0, 0.42));
+      border: 1px solid rgba(247, 183, 51, 0.28);
+      border-radius: 12px;
       padding: 14px 18px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       gap: 14px;
       flex-wrap: wrap;
     }
@@ -356,7 +370,7 @@
     }
 
     .rank-pill {
-      padding: 6px 14px;
+      padding: 6px 15px;
       border-radius: 999px;
       font-family: 'Orbitron', sans-serif;
       font-size: 0.78rem;
@@ -364,8 +378,8 @@
       letter-spacing: 1px;
       border: 1px solid var(--gold);
       color: var(--gold);
-      background: linear-gradient(90deg, rgba(245, 176, 65, 0.18), rgba(255, 42, 85, 0.15));
-      box-shadow: 0 0 15px rgba(245, 176, 65, 0.2);
+      background: linear-gradient(90deg, rgba(247, 183, 51, 0.2), rgba(255, 42, 85, 0.18));
+      box-shadow: 0 0 18px rgba(247, 183, 51, 0.28);
     }
 
     .xp-wrap {
@@ -376,15 +390,15 @@
     .xp-labels {
       display: flex;
       justify-content: space-between;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
 
     .xp-bar {
       width: 100%;
-      height: 7px;
-      background: rgba(255, 255, 255, 0.08);
+      height: 8px;
+      background: rgba(255, 255, 255, 0.09);
       border-radius: 999px;
       overflow: hidden;
     }
@@ -392,29 +406,30 @@
     .xp-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--gold), var(--primary));
+      background: linear-gradient(90deg, var(--gold), var(--primary), var(--cyan));
+      box-shadow: 0 0 12px var(--gold-glow);
       transition: width 0.4s ease;
     }
 
     .section-heading {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.22rem;
       letter-spacing: 1.5px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       color: #fff;
     }
 
     .subtitle {
       color: var(--text-muted);
-      font-size: 0.98rem;
-      margin-bottom: 18px;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
     }
 
     .mode-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     @media (max-width: 560px) {
@@ -422,24 +437,26 @@
     }
 
     .mode-card {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.035);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 11px;
       padding: 14px;
       cursor: pointer;
-      transition: all 0.22s ease;
       text-align: left;
+      position: relative;
+      overflow: hidden;
     }
 
     .mode-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(245, 176, 65, 0.5);
+      border-color: rgba(0, 243, 255, 0.55);
+      box-shadow: 0 6px 22px rgba(0, 243, 255, 0.14);
     }
 
     .mode-card.active {
-      background: linear-gradient(145deg, rgba(255, 42, 85, 0.16), rgba(245, 176, 65, 0.13));
+      background: linear-gradient(145deg, rgba(255, 42, 85, 0.2), rgba(247, 183, 51, 0.16), rgba(0, 243, 255, 0.08));
       border-color: var(--gold);
-      box-shadow: 0 0 22px rgba(245, 176, 65, 0.18);
+      box-shadow: 0 0 26px rgba(247, 183, 51, 0.34), inset 0 0 16px rgba(247, 183, 51, 0.12);
     }
 
     .mode-tag {
@@ -448,8 +465,8 @@
       font-weight: 700;
       padding: 2px 8px;
       border-radius: 4px;
-      background: rgba(255, 42, 85, 0.22);
-      color: #ff6685;
+      background: rgba(0, 243, 255, 0.14);
+      color: var(--cyan);
       margin-bottom: 6px;
       letter-spacing: 1px;
     }
@@ -457,6 +474,7 @@
     .mode-card.active .mode-tag {
       background: var(--gold);
       color: #090a0f;
+      box-shadow: 0 0 12px var(--gold-glow);
     }
 
     .mode-card h3 {
@@ -476,7 +494,7 @@
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .dur-btn {
@@ -488,40 +506,48 @@
       font-family: 'Orbitron', sans-serif;
       font-size: 0.85rem;
       cursor: pointer;
-      transition: 0.2s;
+    }
+
+    .dur-btn:hover {
+      border-color: rgba(0, 243, 255, 0.5);
+      color: #fff;
     }
 
     .dur-btn.active {
       border-color: var(--cyan);
-      color: var(--cyan);
-      background: rgba(0, 243, 255, 0.12);
+      color: #071318;
+      background: linear-gradient(90deg, var(--cyan), #66f7ff);
+      font-weight: 700;
+      box-shadow: 0 0 20px var(--cyan-glow);
     }
 
     .btn-start {
       width: 100%;
-      background: linear-gradient(90deg, var(--primary), #ff5e3a);
+      background: linear-gradient(90deg, var(--primary), #ff5e3a, var(--gold));
+      background-size: 160% auto;
       border: none;
       color: #fff;
       font-family: 'Orbitron', sans-serif;
       font-size: 1.05rem;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 2px;
       padding: 15px 28px;
-      border-radius: 9px;
+      border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 8px 25px var(--primary-glow);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 26px var(--primary-glow);
+      transition: transform 0.2s, box-shadow 0.2s, background-position 0.35s;
     }
 
     .btn-start:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 35px rgba(255, 42, 85, 0.72);
+      background-position: right center;
+      box-shadow: 0 12px 35px rgba(255, 42, 85, 0.72), 0 0 22px rgba(247, 183, 51, 0.35);
     }
 
     .btn-gold {
-      background: linear-gradient(90deg, #d68910, var(--gold));
+      background: linear-gradient(90deg, #e09612, var(--gold), #ffe082);
       color: #090a0f;
-      box-shadow: 0 8px 25px rgba(245, 176, 65, 0.35);
+      box-shadow: 0 8px 25px rgba(247, 183, 51, 0.42);
     }
 
     .btn-ghost {
@@ -529,16 +555,16 @@
       border: 1px solid var(--border);
       color: #fff;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       padding: 12px 18px;
-      border-radius: 8px;
+      border-radius: 9px;
       cursor: pointer;
-      transition: 0.2s;
     }
 
     .btn-ghost:hover {
-      border-color: var(--gold);
-      background: rgba(245, 176, 65, 0.12);
+      border-color: var(--cyan);
+      background: rgba(0, 243, 255, 0.12);
+      box-shadow: 0 0 16px var(--cyan-glow);
     }
 
     /* Liderlik Tablosu */
@@ -553,26 +579,31 @@
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      padding: 6px 10px;
-      border-radius: 6px;
+      padding: 6px 11px;
+      border-radius: 7px;
       font-family: 'Rajdhani', sans-serif;
       font-weight: 700;
-      font-size: 0.84rem;
+      font-size: 0.85rem;
       cursor: pointer;
-      transition: 0.2s;
+    }
+
+    .lb-tab:hover {
+      border-color: rgba(247, 183, 51, 0.45);
+      color: #fff;
     }
 
     .lb-tab.active {
-      background: rgba(245, 176, 65, 0.16);
+      background: linear-gradient(90deg, rgba(247, 183, 51, 0.25), rgba(255, 42, 85, 0.18));
       border-color: var(--gold);
       color: var(--gold);
+      box-shadow: 0 0 16px rgba(247, 183, 51, 0.28);
     }
 
     .lb-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      max-height: 360px;
+      max-height: 365px;
       overflow-y: auto;
       padding-right: 4px;
     }
@@ -581,15 +612,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(0, 0, 0, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 9px;
       padding: 10px 14px;
     }
 
-    .lb-row.top-1 { border-color: rgba(245, 176, 65, 0.55); background: rgba(245, 176, 65, 0.08); }
-    .lb-row.top-2 { border-color: rgba(200, 210, 225, 0.35); }
-    .lb-row.top-3 { border-color: rgba(205, 127, 50, 0.35); }
+    .lb-row.top-1 {
+      border-color: rgba(247, 183, 51, 0.65);
+      background: linear-gradient(90deg, rgba(247, 183, 51, 0.14), rgba(0, 0, 0, 0.45));
+      box-shadow: 0 0 16px rgba(247, 183, 51, 0.16);
+    }
+    .lb-row.top-2 { border-color: rgba(0, 243, 255, 0.42); }
+    .lb-row.top-3 { border-color: rgba(179, 102, 255, 0.42); }
 
     .lb-left {
       display: flex;
@@ -649,7 +684,7 @@
     }
 
     .res-item {
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.48);
       border: 1px solid var(--border);
       padding: 14px 8px;
       border-radius: 9px;
@@ -677,11 +712,11 @@
       font-weight: 900;
       font-size: 1rem;
       letter-spacing: 1.8px;
-      background: linear-gradient(90deg, rgba(245, 176, 65, 0.22), rgba(255, 42, 85, 0.22));
+      background: linear-gradient(90deg, rgba(247, 183, 51, 0.24), rgba(255, 42, 85, 0.22));
       border: 1px solid var(--gold);
       color: var(--gold);
       margin-bottom: 12px;
-      box-shadow: 0 0 22px var(--gold-glow);
+      box-shadow: 0 0 24px var(--gold-glow);
     }
 
     .xp-gain-text {
@@ -706,7 +741,7 @@
   </svg>
 
   <header>
-    <div class="brand" id="brand-home" title="Ana Menüye Dön">
+    <div class="brand glow-interact" id="brand-home" title="Ana Menüye Dön">
       <div class="brand-logo"><span>A</span></div>
       <h1>AIMS PRO</h1>
     </div>
@@ -731,15 +766,15 @@
     </div>
 
     <div class="controls">
-      <select id="crosshair-color" title="Nişangah Rengi">
+      <select id="crosshair-color" class="glow-interact" title="Nişangah Rengi">
         <option value="#00f3ff">Nişangah: Camgöbeği</option>
         <option value="#00ff66">Nişangah: Neon Yeşil</option>
         <option value="#ff2a55">Nişangah: Kırmızı</option>
-        <option value="#f5b041">Nişangah: Altın</option>
+        <option value="#f7b733">Nişangah: Altın</option>
         <option value="#ffffff">Nişangah: Beyaz</option>
       </select>
-      <button class="icon-btn" id="btn-sound" title="Sesi Aç/Kapat">🔊 Ses Açık</button>
-      <button class="icon-btn exit-btn" id="btn-exit-top" title="Çıkış Ekranı (ESC)">⎋ Çıkış</button>
+      <button class="icon-btn glow-interact" id="btn-sound" title="Sesi Aç/Kapat">🔊 Ses Açık</button>
+      <button class="icon-btn exit-btn glow-interact" id="btn-exit-top" title="Çıkış Ekranı (ESC)">⎋ Çıkış</button>
     </div>
   </header>
 
@@ -752,14 +787,14 @@
         <div class="shimmer-badge">RESMİ E-SPOR NİŞAN PLATFORMU</div>
         <h2 class="welcome-title">AIMS PRO'YA HOŞ GELDİNİZ</h2>
         <p class="welcome-desc">
-          Reflekslerini zirveye taşı, rütbeni yükselt, her modda rekor kır ve liderlik tablosunda yerini al.
+          Kademeli rütbe sisteminde yüksel, reflekslerini keskinleştir ve liderlik tablosunda zirveye yerleş.
         </p>
 
         <div class="nick-box">
           <input type="text" id="welcome-nick" class="nick-input" maxlength="18" placeholder="Oyuncu adın (örn: Kaan)" />
         </div>
 
-        <button class="btn-start btn-gold" id="btn-enter-hub">AKADEMİYE GİRİŞ YAP</button>
+        <button class="btn-start btn-gold glow-interact" id="btn-enter-hub">AKADEMİYE GİRİŞ YAP</button>
       </div>
     </div>
 
@@ -773,10 +808,10 @@
               <h3 id="menu-player-name">OYUNCU</h3>
               <span id="menu-total-xp-label">Toplam XP: 0 • Toplam Skor: 0</span>
             </div>
-            <div class="rank-pill" id="menu-rank-badge">BRONZ I</div>
+            <div class="rank-pill" id="menu-rank-badge">BRONZ 1</div>
             <div class="xp-wrap">
               <div class="xp-labels">
-                <span id="xp-progress-text">Sonraki Rütbe: 0 / 500 XP</span>
+                <span id="xp-progress-text">Sonraki Kademe (BRONZ 2): 0 / 350 XP</span>
                 <button type="button" id="btn-change-nick" style="background:none;border:none;color:var(--gold);font-weight:700;cursor:pointer;font-family:'Rajdhani',sans-serif;">Adı Değiştir</button>
               </div>
               <div class="xp-bar">
@@ -789,22 +824,22 @@
           <p class="subtitle">Modunu ve süreni seçerek antrenmana başla.</p>
 
           <div class="mode-grid">
-            <div class="mode-card active" data-mode="gridshot">
+            <div class="mode-card glow-interact active" data-mode="gridshot">
               <span class="mode-tag">HIZ & RİTİM</span>
               <h3>GRIDSHOT</h3>
               <p>Ekranda aynı anda 3 hedef çıkar. Vurdukça yenisi gelir.</p>
             </div>
-            <div class="mode-card" data-mode="flick">
+            <div class="mode-card glow-interact" data-mode="flick">
               <span class="mode-tag">REFLEKS</span>
               <h3>FLICK SHOT</h3>
               <p>Anlık beliren hedefleri süre dolmadan vurarak tepkini ölç.</p>
             </div>
-            <div class="mode-card" data-mode="tracking">
+            <div class="mode-card glow-interact" data-mode="tracking">
               <span class="mode-tag">HAREKETLİ</span>
               <h3>STRAFE TRACK</h3>
               <p>Hareketli hedefleri takip edip isabetli atışlar yap.</p>
             </div>
-            <div class="mode-card" data-mode="precision">
+            <div class="mode-card glow-interact" data-mode="precision">
               <span class="mode-tag">HEADSHOT</span>
               <h3>MİKRO NİŞAN</h3>
               <p>Küçük hedeflerle ince fare hakimiyetini geliştir.</p>
@@ -812,12 +847,12 @@
           </div>
 
           <div class="duration-bar">
-            <button class="dur-btn" data-time="15">15 SANİYE</button>
-            <button class="dur-btn active" data-time="30">30 SANİYE</button>
-            <button class="dur-btn" data-time="60">60 SANİYE</button>
+            <button class="dur-btn glow-interact" data-time="15">15 SANİYE</button>
+            <button class="dur-btn glow-interact active" data-time="30">30 SANİYE</button>
+            <button class="dur-btn glow-interact" data-time="60">60 SANİYE</button>
           </div>
 
-          <button class="btn-start" id="btn-play">ANTRENMANI BAŞLAT</button>
+          <button class="btn-start glow-interact" id="btn-play">ANTRENMANI BAŞLAT</button>
         </div>
 
         <!-- Sağ: Her Oyuna Özel ve Toplam Liderlik Tablosu -->
@@ -826,11 +861,11 @@
           <p class="subtitle">Mod bazlı rekorlar ve genel toplam puan sıralaması.</p>
 
           <div class="lb-tabs">
-            <button class="lb-tab active" data-lb="total">TOPLAM</button>
-            <button class="lb-tab" data-lb="gridshot">GRIDSHOT</button>
-            <button class="lb-tab" data-lb="flick">FLICK</button>
-            <button class="lb-tab" data-lb="tracking">TRACK</button>
-            <button class="lb-tab" data-lb="precision">MİKRO</button>
+            <button class="lb-tab glow-interact active" data-lb="total">TOPLAM</button>
+            <button class="lb-tab glow-interact" data-lb="gridshot">GRIDSHOT</button>
+            <button class="lb-tab glow-interact" data-lb="flick">FLICK</button>
+            <button class="lb-tab glow-interact" data-lb="tracking">TRACK</button>
+            <button class="lb-tab glow-interact" data-lb="precision">MİKRO</button>
           </div>
 
           <div class="lb-list" id="leaderboard-list"></div>
@@ -846,9 +881,9 @@
         <p class="subtitle">Oyun şu an duraklatıldı. Nasıl devam etmek istersin?</p>
 
         <div class="exit-actions">
-          <button class="btn-start btn-gold" id="btn-resume-game">▶ ANTRENMANA DEVAM ET</button>
-          <button class="btn-start" id="btn-finish-now">⏹ ANTRENMANI BİTİR & SKORU KAYDET</button>
-          <button class="btn-ghost" id="btn-quit-to-menu">🏠 KAYDETMEDEN ANA MENÜYE DÖN</button>
+          <button class="btn-start btn-gold glow-interact" id="btn-resume-game">▶ ANTRENMANA DEVAM ET</button>
+          <button class="btn-start glow-interact" id="btn-finish-now">⏹ ANTRENMANI BİTİR & SKORU KAYDET</button>
+          <button class="btn-ghost glow-interact" id="btn-quit-to-menu">🏠 KAYDETMEDEN ANA MENÜYE DÖN</button>
         </div>
       </div>
     </div>
@@ -859,7 +894,7 @@
         <h2 class="section-heading" style="font-size: 1.75rem;">ANTRENMAN TAMAMLANDI</h2>
         <p class="subtitle" id="res-mode-label">Mod: GRIDSHOT</p>
 
-        <div class="rank-badge" id="final-rank">RÜTBE: ELMAS NİŞANCI</div>
+        <div class="rank-badge" id="final-rank">RÜTBE: BRONZ 1</div>
         <div class="xp-gain-text" id="res-xp-gained">+0 XP KAZANILDI</div>
 
         <div class="result-grid">
@@ -882,8 +917,8 @@
         </div>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <button class="btn-start" style="flex:1;" id="btn-restart">TEKRAR OYNA</button>
-          <button class="btn-ghost" id="btn-res-menu">ANA MENÜ & LİDERLİK</button>
+          <button class="btn-start glow-interact" style="flex:1;" id="btn-restart">TEKRAR OYNA</button>
+          <button class="btn-ghost glow-interact" id="btn-res-menu">ANA MENÜ & LİDERLİK</button>
         </div>
       </div>
     </div>
@@ -895,13 +930,11 @@
     const arenaWrapper = document.getElementById('arena-wrapper');
     const crosshair = document.getElementById('custom-crosshair');
 
-    // Ekranlar
     const welcomeScreen = document.getElementById('welcome-screen');
     const startMenu = document.getElementById('start-menu');
     const exitMenu = document.getElementById('exit-menu');
     const resultMenu = document.getElementById('result-menu');
 
-    // HUD
     const hudScore = document.getElementById('hud-score');
     const hudTime = document.getElementById('hud-time');
     const hudAcc = document.getElementById('hud-acc');
@@ -914,17 +947,29 @@
       precision: 'MİKRO NİŞAN'
     };
 
+    // Kademeli Rütbe Sistemi (Bronz 1-4 -> Gümüş 1-4 -> Altın 1-4 -> Elmas 1-4 -> Ölümsüz -> Radyant)
     const RANKS = [
-      { minXp: 0, name: 'BRONZ I' },
-      { minXp: 500, name: 'GÜMÜŞ II' },
-      { minXp: 1200, name: 'ALTIN III' },
-      { minXp: 2200, name: 'ELMAS NİŞANCI' },
-      { minXp: 3600, name: 'ÖLÜMSÜZ (IMMORTAL)' },
-      { minXp: 5500, name: 'RADYANT // AIMS PRO' }
+      { minXp: 0, name: 'BRONZ 1' },
+      { minXp: 400, name: 'BRONZ 2' },
+      { minXp: 850, name: 'BRONZ 3' },
+      { minXp: 1350, name: 'BRONZ 4' },
+      { minXp: 1950, name: 'GÜMÜŞ 1' },
+      { minXp: 2650, name: 'GÜMÜŞ 2' },
+      { minXp: 3450, name: 'GÜMÜŞ 3' },
+      { minXp: 4350, name: 'GÜMÜŞ 4' },
+      { minXp: 5400, name: 'ALTIN 1' },
+      { minXp: 6600, name: 'ALTIN 2' },
+      { minXp: 7950, name: 'ALTIN 3' },
+      { minXp: 9450, name: 'ALTIN 4' },
+      { minXp: 11200, name: 'ELMAS 1' },
+      { minXp: 13150, name: 'ELMAS 2' },
+      { minXp: 15300, name: 'ELMAS 3' },
+      { minXp: 17650, name: 'ELMAS 4' },
+      { minXp: 20500, name: 'ÖLÜMSÜZ (IMMORTAL)' },
+      { minXp: 24500, name: 'RADYANT // AIMS PRO' }
     ];
 
-    // Kalıcı Kullanıcı & Liderlik Verisi (LocalStorage)
-    const STORAGE_KEY = 'aims_pro_save_v1';
+    const STORAGE_KEY = 'aims_pro_save_v2';
     function loadSave() {
       const defaults = {
         playerName: 'Oyuncu 1',
@@ -980,7 +1025,7 @@
       document.getElementById('welcome-nick').value = saveData.playerName;
       document.getElementById('menu-player-name').textContent = saveData.playerName.toUpperCase();
       document.getElementById('menu-total-xp-label').textContent =
-        `Toplam XP: ${saveData.xp} • Toplam Skor: ${saveData.totalScore.toLocaleString('tr-TR')}`;
+        `Toplam XP: ${saveData.xp.toLocaleString('tr-TR')} • Toplam Skor: ${saveData.totalScore.toLocaleString('tr-TR')}`;
 
       const { current, next } = getRankInfo(saveData.xp);
       document.getElementById('menu-rank-badge').textContent = current.name;
@@ -990,7 +1035,7 @@
         const gainedInTier = saveData.xp - current.minXp;
         const pct = Math.min(100, Math.max(0, Math.round((gainedInTier / spanXp) * 100)));
         document.getElementById('xp-progress-text').textContent =
-          `Sonraki Rütbe (${next.name}): ${gainedInTier} / ${spanXp} XP`;
+          `Sonraki Kademe (${next.name}): ${gainedInTier} / ${spanXp} XP`;
         document.getElementById('xp-fill-bar').style.width = pct + '%';
       } else {
         document.getElementById('xp-progress-text').textContent = 'ZİRVE RÜTBE ULAŞILDI (MAKS)';
@@ -1063,7 +1108,6 @@
       }[m]));
     }
 
-    // Oyun Durumu
     let isPlaying = false;
     let isPausedForExit = false;
     let selectedMode = 'gridshot';
@@ -1081,7 +1125,6 @@
     let soundEnabled = true;
     let lastFrameTime = 0;
 
-    // Web Audio API Ses Efekti
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playSound(type) {
       if (!soundEnabled) return;
@@ -1095,8 +1138,8 @@
       const now = audioCtx.currentTime;
       if (type === 'hit') {
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(620 + Math.min(combo * 18, 500), now);
-        osc.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
+        osc.frequency.setValueAtTime(640 + Math.min(combo * 18, 520), now);
+        osc.frequency.exponentialRampToValueAtTime(1240, now + 0.08);
         gain.gain.setValueAtTime(0.22, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
         osc.start(now);
@@ -1140,7 +1183,6 @@
       e.target.textContent = soundEnabled ? '🔊 Ses Açık' : '🔇 Ses Kapalı';
     });
 
-    // Açılış Ekranı -> Menü
     document.getElementById('btn-enter-hub').addEventListener('click', () => {
       const val = document.getElementById('welcome-nick').value.trim();
       if (val) saveData.playerName = val;
@@ -1155,7 +1197,6 @@
       welcomeScreen.classList.remove('hidden');
     });
 
-    // Mod ve Süre Seçimleri
     document.querySelectorAll('.mode-card').forEach(card => {
       card.addEventListener('click', () => {
         document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
@@ -1173,7 +1214,6 @@
       });
     });
 
-    // Liderlik Sekmeleri
     document.querySelectorAll('.lb-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'));
@@ -1194,10 +1234,10 @@
         radius = 16;
       } else if (selectedMode === 'flick') {
         radius = 28;
-        lifeTime = 1350;
+        lifeTime = 1400;
       } else if (selectedMode === 'tracking') {
         radius = 30;
-        const speed = 220 + Math.random() * 140;
+        const speed = 210 + Math.random() * 130;
         const angle = Math.random() * Math.PI * 2;
         vx = Math.cos(angle) * speed;
         vy = Math.sin(angle) * speed;
@@ -1220,7 +1260,7 @@
 
       targets.push({
         x, y, radius,
-        currentRadius: 4,
+        currentRadius: 6,
         vx, vy,
         spawnTime: performance.now(),
         lifeTime
@@ -1273,7 +1313,6 @@
       requestAnimationFrame(gameLoop);
     }
 
-    // Çıkış Ekranı Kontrolleri
     function openExitModal() {
       if (!isPlaying || isPausedForExit) return;
       isPausedForExit = true;
@@ -1342,8 +1381,8 @@
         ? Math.round(reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length)
         : 0;
 
-      // XP & Kayıt Güncelleme
-      const gainedXp = Math.max(25, Math.round(score / 12) + Math.round(acc / 2));
+      // Kademeli sistem için dengeli XP (tek elde rütbe zıplamayı önler)
+      const gainedXp = hits > 0 ? Math.max(15, Math.round(score / 45) + Math.round(hits * 1.5)) : 10;
       saveData.xp += gainedXp;
       saveData.totalScore += score;
       if (score > (saveData.bestByMode[selectedMode] || 0)) {
@@ -1404,20 +1443,22 @@
 
       if (hitIndex !== -1) {
         const hitTarget = targets[hitIndex];
-        const reaction = Math.round(performance.now() - hitTarget.spawnTime);
+        // Gerçekçi refleks süresi hesaplaması
+        const rawReaction = performance.now() - hitTarget.spawnTime;
+        const reaction = Math.max(120, Math.min(950, Math.round(rawReaction)));
         reactionTimes.push(reaction);
 
         hits++;
         combo++;
         if (combo > maxCombo) maxCombo = combo;
 
-        const speedBonus = Math.max(0, Math.round((800 - reaction) / 8));
+        const speedBonus = Math.max(0, Math.round((850 - reaction) / 8));
         const gained = 100 + speedBonus + (combo * 5);
         score += gained;
 
         playSound('hit');
         createExplosion(hitTarget.x, hitTarget.y, '#00f3ff');
-        addFloatingText(hitTarget.x, hitTarget.y - 15, `+${gained} (${reaction}ms)`, '#f5b041');
+        addFloatingText(hitTarget.x, hitTarget.y - 15, `+${gained} (${reaction}ms)`, '#f7b733');
 
         targets.splice(hitIndex, 1);
         spawnTarget();
@@ -1450,7 +1491,7 @@
         const t = targets[i];
 
         if (t.currentRadius < t.radius) {
-          t.currentRadius = Math.min(t.radius, t.currentRadius + 240 * dt);
+          t.currentRadius = Math.min(t.radius, t.currentRadius + 280 * dt);
         }
 
         t.x += t.vx * dt;
@@ -1530,7 +1571,6 @@
       renderProfileAndLeaderboard();
     });
 
-    // İlk yüklemede profil & liderliği hazırla
     renderProfileAndLeaderboard();
   </script>
 </body>
