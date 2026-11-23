@@ -13,9 +13,7 @@
       --primary: #ff2a55;
       --primary-glow: rgba(255, 42, 85, 0.48);
       --gold: #ffc13b;
-      --gold-glow: rgba(255, 193, 59, 0.48);
       --cyan: #18e0ff;
-      --cyan-glow: rgba(24, 224, 255, 0.36);
       --emerald: #00e699;
       --text-main: #f4f6fb;
       --text-muted: #9aa5be;
@@ -54,7 +52,6 @@
       flex-direction: column;
     }
 
-    /* Dinamik arka plan ışık geçişleri ve yanıp sönen spotlar */
     .ambient-lights {
       position: fixed;
       inset: 0;
@@ -99,14 +96,24 @@
       animation-duration: 3.6s;
     }
 
-    .light-beam.beam-magenta {
-      width: 340px;
-      height: 340px;
-      bottom: 22%;
-      left: 18%;
-      background: radial-gradient(circle, rgba(192, 108, 255, 0.36), transparent 72%);
-      animation-delay: -2.8s;
-      animation-duration: 5s;
+    .breath-light {
+      position: fixed;
+      width: 640px;
+      height: 640px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(110px);
+      background: radial-gradient(circle, rgba(255, 193, 59, 0.36), rgba(255, 42, 85, 0.24) 55%, transparent 75%);
+      animation: breathLight 5.5s ease-in-out infinite;
+    }
+
+    @keyframes breathLight {
+      0%, 100% { transform: translate(-50%, -50%) scale(0.78); opacity: 0.22; }
+      50% { transform: translate(-50%, -50%) scale(1.22); opacity: 0.62; }
     }
 
     @keyframes strobePulse {
@@ -115,7 +122,6 @@
       100% { opacity: 0.25; transform: scale(0.98) translate(-12px, 14px); }
     }
 
-    /* Hoş Geldiniz Bildirim Afişi */
     .welcome-toast {
       position: fixed;
       top: 86px;
@@ -141,9 +147,7 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    .welcome-toast span {
-      color: var(--gold);
-    }
+    .welcome-toast span { color: var(--gold); }
 
     .glow-interact {
       transition: transform 0.15s ease, box-shadow 0.22s ease, border-color 0.2s ease, background 0.22s ease;
@@ -153,11 +157,8 @@
       box-shadow: 0 0 22px rgba(255, 193, 59, 0.24), 0 0 14px rgba(24, 224, 255, 0.16);
     }
 
-    .glow-interact:active {
-      transform: scale(0.97) !important;
-    }
+    .glow-interact:active { transform: scale(0.97) !important; }
 
-    /* Üst HUD Bar */
     header {
       height: 72px;
       background: linear-gradient(90deg, rgba(13, 15, 28, 0.96), rgba(36, 14, 28, 0.95), rgba(13, 18, 32, 0.96));
@@ -291,7 +292,6 @@
     }
     .chip-rank { font-size: 0.72rem; font-weight: 700; color: var(--gold); }
 
-    /* Oyun Alanı */
     #arena-wrapper {
       position: relative;
       flex: 1;
@@ -340,7 +340,6 @@
       background: radial-gradient(circle at 50% 40%, rgba(40, 18, 42, 0.65), rgba(6, 7, 13, 0.88));
     }
 
-    /* Üst ışık geçiş çizgisinin parlayan / akan hali */
     .welcome-card, .panel {
       position: relative;
       background: linear-gradient(155deg, rgba(24, 22, 42, 0.96), rgba(10, 12, 23, 0.98));
@@ -541,10 +540,7 @@
       text-align: left;
     }
 
-    .mode-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 193, 59, 0.65);
-    }
+    .mode-card:hover { transform: translateY(-2px); border-color: rgba(255, 193, 59, 0.65); }
 
     .mode-card.active {
       background: linear-gradient(145deg, rgba(255, 193, 59, 0.17), rgba(255, 42, 85, 0.12));
@@ -564,11 +560,7 @@
       letter-spacing: 0.05em;
     }
 
-    .mode-card.active .mode-tag {
-      background: var(--gold);
-      color: #090a0f;
-    }
-
+    .mode-card.active .mode-tag { background: var(--gold); color: #090a0f; }
     .mode-card h3 { font-family: var(--font-display); font-size: 0.92rem; font-weight: 700; margin-bottom: 2px; color: #fff; }
     .mode-card p { font-size: 0.79rem; color: var(--text-muted); line-height: 1.28; }
 
@@ -586,18 +578,9 @@
       cursor: pointer;
     }
 
-    .dur-btn.active {
-      border-color: var(--gold);
-      color: #090b12;
-      background: var(--gold);
-    }
+    .dur-btn.active { border-color: var(--gold); color: #090b12; background: var(--gold); }
 
-    .action-row-hub {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 10px;
-    }
-
+    .action-row-hub { display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px; }
     @media (max-width: 560px) { .action-row-hub { grid-template-columns: 1fr; } }
 
     .btn-start {
@@ -664,11 +647,7 @@
       cursor: pointer;
     }
 
-    .lb-tab.active {
-      background: rgba(255, 193, 59, 0.2);
-      border-color: var(--gold);
-      color: var(--gold);
-    }
+    .lb-tab.active { background: rgba(255, 193, 59, 0.2); border-color: var(--gold); color: var(--gold); }
 
     .lb-list {
       display: flex;
@@ -712,18 +691,11 @@
     .quest-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; padding: 3px 0; color: var(--text-muted); }
     .quest-item.done { color: var(--emerald); text-decoration: line-through; }
 
-    /* VS Modal */
     .vs-modal-box { max-width: 680px; width: 100%; text-align: left; }
     .vs-grid-setup { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
     @media (max-width: 600px) { .vs-grid-setup { grid-template-columns: 1fr; } }
 
-    .vs-card {
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 193, 59, 0.24);
-      border-radius: 12px;
-      padding: 14px;
-    }
-
+    .vs-card { background: rgba(0, 0, 0, 0.45); border: 1px solid rgba(255, 193, 59, 0.24); border-radius: 12px; padding: 14px; }
     .vs-card h4 { font-family: var(--font-display); font-size: 0.92rem; color: var(--gold); margin-bottom: 6px; }
 
     .room-code-display {
@@ -757,22 +729,10 @@
     .vs-fighter-score { font-family: var(--font-mono); font-weight: 800; font-size: 1.18rem; color: var(--gold); margin-top: 2px; }
     .vs-badge-mid { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--primary); padding: 4px 10px; border: 1px solid rgba(255, 42, 85, 0.45); border-radius: 8px; }
 
-    .vs-status-note {
-      font-size: 0.84rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 12px;
-      color: #ff8ca4;
-    }
+    .vs-status-note { font-size: 0.84rem; font-weight: 700; text-align: center; margin-bottom: 12px; color: #ff8ca4; }
     .vs-status-note.ready { color: var(--emerald); }
+    .btn-start:disabled { opacity: 0.42; cursor: not-allowed; transform: none !important; }
 
-    .btn-start:disabled {
-      opacity: 0.42;
-      cursor: not-allowed;
-      transform: none !important;
-    }
-
-    /* Atölye */
     .workshop-box { max-width: 740px; width: 100%; text-align: left; }
     .workshop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0 18px; }
     @media (max-width: 680px) { .workshop-grid { grid-template-columns: 1fr; } }
@@ -833,15 +793,13 @@
 </head>
 <body>
 
-  <!-- Hareketli ve yanıp sönen ışık geçişleri -->
   <div class="ambient-lights">
     <div class="light-beam beam-gold"></div>
     <div class="light-beam beam-crimson"></div>
     <div class="light-beam beam-cyan"></div>
-    <div class="light-beam beam-magenta"></div>
   </div>
+  <div class="breath-light"></div>
 
-  <!-- Giriş sonrası çıkan Hoş Geldiniz bildirimi -->
   <div class="welcome-toast" id="welcome-toast">HOŞ GELDİNİZ, <span id="welcome-toast-name">OYUNCU</span>!</div>
 
   <svg id="custom-crosshair" width="48" height="48" viewBox="0 0 48 48"></svg>
@@ -865,34 +823,19 @@
     </div>
 
     <div class="hud-stats">
-      <div class="stat-box">
-        <div class="stat-label">SKOR</div>
-        <div class="stat-value gold" id="hud-score">0</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">KOMBO</div>
-        <div class="stat-value emerald" id="hud-combo">0x</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">SÜRE</div>
-        <div class="stat-value cyan" id="hud-time">30.0s</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">İSABET</div>
-        <div class="stat-value" id="hud-acc">100%</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">ORT. TEPKİ</div>
-        <div class="stat-value red" id="hud-ms">0 ms</div>
-      </div>
+      <div class="stat-box"><div class="stat-label">SKOR</div><div class="stat-value gold" id="hud-score">0</div></div>
+      <div class="stat-box"><div class="stat-label">KOMBO</div><div class="stat-value emerald" id="hud-combo">0x</div></div>
+      <div class="stat-box"><div class="stat-label">SÜRE</div><div class="stat-value cyan" id="hud-time">30.0s</div></div>
+      <div class="stat-box"><div class="stat-label">İSABET</div><div class="stat-value" id="hud-acc">100%</div></div>
+      <div class="stat-box"><div class="stat-label">ORT. TEPKİ</div><div class="stat-value red" id="hud-ms">0 ms</div></div>
     </div>
 
     <div class="controls">
-      <button class="icon-btn vs-top-btn glow-interact" id="btn-open-vs-top" title="Online VS Oda Oluştur veya Katıl">⚔ Online VS</button>
-      <button class="icon-btn glow-interact" id="btn-sound" title="Sesi Aç/Kapat">🔊 Ses</button>
-      <button class="icon-btn exit-btn glow-interact" id="btn-exit-top" title="Çıkış Ekranı (ESC)">⎋ Çıkış</button>
+      <button class="icon-btn vs-top-btn glow-interact" id="btn-open-vs-top">⚔ Online VS</button>
+      <button class="icon-btn glow-interact" id="btn-sound">🔊 Ses</button>
+      <button class="icon-btn exit-btn glow-interact" id="btn-exit-top">⎋ Çıkış</button>
 
-      <div class="header-profile-chip glow-interact" id="btn-open-profile" title="Profil, Fotoğraf, Sens ve Nişangah Ayarları">
+      <div class="header-profile-chip glow-interact" id="btn-open-profile">
         <div class="avatar-circle" id="header-avatar">🎯</div>
         <div class="chip-info">
           <div class="chip-name" id="header-nick">OYUNCU</div>
@@ -902,7 +845,6 @@
     </div>
   </header>
 
-  <!-- 1. GİRİŞ YAP / KAYIT OL EKRANI -->
   <div class="overlay" id="welcome-screen">
     <div class="welcome-card">
       <div style="display:flex;justify-content:center;margin-bottom:10px;">
@@ -937,7 +879,6 @@
       </div>
 
       <div class="auth-error" id="auth-error-msg"></div>
-
       <button class="btn-start btn-gold glow-interact" id="btn-auth-submit">GİRİŞ YAP</button>
     </div>
   </div>
@@ -945,7 +886,6 @@
   <div id="arena-wrapper">
     <canvas id="gameCanvas"></canvas>
 
-    <!-- 2. ANA MENÜ -->
     <div class="overlay hidden" id="start-menu">
       <div class="hub-container">
         <div class="panel">
@@ -966,9 +906,7 @@
                 <span id="xp-progress-text">Sonraki Kademe (BRONZ 2): 0 / 400 XP</span>
                 <button type="button" id="btn-switch-account" style="background:none;border:none;color:var(--gold);font-weight:700;cursor:pointer;font-family:var(--font-body);font-size:0.78rem;">Çıkış / Hesap Değiştir</button>
               </div>
-              <div class="xp-bar">
-                <div class="xp-fill" id="xp-fill-bar"></div>
-              </div>
+              <div class="xp-bar"><div class="xp-fill" id="xp-fill-bar"></div></div>
             </div>
           </div>
 
@@ -976,26 +914,10 @@
           <p class="subtitle">Basılı tutarak takip için <strong>HOLD TRACK</strong> seçebilir veya arkadaşınla <strong>VS</strong> atabilirsin.</p>
 
           <div class="mode-grid">
-            <div class="mode-card glow-interact active" data-mode="gridshot">
-              <span class="mode-tag">HIZ & RİTİM</span>
-              <h3>GRIDSHOT</h3>
-              <p>Aynı anda 3 hedef; vurdukça yenisi gelir.</p>
-            </div>
-            <div class="mode-card glow-interact" data-mode="flick">
-              <span class="mode-tag">REFLEKS</span>
-              <h3>FLICK SHOT</h3>
-              <p>Anlık beliren hedefleri hızla vur.</p>
-            </div>
-            <div class="mode-card glow-interact" data-mode="tracking">
-              <span class="mode-tag">HAREKETLİ</span>
-              <h3>STRAFE TRACK</h3>
-              <p>Kaçan hedefleri takip edip vur.</p>
-            </div>
-            <div class="mode-card glow-interact" data-mode="precision">
-              <span class="mode-tag">HEADSHOT</span>
-              <h3>MİKRO NİŞAN</h3>
-              <p>Küçük hedeflerle nokta hassasiyeti.</p>
-            </div>
+            <div class="mode-card glow-interact active" data-mode="gridshot"><span class="mode-tag">HIZ & RİTİM</span><h3>GRIDSHOT</h3><p>Aynı anda 3 hedef; vurdukça yenisi gelir.</p></div>
+            <div class="mode-card glow-interact" data-mode="flick"><span class="mode-tag">REFLEKS</span><h3>FLICK SHOT</h3><p>Anlık beliren hedefleri hızla vur.</p></div>
+            <div class="mode-card glow-interact" data-mode="tracking"><span class="mode-tag">HAREKETLİ</span><h3>STRAFE TRACK</h3><p>Kaçan hedefleri takip edip vur.</p></div>
+            <div class="mode-card glow-interact" data-mode="precision"><span class="mode-tag">HEADSHOT</span><h3>MİKRO NİŞAN</h3><p>Küçük hedeflerle nokta hassasiyeti.</p></div>
             <div class="mode-card glow-interact" data-mode="holdtrack" style="grid-column: span 2;">
               <span class="mode-tag">BASILI TUT & TAKİP</span>
               <h3>HOLD TRACK (BASILI TUTMA TAKİBİ)</h3>
@@ -1038,7 +960,6 @@
       </div>
     </div>
 
-    <!-- 3. ONLINE VS ODA EKRANI -->
     <div class="overlay hidden" id="vs-modal">
       <div class="panel vs-modal-box">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
@@ -1081,12 +1002,10 @@
         </div>
 
         <div class="vs-status-note" id="vs-status-note">Tek başına VS başlatılamaz. Odaya rakip bağlanmasını bekle veya bir odaya katıl.</div>
-
         <button class="btn-start glow-interact" id="btn-start-vs-match" disabled>⚔ VS MAÇINI BAŞLAT</button>
       </div>
     </div>
 
-    <!-- 4. PROFİL & EKİPMAN ATÖLYESİ -->
     <div class="overlay hidden" id="profile-modal">
       <div class="panel workshop-box">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
@@ -1150,25 +1069,10 @@
               <svg id="ws-crosshair-preview" width="48" height="48" viewBox="0 0 48 48"></svg>
             </div>
 
-            <div class="slider-row">
-              <label><span>Nişangah Rengi</span></label>
-              <input type="color" id="ws-ch-color" value="#00f3ff" style="width:100%;height:30px;border:none;background:none;cursor:pointer;" />
-            </div>
-
-            <div class="slider-row">
-              <label><span>Çizgi Uzunluğu</span><span id="ws-ch-size-val">8px</span></label>
-              <input type="range" id="ws-ch-size" min="2" max="16" step="1" value="8" />
-            </div>
-
-            <div class="slider-row">
-              <label><span>Kalınlık</span><span id="ws-ch-thick-val">2px</span></label>
-              <input type="range" id="ws-ch-thick" min="1" max="5" step="1" value="2" />
-            </div>
-
-            <div class="slider-row">
-              <label><span>Merkez Boşluk</span><span id="ws-ch-gap-val">4px</span></label>
-              <input type="range" id="ws-ch-gap" min="0" max="12" step="1" value="4" />
-            </div>
+            <div class="slider-row"><label><span>Nişangah Rengi</span></label><input type="color" id="ws-ch-color" value="#00f3ff" style="width:100%;height:30px;border:none;background:none;cursor:pointer;" /></div>
+            <div class="slider-row"><label><span>Çizgi Uzunluğu</span><span id="ws-ch-size-val">8px</span></label><input type="range" id="ws-ch-size" min="2" max="16" step="1" value="8" /></div>
+            <div class="slider-row"><label><span>Kalınlık</span><span id="ws-ch-thick-val">2px</span></label><input type="range" id="ws-ch-thick" min="1" max="5" step="1" value="2" /></div>
+            <div class="slider-row"><label><span>Merkez Boşluk</span><span id="ws-ch-gap-val">4px</span></label><input type="range" id="ws-ch-gap" min="0" max="12" step="1" value="4" /></div>
 
             <label style="display:flex;align-items:center;gap:8px;font-size:0.86rem;cursor:pointer;color:#dce3f0;">
               <input type="checkbox" id="ws-ch-dot" checked style="accent-color:var(--gold);width:15px;height:15px;" />
@@ -1181,12 +1085,10 @@
       </div>
     </div>
 
-    <!-- 5. ÇIKIŞ EKRANI -->
     <div class="overlay hidden" id="exit-menu">
       <div class="panel modal-box">
         <h2 class="section-heading" style="font-size: 1.65rem;">ÇIKIŞ EKRANI</h2>
         <p class="subtitle">Oyun şu an duraklatıldı. Nasıl devam etmek istersin?</p>
-
         <div class="exit-actions">
           <button class="btn-start btn-gold glow-interact" id="btn-resume-game">▶ ANTRENMANA DEVAM ET</button>
           <button class="btn-start glow-interact" id="btn-finish-now">⏹ ANTRENMANI BİTİR & SKORU KAYDET</button>
@@ -1195,7 +1097,6 @@
       </div>
     </div>
 
-    <!-- 6. SONUÇ & ISI HARİTASI EKRANI -->
     <div class="overlay hidden" id="result-menu">
       <div class="panel modal-box">
         <h2 class="section-heading" style="font-size: 1.65rem;" id="res-heading">ANTRENMAN TAMAMLANDI</h2>
@@ -1205,22 +1106,10 @@
         <div class="xp-gain-text" id="res-xp-gained">+0 XP KAZANILDI</div>
 
         <div class="result-grid">
-          <div class="res-item">
-            <span>Toplam Skor</span>
-            <strong id="res-score" style="color: var(--gold);">0</strong>
-          </div>
-          <div class="res-item">
-            <span>İsabet Oranı</span>
-            <strong id="res-acc" style="color: var(--cyan);">0%</strong>
-          </div>
-          <div class="res-item">
-            <span>Ort. Tepki</span>
-            <strong id="res-ms" style="color: var(--primary);">0 ms</strong>
-          </div>
-          <div class="res-item">
-            <span>Maks. Kombo</span>
-            <strong id="res-combo">0x</strong>
-          </div>
+          <div class="res-item"><span>Toplam Skor</span><strong id="res-score" style="color: var(--gold);">0</strong></div>
+          <div class="res-item"><span>İsabet Oranı</span><strong id="res-acc" style="color: var(--cyan);">0%</strong></div>
+          <div class="res-item"><span>Ort. Tepki</span><strong id="res-ms" style="color: var(--primary);">0 ms</strong></div>
+          <div class="res-item"><span>Maks. Kombo</span><strong id="res-combo">0x</strong></div>
         </div>
 
         <div class="heatmap-wrap">
@@ -1271,27 +1160,14 @@
     };
 
     const RANKS = [
-      { minXp: 0, name: 'BRONZ 1' },
-      { minXp: 400, name: 'BRONZ 2' },
-      { minXp: 850, name: 'BRONZ 3' },
-      { minXp: 1350, name: 'BRONZ 4' },
-      { minXp: 1950, name: 'GÜMÜŞ 1' },
-      { minXp: 2650, name: 'GÜMÜŞ 2' },
-      { minXp: 3450, name: 'GÜMÜŞ 3' },
-      { minXp: 4350, name: 'GÜMÜŞ 4' },
-      { minXp: 5400, name: 'ALTIN 1' },
-      { minXp: 6600, name: 'ALTIN 2' },
-      { minXp: 7950, name: 'ALTIN 3' },
-      { minXp: 9450, name: 'ALTIN 4' },
-      { minXp: 11200, name: 'ELMAS 1' },
-      { minXp: 13150, name: 'ELMAS 2' },
-      { minXp: 15300, name: 'ELMAS 3' },
-      { minXp: 17650, name: 'ELMAS 4' },
-      { minXp: 20500, name: 'ÖLÜMSÜZ (IMMORTAL)' },
-      { minXp: 24500, name: 'RADYANT // AIMS PRO' }
+      { minXp: 0, name: 'BRONZ 1' }, { minXp: 400, name: 'BRONZ 2' }, { minXp: 850, name: 'BRONZ 3' }, { minXp: 1350, name: 'BRONZ 4' },
+      { minXp: 1950, name: 'GÜMÜŞ 1' }, { minXp: 2650, name: 'GÜMÜŞ 2' }, { minXp: 3450, name: 'GÜMÜŞ 3' }, { minXp: 4350, name: 'GÜMÜŞ 4' },
+      { minXp: 5400, name: 'ALTIN 1' }, { minXp: 6600, name: 'ALTIN 2' }, { minXp: 7950, name: 'ALTIN 3' }, { minXp: 9450, name: 'ALTIN 4' },
+      { minXp: 11200, name: 'ELMAS 1' }, { minXp: 13150, name: 'ELMAS 2' }, { minXp: 15300, name: 'ELMAS 3' }, { minXp: 17650, name: 'ELMAS 4' },
+      { minXp: 20500, name: 'ÖLÜMSÜZ (IMMORTAL)' }, { minXp: 24500, name: 'RADYANT // AIMS PRO' }
     ];
 
-    const DB_KEY = 'aims_pro_auth_db_v7';
+    const DB_KEY = 'aims_pro_auth_db_v8';
 
     function hashPassword(pw) {
       let h = 2166136261;
@@ -1338,95 +1214,37 @@
 
     function getCurrentUser() {
       if (!db.loggedInUser) return null;
-      const key = db.loggedInUser.trim().toLowerCase();
-      return db.users[key] || null;
+      return db.users[db.loggedInUser.trim().toLowerCase()] || null;
     }
 
-    // Ses sistemi (Açılış, Çıkış, Vuruş, Takip, Iskalama)
+    // Ses sadece siteye girildiğinde çalar; tıklamalarda/oyunda çalmaz
     let soundEnabled = true;
+    let entrySoundPlayed = false;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-    function playSound(type) {
-      if (!soundEnabled) return;
+    function playSiteEntrySound() {
+      if (entrySoundPlayed || !soundEnabled) return;
+      entrySoundPlayed = true;
       if (audioCtx.state === 'suspended') audioCtx.resume();
       const now = audioCtx.currentTime;
-
-      if (type === 'intro') {
-        const notes = [523.25, 659.25, 783.99, 1046.5];
-        notes.forEach((freq, idx) => {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.07);
-          gain.gain.setValueAtTime(0.11, now + idx * 0.07);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.22);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start(now + idx * 0.07);
-          osc.stop(now + idx * 0.07 + 0.23);
-        });
-        return;
-      }
-
-      if (type === 'outro') {
-        const notes = [659.25, 493.88, 392.0];
-        notes.forEach((freq, idx) => {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.075);
-          gain.gain.setValueAtTime(0.12, now + idx * 0.075);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.075 + 0.2);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start(now + idx * 0.075);
-          osc.stop(now + idx * 0.075 + 0.21);
-        });
-        return;
-      }
-
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      if (type === 'hit') {
+      [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(650 + Math.min(combo * 20, 560), now);
-        osc.frequency.exponentialRampToValueAtTime(1280, now + 0.075);
-        gain.gain.setValueAtTime(0.18, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.085);
-        osc.start(now);
-        osc.stop(now + 0.085);
-      } else if (type === 'tick') {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(880 + Math.min(combo * 15, 420), now);
-        gain.gain.setValueAtTime(0.08, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
-        osc.start(now);
-        osc.stop(now + 0.045);
-      } else if (type === 'miss') {
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(145, now);
-        osc.frequency.exponentialRampToValueAtTime(62, now + 0.11);
-        gain.gain.setValueAtTime(0.14, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
-        osc.start(now);
-        osc.stop(now + 0.11);
-      }
+        osc.frequency.setValueAtTime(freq, now + i * 0.07);
+        gain.gain.setValueAtTime(0.11, now + i * 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.22);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.07);
+        osc.stop(now + i * 0.07 + 0.23);
+      });
     }
 
-    // Site açıldığında ufak açılış sesi
-    let introPlayed = false;
-    function triggerIntroSoundOnce() {
-      if (introPlayed) return;
-      introPlayed = true;
-      playSound('intro');
-    }
-    window.addEventListener('DOMContentLoaded', () => {
-      playSound('intro');
-    });
-    window.addEventListener('pointerdown', triggerIntroSoundOnce, { once: true });
+    function playSound() {}
+
+    window.addEventListener('DOMContentLoaded', playSiteEntrySound);
+    window.addEventListener('pointerdown', playSiteEntrySound, { once: true });
 
     let toastTimer = null;
     function showWelcomeToast(userName) {
@@ -1434,9 +1252,7 @@
       document.getElementById('welcome-toast-name').textContent = userName.toUpperCase();
       toast.classList.add('show');
       if (toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3200);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
     }
 
     function getRankInfo(xp) {
@@ -1476,7 +1292,6 @@
       svgEl.innerHTML = html;
     }
 
-    // Giriş / Kayıt Ol mantığı
     let authMode = 'login';
     const tabLogin = document.getElementById('tab-auth-login');
     const tabRegister = document.getElementById('tab-auth-register');
@@ -1505,14 +1320,8 @@
       const password = document.getElementById('auth-password').value;
       authErrorMsg.textContent = '';
 
-      if (username.length < 2) {
-        authErrorMsg.textContent = 'Kullanıcı adı en az 2 karakter olmalıdır.';
-        return;
-      }
-      if (password.length < 4) {
-        authErrorMsg.textContent = 'Şifre en az 4 karakter olmalıdır.';
-        return;
-      }
+      if (username.length < 2) { authErrorMsg.textContent = 'Kullanıcı adı en az 2 karakter olmalıdır.'; return; }
+      if (password.length < 4) { authErrorMsg.textContent = 'Şifre en az 4 karakter olmalıdır.'; return; }
 
       const key = username.toLowerCase();
 
@@ -1529,7 +1338,6 @@
         startMenu.classList.remove('hidden');
         refreshAllUI();
         showWelcomeToast(username);
-        playSound('intro');
       } else {
         const existing = db.users[key];
         if (!existing) {
@@ -1547,12 +1355,10 @@
         startMenu.classList.remove('hidden');
         refreshAllUI();
         showWelcomeToast(existing.name);
-        playSound('intro');
       }
     });
 
     document.getElementById('btn-switch-account').addEventListener('click', () => {
-      playSound('outro');
       db.loggedInUser = null;
       saveDB();
       startMenu.classList.add('hidden');
@@ -1608,7 +1414,6 @@
       `).join('');
     }
 
-    // Liderlik Tablosu: TOPLAM sekmesinde hepsinin puanlarının toplamı
     function renderLeaderboard() {
       const listEl = document.getElementById('leaderboard-list');
       listEl.innerHTML = '';
@@ -1652,16 +1457,11 @@
           listEl.appendChild(row);
         });
       } else {
-        const filtered = db.entries
-          .filter(e => e.mode === activeLbTab)
-          .sort((a, b) => b.score - a.score)
-          .slice(0, 8);
-
+        const filtered = db.entries.filter(e => e.mode === activeLbTab).sort((a, b) => b.score - a.score).slice(0, 8);
         if (!filtered.length) {
           listEl.innerHTML = '<div class="lb-sub" style="text-align:center;padding:20px;">Bu modda henüz kayıt yok.</div>';
           return;
         }
-
         filtered.forEach((item, idx) => {
           const row = document.createElement('div');
           row.className = `lb-row ${idx === 0 ? 'top-1' : ''}`;
@@ -1684,14 +1484,13 @@
       return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
     }
 
-    // Online VS Oda Sistemi
     let vsRoomCode = '';
     let vsMatchActive = false;
     let vsOpponentConnected = false;
     let vsOpponentName = 'Rakip Bağlanmadı';
     let vsOpponentScore = 0;
 
-    const vsChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('aims_pro_vs_v7') : null;
+    const vsChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('aims_pro_vs_v8') : null;
 
     function broadcastVsMessage(payload) {
       if (!vsRoomCode) return;
@@ -1807,10 +1606,7 @@
 
     document.getElementById('btn-join-room').addEventListener('click', () => {
       const code = document.getElementById('vs-join-code-input').value.trim().toUpperCase();
-      if (code.length < 4) {
-        alert('Lütfen geçerli bir oda kodu gir.');
-        return;
-      }
+      if (code.length < 4) { alert('Lütfen geçerli bir oda kodu gir.'); return; }
       vsRoomCode = code;
       document.getElementById('vs-created-code').textContent = vsRoomCode;
       const me = getCurrentUser();
@@ -1827,7 +1623,6 @@
           }
         } catch {}
       }
-
       syncVsBoardUI();
     });
 
@@ -1841,7 +1636,6 @@
       startGame(true);
     });
 
-    // Atölye
     let tempPhotoData = '';
     function openProfileWorkshop() {
       const user = getCurrentUser();
@@ -1886,9 +1680,7 @@
       updateWorkshopCrosshairPreview();
     }
 
-    document.querySelectorAll('.ch-preset-btn').forEach(b => {
-      b.addEventListener('click', () => applyCrosshairPreset(b.dataset.preset));
-    });
+    document.querySelectorAll('.ch-preset-btn').forEach(b => b.addEventListener('click', () => applyCrosshairPreset(b.dataset.preset)));
 
     function updateWorkshopCrosshairPreview() {
       const previewCh = {
@@ -1932,8 +1724,7 @@
         const img = new Image();
         img.onload = () => {
           const c = document.createElement('canvas');
-          c.width = 96;
-          c.height = 96;
+          c.width = 96; c.height = 96;
           c.getContext('2d').drawImage(img, 0, 0, 96, 96);
           tempPhotoData = c.toDataURL('image/jpeg', 0.8);
           document.getElementById('ws-avatar-preview').innerHTML = `<img src="${tempPhotoData}" alt="avatar" />`;
@@ -2001,7 +1792,6 @@
       });
     });
 
-    // Oyun Motoru
     let isPlaying = false;
     let isPausedForExit = false;
     let isMouseDown = false;
@@ -2031,7 +1821,6 @@
     document.getElementById('btn-sound').addEventListener('click', (e) => {
       soundEnabled = !soundEnabled;
       e.target.textContent = soundEnabled ? '🔊 Ses' : '🔇 Sessiz';
-      if (soundEnabled) playSound('intro');
     });
 
     function resizeCanvas() {
@@ -2064,28 +1853,22 @@
 
     function spawnTarget() {
       const padding = 82;
-      let radius = 34;
-      let vx = 0;
-      let vy = 0;
-      let lifeTime = null;
+      let radius = 34, vx = 0, vy = 0, lifeTime = null;
 
       if (selectedMode === 'precision') {
         radius = 17;
       } else if (selectedMode === 'flick') {
-        radius = 29;
-        lifeTime = 1450;
+        radius = 29; lifeTime = 1450;
       } else if (selectedMode === 'tracking') {
         radius = 31;
         const speed = 195 + Math.random() * 125;
         const angle = Math.random() * Math.PI * 2;
-        vx = Math.cos(angle) * speed;
-        vy = Math.sin(angle) * speed;
+        vx = Math.cos(angle) * speed; vy = Math.sin(angle) * speed;
       } else if (selectedMode === 'holdtrack') {
         radius = 42;
         const speed = 155 + Math.random() * 95;
         const angle = Math.random() * Math.PI * 2;
-        vx = Math.cos(angle) * speed;
-        vy = Math.sin(angle) * speed;
+        vx = Math.cos(angle) * speed; vy = Math.sin(angle) * speed;
       }
 
       let x, y, safe, attempts = 0;
@@ -2094,21 +1877,12 @@
         x = padding + Math.random() * Math.max(40, canvas.width - padding * 2);
         y = padding + Math.random() * Math.max(40, canvas.height - padding * 2);
         for (const t of targets) {
-          if (Math.hypot(x - t.x, y - t.y) < radius + t.radius + 26) {
-            safe = false;
-            break;
-          }
+          if (Math.hypot(x - t.x, y - t.y) < radius + t.radius + 26) { safe = false; break; }
         }
         attempts++;
       } while (!safe && attempts < 30);
 
-      targets.push({
-        x, y, radius,
-        currentRadius: Math.max(12, radius * 0.55),
-        vx, vy,
-        spawnTime: performance.now(),
-        lifeTime
-      });
+      targets.push({ x, y, radius, currentRadius: Math.max(12, radius * 0.55), vx, vy, spawnTime: performance.now(), lifeTime });
     }
 
     function createExplosion(x, y, color) {
@@ -2116,14 +1890,7 @@
       for (let i = 0; i < 12; i++) {
         const angle = (Math.PI * 2 / 12) * i + Math.random() * 0.25;
         const speed = 110 + Math.random() * 200;
-        particles.push({
-          x, y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          alpha: 1,
-          size: 3 + Math.random() * 2.2,
-          color
-        });
+        particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, alpha: 1, size: 3 + Math.random() * 2.2, color });
       }
       shockwaves.push({ x, y, r: 10, maxR: 54, alpha: 0.8, color });
     }
@@ -2136,25 +1903,12 @@
     function startGame(fromVs = false) {
       if (!getCurrentUser()) return;
       resizeCanvas();
-      isPlaying = true;
-      isPausedForExit = false;
-      isMouseDown = false;
-      holdTickAccum = 0;
-      holdActiveTicks = 0;
-      holdTotalTicks = 0;
+      isPlaying = true; isPausedForExit = false; isMouseDown = false;
+      holdTickAccum = 0; holdActiveTicks = 0; holdTotalTicks = 0;
       vsMatchActive = !!fromVs;
 
-      score = 0;
-      hits = 0;
-      shots = 0;
-      combo = 0;
-      maxCombo = 0;
-      reactionTimes = [];
-      shotLog = [];
-      targets = [];
-      particles = [];
-      shockwaves = [];
-      floatingTexts = [];
+      score = 0; hits = 0; shots = 0; combo = 0; maxCombo = 0;
+      reactionTimes = []; shotLog = []; targets = []; particles = []; shockwaves = []; floatingTexts = [];
       timeLeft = selectedDuration;
 
       arenaWrapper.classList.add('playing-cursor');
@@ -2175,9 +1929,7 @@
 
     function openExitModal() {
       if (!isPlaying || isPausedForExit) return;
-      isPausedForExit = true;
-      isMouseDown = false;
-      playSound('outro');
+      isPausedForExit = true; isMouseDown = false;
       crosshair.style.display = 'none';
       arenaWrapper.classList.remove('playing-cursor');
       exitMenu.classList.remove('hidden');
@@ -2186,23 +1938,18 @@
     function closeExitModal() {
       if (!isPlaying || !isPausedForExit) return;
       isPausedForExit = false;
-      playSound('intro');
       exitMenu.classList.add('hidden');
       arenaWrapper.classList.add('playing-cursor');
       lastFrameTime = performance.now();
       requestAnimationFrame(gameLoop);
     }
 
-    document.getElementById('btn-exit-top').addEventListener('click', () => {
-      if (isPlaying) openExitModal();
-      else playSound('outro');
-    });
+    document.getElementById('btn-exit-top').addEventListener('click', () => { if (isPlaying) openExitModal(); });
 
     document.getElementById('brand-home').addEventListener('click', () => {
       if (!getCurrentUser()) return;
-      if (isPlaying) {
-        openExitModal();
-      } else if (welcomeScreen.classList.contains('hidden')) {
+      if (isPlaying) openExitModal();
+      else if (welcomeScreen.classList.contains('hidden')) {
         resultMenu.classList.add('hidden');
         exitMenu.classList.add('hidden');
         profileModal.classList.add('hidden');
@@ -2213,16 +1960,9 @@
     });
 
     document.getElementById('btn-resume-game').addEventListener('click', closeExitModal);
-    document.getElementById('btn-finish-now').addEventListener('click', () => {
-      exitMenu.classList.add('hidden');
-      endGame();
-    });
+    document.getElementById('btn-finish-now').addEventListener('click', () => { exitMenu.classList.add('hidden'); endGame(); });
     document.getElementById('btn-quit-to-menu').addEventListener('click', () => {
-      playSound('outro');
-      isPlaying = false;
-      isPausedForExit = false;
-      isMouseDown = false;
-      vsMatchActive = false;
+      isPlaying = false; isPausedForExit = false; isMouseDown = false; vsMatchActive = false;
       crosshair.style.display = 'none';
       arenaWrapper.classList.remove('playing-cursor');
       arenaWrapper.classList.remove('overdrive-glow');
@@ -2244,7 +1984,6 @@
       hCtx.clearRect(0, 0, hCanvas.width, hCanvas.height);
       hCtx.strokeStyle = 'rgba(255,255,255,0.08)';
       hCtx.strokeRect(1, 1, hCanvas.width - 2, hCanvas.height - 2);
-
       for (const s of shotLog) {
         const px = Math.max(5, Math.min(hCanvas.width - 5, s.nx * hCanvas.width));
         const py = Math.max(5, Math.min(hCanvas.height - 5, s.ny * hCanvas.height));
@@ -2256,10 +1995,7 @@
     }
 
     function endGame() {
-      isPlaying = false;
-      isPausedForExit = false;
-      isMouseDown = false;
-      playSound('outro');
+      isPlaying = false; isPausedForExit = false; isMouseDown = false;
       crosshair.style.display = 'none';
       arenaWrapper.classList.remove('playing-cursor');
       arenaWrapper.classList.remove('overdrive-glow');
@@ -2280,7 +2016,6 @@
         : 0;
 
       let gainedXp = hits > 0 ? Math.max(15, Math.round(score / 45) + Math.round(hits * 1.5)) : 10;
-
       if (!user.quests.q25hits && hits >= 25) { user.quests.q25hits = true; gainedXp += 120; }
       if (!user.quests.q80acc && (shots >= 10 || holdTotalTicks >= 15) && acc >= 80) { user.quests.q80acc = true; gainedXp += 150; }
       if (!user.quests.q3000score && score >= 3000) { user.quests.q3000score = true; gainedXp += 200; }
@@ -2341,20 +2076,16 @@
       const rect = canvas.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       const clickY = e.clientY - rect.top;
-      pointerX = clickX;
-      pointerY = clickY;
+      pointerX = clickX; pointerY = clickY;
 
       if (selectedMode === 'holdtrack') return;
 
       shots++;
       let hitIndex = -1;
-
       for (let i = targets.length - 1; i >= 0; i--) {
         const t = targets[i];
-        const hitRadius = Math.max(t.radius, t.currentRadius) + 5;
-        if (Math.hypot(clickX - t.x, clickY - t.y) <= hitRadius) {
-          hitIndex = i;
-          break;
+        if (Math.hypot(clickX - t.x, clickY - t.y) <= Math.max(t.radius, t.currentRadius) + 5) {
+          hitIndex = i; break;
         }
       }
 
@@ -2364,13 +2095,11 @@
 
       if (hitIndex !== -1) {
         const hitTarget = targets[hitIndex];
-        const rawReaction = performance.now() - hitTarget.spawnTime;
-        const reaction = Math.max(110, Math.min(950, Math.round(rawReaction)));
+        const reaction = Math.max(110, Math.min(950, Math.round(performance.now() - hitTarget.spawnTime)));
         reactionTimes.push(reaction);
         shotLog.push({ nx: clickX / Math.max(1, canvas.width), ny: clickY / Math.max(1, canvas.height), hit: true });
 
-        hits++;
-        combo++;
+        hits++; combo++;
         if (combo > maxCombo) maxCombo = combo;
 
         const overdriveMult = combo >= 10 ? 1.25 : 1.0;
@@ -2378,7 +2107,6 @@
         const gained = Math.round((100 + speedBonus + (combo * 5)) * sensMult * overdriveMult);
         score += gained;
 
-        playSound('hit');
         createExplosion(hitTarget.x, hitTarget.y, combo >= 10 ? '#ffc13b' : theme.particle);
         addFloatingText(hitTarget.x, hitTarget.y - 16, `+${gained} (${reaction}ms)`, combo >= 10 ? '#00e699' : '#ffc13b');
 
@@ -2388,11 +2116,9 @@
         shotLog.push({ nx: clickX / Math.max(1, canvas.width), ny: clickY / Math.max(1, canvas.height), hit: false });
         combo = 0;
         score = Math.max(0, score - 25);
-        playSound('miss');
         shockwaves.push({ x: clickX, y: clickY, r: 4, maxR: 26, alpha: 0.7, color: '#ff2a55' });
         addFloatingText(clickX, clickY - 10, '-25', '#ff4d79');
       }
-
       updateHUD();
     });
 
@@ -2402,12 +2128,7 @@
       lastFrameTime = now;
 
       timeLeft -= dt;
-      if (timeLeft <= 0) {
-        timeLeft = 0;
-        updateHUD();
-        endGame();
-        return;
-      }
+      if (timeLeft <= 0) { timeLeft = 0; updateHUD(); endGame(); return; }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const user = getCurrentUser();
@@ -2422,22 +2143,13 @@
 
           let lockedTarget = null;
           for (const t of targets) {
-            if (Math.hypot(pointerX - t.x, pointerY - t.y) <= t.radius + 8) {
-              lockedTarget = t;
-              break;
-            }
+            if (Math.hypot(pointerX - t.x, pointerY - t.y) <= t.radius + 8) { lockedTarget = t; break; }
           }
 
-          shotLog.push({
-            nx: pointerX / Math.max(1, canvas.width),
-            ny: pointerY / Math.max(1, canvas.height),
-            hit: !!lockedTarget
-          });
+          shotLog.push({ nx: pointerX / Math.max(1, canvas.width), ny: pointerY / Math.max(1, canvas.height), hit: !!lockedTarget });
 
           if (lockedTarget) {
-            holdActiveTicks++;
-            hits++;
-            combo++;
+            holdActiveTicks++; hits++; combo++;
             if (combo > maxCombo) maxCombo = combo;
             if (!reactionTimes.length) reactionTimes.push(210);
 
@@ -2445,8 +2157,6 @@
             const gained = Math.max(15, Math.round((28 + Math.min(combo, 30) * 1.5) * sensMult * overdriveMult));
             score += gained;
             lockedTarget.hp = (lockedTarget.hp || 100) - 7;
-
-            if (holdActiveTicks % 2 === 0) playSound('tick');
             addFloatingText(pointerX, pointerY - 14, `+${gained}`, '#00e699');
 
             if (lockedTarget.hp <= 0) {
@@ -2471,85 +2181,51 @@
       for (let i = targets.length - 1; i >= 0; i--) {
         const t = targets[i];
         if (t.currentRadius < t.radius) t.currentRadius = Math.min(t.radius, t.currentRadius + 420 * dt);
-
-        t.x += t.vx * dt;
-        t.y += t.vy * dt;
+        t.x += t.vx * dt; t.y += t.vy * dt;
         if (t.x - t.radius < 34 || t.x + t.radius > canvas.width - 34) t.vx *= -1;
         if (t.y - t.radius < 34 || t.y + t.radius > canvas.height - 34) t.vy *= -1;
 
         if (t.lifeTime && (now - t.spawnTime > t.lifeTime)) {
-          combo = 0;
-          targets.splice(i, 1);
-          spawnTarget();
-          continue;
+          combo = 0; targets.splice(i, 1); spawnTarget(); continue;
         }
 
         const r = t.currentRadius;
         const isBeingHeld = selectedMode === 'holdtrack' && isMouseDown && Math.hypot(pointerX - t.x, pointerY - t.y) <= r + 8;
-
         const grad = ctx.createRadialGradient(t.x, t.y, r * 0.15, t.x, t.y, r);
         grad.addColorStop(0, isBeingHeld ? '#ffffff' : theme.inner);
         grad.addColorStop(0.68, isBeingHeld ? '#00e699' : theme.mid);
         grad.addColorStop(1, theme.outer);
 
-        ctx.beginPath();
-        ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = grad;
-        ctx.fill();
-
+        ctx.beginPath(); ctx.arc(t.x, t.y, r, 0, Math.PI * 2); ctx.fillStyle = grad; ctx.fill();
         ctx.lineWidth = isBeingHeld ? 3 : 2;
-        ctx.strokeStyle = isBeingHeld ? '#00e699' : (combo >= 10 ? '#ffc13b' : '#ffffff');
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(t.x, t.y, r * 0.24, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.fill();
+        ctx.strokeStyle = isBeingHeld ? '#00e699' : (combo >= 10 ? '#ffc13b' : '#ffffff'); ctx.stroke();
+        ctx.beginPath(); ctx.arc(t.x, t.y, r * 0.24, 0, Math.PI * 2); ctx.fillStyle = '#ffffff'; ctx.fill();
 
         if (selectedMode === 'holdtrack') {
-          ctx.font = 'bold 11px JetBrains Mono';
-          ctx.fillStyle = '#ffffff';
-          ctx.textAlign = 'center';
+          ctx.font = 'bold 11px JetBrains Mono'; ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center';
           ctx.fillText('BASILI TUT', t.x, t.y + r + 15);
         }
       }
 
       for (let i = shockwaves.length - 1; i >= 0; i--) {
-        const sw = shockwaves[i];
-        sw.r += 160 * dt;
-        sw.alpha -= 2.8 * dt;
+        const sw = shockwaves[i]; sw.r += 160 * dt; sw.alpha -= 2.8 * dt;
         if (sw.alpha <= 0) { shockwaves.splice(i, 1); continue; }
         ctx.globalAlpha = Math.max(0, sw.alpha);
-        ctx.beginPath();
-        ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
-        ctx.strokeStyle = sw.color;
-        ctx.lineWidth = 2;
-        ctx.stroke();
+        ctx.beginPath(); ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2); ctx.strokeStyle = sw.color; ctx.lineWidth = 2; ctx.stroke();
       }
 
       for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        p.x += p.vx * dt;
-        p.y += p.vy * dt;
-        p.alpha -= 2.6 * dt;
+        const p = particles[i]; p.x += p.vx * dt; p.y += p.vy * dt; p.alpha -= 2.6 * dt;
         if (p.alpha <= 0) { particles.splice(i, 1); continue; }
         ctx.globalAlpha = Math.max(0, p.alpha);
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
       }
 
       for (let i = floatingTexts.length - 1; i >= 0; i--) {
-        const ft = floatingTexts[i];
-        ft.y += ft.vy * dt;
-        ft.alpha -= 1.6 * dt;
+        const ft = floatingTexts[i]; ft.y += ft.vy * dt; ft.alpha -= 1.6 * dt;
         if (ft.alpha <= 0) { floatingTexts.splice(i, 1); continue; }
         ctx.globalAlpha = Math.max(0, ft.alpha);
-        ctx.font = '700 13px JetBrains Mono';
-        ctx.fillStyle = ft.color;
-        ctx.textAlign = 'center';
-        ctx.fillText(ft.text, ft.x, ft.y);
+        ctx.font = '700 13px JetBrains Mono'; ctx.fillStyle = ft.color; ctx.textAlign = 'center'; ctx.fillText(ft.text, ft.x, ft.y);
       }
       ctx.globalAlpha = 1;
 
