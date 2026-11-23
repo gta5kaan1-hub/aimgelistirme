@@ -54,7 +54,6 @@
       flex-direction: column;
     }
 
-    /* Görünür ve hareketli arka plan ışık geçişleri + nefes alan ışık */
     .ambient-lights {
       position: fixed;
       inset: 0;
@@ -244,7 +243,6 @@
 
     #custom-crosshair { position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); display: none; }
 
-    /* Arka plan ışıklarının görünmesi için yarı saydam katman */
     .overlay {
       position: absolute;
       inset: 0;
@@ -343,7 +341,6 @@
     .section-heading { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; margin-bottom: 3px; color: #fff; }
     .subtitle { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 12px; }
 
-    /* Renkli Mod Kartları[cite: 13] */
     .mode-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 13px; }
     @media (max-width: 720px) { .mode-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .mode-grid { grid-template-columns: 1fr; } }
@@ -860,7 +857,7 @@
       { minXp: 20500, name: 'ÖLÜMSÜZ (IMMORTAL)' }, { minXp: 24500, name: 'RADYANT // AIMS PRO' }
     ];
 
-    const DB_KEY = 'aims_pro_auth_db_v9';
+    const DB_KEY = 'aims_pro_auth_db_v10';
 
     function hashPassword(pw) {
       let h = 2166136261;
@@ -910,7 +907,6 @@
       return db.users[db.loggedInUser.trim().toLowerCase()] || null;
     }
 
-    // Ses sadece siteye girildiğinde çalar
     let soundEnabled = true;
     let entrySoundPlayed = false;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -985,7 +981,6 @@
       svgEl.innerHTML = html;
     }
 
-    // Giriş / Kayıt Ol mantığı (Kayıt olduktan sonra giriş yaparken sorunsuz çalışır)
     let authMode = 'login';
     const tabLogin = document.getElementById('tab-auth-login');
     const tabRegister = document.getElementById('tab-auth-register');
@@ -1204,7 +1199,7 @@
     let vsOpponentName = 'Rakip Bağlanmadı';
     let vsOpponentScore = 0;
 
-    const vsChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('aims_pro_vs_v9') : null;
+    const vsChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('aims_pro_vs_v10') : null;
 
     function broadcastVsMessage(payload) {
       if (!vsRoomCode) return;
@@ -1214,8 +1209,44 @@
     }
 
     function handleIncomingVsMessage(msg) {
-      if (!msg || !msg.roomCode || msg.roomCode !== vsRoomCode) return;
+      if (!msg || !msg.sender) return;
       const me = getCurrentUser();
+
+      if (msg.type === 'leaderboard_entry' && typeof msg.score === 'number') {
+        const k = msg.sender.trim().toLowerCase();
+        if (!db.users[k]) {
+          db.users[k] = {
+            name: msg.sender.trim(),
+            passwordHash: '',
+            xp: 0,
+            totalScore: Number(msg.score) || 0,
+            avatarEmoji: '🎯',
+            avatarPhoto: '',
+            sens: 1.0,
+            targetTheme: 'gold',
+            crosshair: { color: '#ffc13b', size: 8, thick: 2, gap: 4, dot: true },
+            quests: { q25hits: false, q80acc: false, q3000score: false }
+          };
+        } else if (!me || me.name.toLowerCase() !== k) {
+          db.users[k].totalScore = (Number(db.users[k].totalScore) || 0) + (Number(msg.score) || 0);
+        }
+
+        const exists = db.entries.some(e => e.syncId && e.syncId === msg.syncId);
+        if (!exists) {
+          db.entries.push({
+            syncId: msg.syncId || `${Date.now()}_${Math.random()}`,
+            name: msg.sender.trim(),
+            mode: msg.mode || 'gridshot',
+            score: Number(msg.score) || 0,
+            acc: Number(msg.acc) || 0
+          });
+          db.entries = db.entries.slice(-180);
+        }
+        saveDB();
+        renderLeaderboard();
+      }
+
+      if (!msg.roomCode || msg.roomCode !== vsRoomCode) return;
       if (!me || msg.sender === me.name) return;
 
       if (msg.type === 'join' || msg.type === 'score' || msg.type === 'start') {
@@ -1235,7 +1266,11 @@
 
     if (vsChannel) vsChannel.onmessage = (ev) => handleIncomingVsMessage(ev.data);
     window.addEventListener('storage', (ev) => {
-      if (ev.key && ev.key.startsWith('aims_pro_vs_room_') && ev.newValue) {
+      if (!ev.newValue) return;
+      if (ev.key && ev.key.startsWith('aims_pro_vs_room_')) {
+        try { handleIncomingVsMessage(JSON.parse(ev.newValue)); } catch {}
+      }
+      if (ev.key === 'aims_pro_lb_sync') {
         try { handleIncomingVsMessage(JSON.parse(ev.newValue)); } catch {}
       }
     });
@@ -1738,11 +1773,29 @@
       user.totalScore += score;
 
       if (score > 0 || hits > 0) {
-        db.entries.push({ name: user.name, mode: selectedMode, score, acc });
+        db.entries.push({
+          syncId: `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+          name: user.name,
+          mode: selectedMode,
+          score,
+          acc
+        });
         db.entries = db.entries.slice(-180);
       }
 
       saveDB();
+
+      const syncPayload = {
+        type: 'leaderboard_entry',
+        syncId: `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+        sender: user.name,
+        mode: selectedMode,
+        score,
+        acc
+      };
+      localStorage.setItem('aims_pro_lb_sync', JSON.stringify(syncPayload));
+      if (vsChannel) vsChannel.postMessage(syncPayload);
+
       refreshAllUI();
 
       const { current } = getRankInfo(user.xp);
