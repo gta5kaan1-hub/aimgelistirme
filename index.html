@@ -7,11 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #08090f;
-      --bg-card: rgba(18, 22, 36, 0.92);
+      --bg-dark: #07080e;
+      --bg-card: rgba(17, 21, 36, 0.94);
       --primary: #ff2a55;
       --primary-glow: rgba(255, 42, 85, 0.55);
-      --burgundy: #691229;
       --gold: #f7b733;
       --gold-glow: rgba(247, 183, 51, 0.55);
       --cyan: #00f3ff;
@@ -30,46 +29,50 @@
       user-select: none;
     }
 
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
       background-color: var(--bg-dark);
       background-image:
-        radial-gradient(circle at 15% 10%, rgba(247, 183, 51, 0.18) 0%, transparent 42%),
-        radial-gradient(circle at 85% 12%, rgba(255, 42, 85, 0.2) 0%, transparent 45%),
-        radial-gradient(circle at 50% 95%, rgba(0, 243, 255, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 18% 12%, rgba(247, 183, 51, 0.18) 0%, transparent 44%),
+        radial-gradient(circle at 84% 14%, rgba(255, 42, 85, 0.2) 0%, transparent 46%),
+        radial-gradient(circle at 50% 92%, rgba(0, 243, 255, 0.12) 0%, transparent 50%),
         linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
       background-size: 100% 100%, 100% 100%, 100% 100%, 42px 42px, 42px 42px;
       color: var(--text-main);
       font-family: 'Rajdhani', sans-serif;
-      height: 100vh;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
 
-    /* Tıklama / Etkileşim Parlaması */
     .glow-interact {
-      transition: transform 0.18s ease, box-shadow 0.25s ease, border-color 0.22s ease, background 0.22s ease;
+      transition: transform 0.16s ease, box-shadow 0.24s ease, border-color 0.22s ease, background 0.22s ease;
     }
 
     .glow-interact:active {
       transform: scale(0.97) !important;
-      box-shadow: 0 0 28px var(--gold-glow), 0 0 18px var(--cyan-glow) !important;
+      box-shadow: 0 0 26px var(--gold-glow), 0 0 18px var(--cyan-glow) !important;
       border-color: var(--gold) !important;
     }
 
     /* Üst HUD Bar */
     header {
-      height: 70px;
-      background: linear-gradient(90deg, rgba(14, 17, 29, 0.95), rgba(26, 13, 24, 0.92), rgba(14, 17, 29, 0.95));
+      height: 72px;
+      background: linear-gradient(90deg, rgba(13, 16, 28, 0.96), rgba(28, 13, 25, 0.94), rgba(13, 16, 28, 0.96));
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(247, 183, 51, 0.28);
+      border-bottom: 1px solid rgba(247, 183, 51, 0.3);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
-      z-index: 25;
-      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.7);
+      padding: 0 22px;
+      z-index: 40;
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.72);
+      flex-shrink: 0;
     }
 
     .brand {
@@ -94,13 +97,11 @@
       transform: rotate(45deg);
     }
 
-    .brand-logo span {
-      transform: rotate(-45deg);
-    }
+    .brand-logo span { transform: rotate(-45deg); }
 
     .brand h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.35rem;
+      font-size: 1.32rem;
       font-weight: 900;
       letter-spacing: 2.5px;
       background: linear-gradient(90deg, #ffffff, var(--gold), #ff5c7c);
@@ -110,29 +111,28 @@
 
     .hud-stats {
       display: flex;
-      gap: 16px;
+      gap: 14px;
     }
 
     .stat-box {
       text-align: center;
-      background: rgba(8, 10, 18, 0.72);
-      padding: 5px 15px;
+      background: rgba(8, 10, 18, 0.74);
+      padding: 5px 14px;
       border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.12);
-      min-width: 96px;
-      box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.02);
+      min-width: 92px;
     }
 
     .stat-label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.4px;
       color: var(--text-muted);
     }
 
     .stat-value {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: #fff;
     }
@@ -147,20 +147,19 @@
       gap: 10px;
     }
 
-    select, button.icon-btn {
+    button.icon-btn {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border);
       color: #fff;
-      padding: 7px 12px;
-      border-radius: 7px;
+      padding: 8px 12px;
+      border-radius: 8px;
       font-family: 'Rajdhani', sans-serif;
       font-weight: 700;
       font-size: 0.92rem;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
-    select:hover, button.icon-btn:hover {
+    button.icon-btn:hover {
       border-color: var(--gold);
       background: rgba(247, 183, 51, 0.14);
       box-shadow: 0 0 15px rgba(247, 183, 51, 0.22);
@@ -175,12 +174,67 @@
       background: rgba(255, 42, 85, 0.24);
       border-color: var(--primary);
       color: #fff;
-      box-shadow: 0 0 18px var(--primary-glow);
     }
 
-    select option {
-      background: #121522;
+    /* Sağ Üst Profil Rozeti */
+    .header-profile-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(247, 183, 51, 0.16), rgba(255, 42, 85, 0.14));
+      border: 1px solid rgba(247, 183, 51, 0.48);
+      padding: 5px 12px 5px 6px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 0 18px rgba(247, 183, 51, 0.2);
+    }
+
+    .header-profile-chip:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 24px rgba(247, 183, 51, 0.42);
+    }
+
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: #141829;
+      display: grid;
+      place-items: center;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--gold);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .avatar-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .chip-info {
+      text-align: left;
+      line-height: 1.15;
+    }
+
+    .chip-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
       color: #fff;
+      max-width: 110px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .chip-rank {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold);
     }
 
     /* Oyun Alanı */
@@ -192,7 +246,7 @@
       cursor: none;
     }
 
-    canvas {
+    canvas#gameCanvas {
       display: block;
       width: 100%;
       height: 100%;
@@ -206,12 +260,12 @@
       display: none;
     }
 
-    /* Katmanlar */
+    /* Tam Ortalı Overlay Katmanları */
     .overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 20%, rgba(36, 20, 44, 0.85), rgba(7, 8, 14, 0.95));
-      backdrop-filter: blur(12px);
+      background: radial-gradient(circle at 50% 45%, rgba(34, 22, 46, 0.86), rgba(6, 7, 13, 0.96));
+      backdrop-filter: blur(13px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -221,27 +275,38 @@
       overflow-y: auto;
     }
 
-    /* Şık Açılış Ekranı */
+    /* Tam Ekran Ortalanmış Açılış Ekranı */
+    #welcome-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
     .welcome-card {
       position: relative;
-      max-width: 650px;
+      max-width: 620px;
       width: 100%;
-      background: linear-gradient(155deg, rgba(25, 27, 45, 0.96), rgba(11, 13, 22, 0.98));
-      border: 1px solid rgba(247, 183, 51, 0.48);
-      border-radius: 18px;
-      padding: 42px 34px;
+      margin: auto;
+      background: linear-gradient(155deg, rgba(25, 28, 48, 0.97), rgba(10, 12, 22, 0.99));
+      border: 1px solid rgba(247, 183, 51, 0.5);
+      border-radius: 20px;
+      padding: 46px 38px;
       text-align: center;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.88), 0 0 48px rgba(247, 183, 51, 0.18);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.9), 0 0 55px rgba(247, 183, 51, 0.2);
       overflow: hidden;
       animation: cardEntrance 0.42s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes cardEntrance {
-      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .welcome-card::before {
+    .welcome-card::before, .panel::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -254,13 +319,13 @@
       font-family: 'Orbitron', sans-serif;
       font-size: 0.72rem;
       letter-spacing: 2.5px;
-      padding: 5px 14px;
+      padding: 5px 15px;
       border-radius: 999px;
       color: var(--gold);
       border: 1px solid rgba(247, 183, 51, 0.45);
       background: rgba(247, 183, 51, 0.1);
-      box-shadow: 0 0 16px rgba(247, 183, 51, 0.2);
-      margin-bottom: 14px;
+      box-shadow: 0 0 18px rgba(247, 183, 51, 0.22);
+      margin-bottom: 16px;
     }
 
     .welcome-title {
@@ -269,7 +334,7 @@
       font-weight: 900;
       letter-spacing: 2px;
       line-height: 1.15;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       background: linear-gradient(120deg, #ffffff 10%, var(--gold) 45%, var(--cyan) 80%, #ff4d79 100%);
       background-size: 220% auto;
       -webkit-background-clip: text;
@@ -277,53 +342,78 @@
       animation: shineText 4.5s linear infinite;
     }
 
-    @keyframes shineText {
-      to { background-position: 220% center; }
-    }
+    @keyframes shineText { to { background-position: 220% center; } }
 
     .welcome-desc {
       color: var(--text-muted);
-      font-size: 1.06rem;
-      max-width: 490px;
+      font-size: 1.05rem;
+      max-width: 470px;
       margin: 0 auto 24px;
       line-height: 1.45;
     }
 
     .nick-box {
-      max-width: 380px;
-      margin: 0 auto 24px;
+      max-width: 390px;
+      margin: 0 auto 14px;
     }
 
     .nick-input {
       width: 100%;
-      background: rgba(0, 0, 0, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 9px;
-      padding: 12px 15px;
+      background: rgba(0, 0, 0, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 13px 16px;
       color: #fff;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.05rem;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
       font-weight: 700;
+      letter-spacing: 1px;
       outline: none;
       transition: 0.2s;
     }
 
     .nick-input:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 18px rgba(247, 183, 51, 0.28);
+      box-shadow: 0 0 20px rgba(247, 183, 51, 0.32);
+    }
+
+    .saved-profiles-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .saved-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(247, 183, 51, 0.3);
+      color: #e2e8f0;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .saved-pill:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(247, 183, 51, 0.14);
     }
 
     /* Ana Menü Düzeni */
     .hub-container {
-      max-width: 1120px;
+      max-width: 1150px;
       width: 100%;
       display: grid;
-      grid-template-columns: 1.42fr 1fr;
+      grid-template-columns: 1.45fr 1fr;
       gap: 20px;
       align-items: stretch;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 920px) {
       .hub-container { grid-template-columns: 1fr; }
     }
 
@@ -332,72 +422,70 @@
       border: 1px solid rgba(247, 183, 51, 0.32);
       box-shadow: 0 22px 60px rgba(0, 0, 0, 0.78), 0 0 28px rgba(0, 243, 255, 0.06);
       border-radius: 16px;
-      padding: 24px;
+      padding: 22px;
       position: relative;
       overflow: hidden;
-    }
-
-    .panel::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--gold), var(--cyan), var(--violet));
     }
 
     .player-banner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(120deg, rgba(247, 183, 51, 0.08), rgba(0, 243, 255, 0.05), rgba(0, 0, 0, 0.42));
+      background: linear-gradient(120deg, rgba(247, 183, 51, 0.09), rgba(0, 243, 255, 0.05), rgba(0, 0, 0, 0.45));
       border: 1px solid rgba(247, 183, 51, 0.28);
       border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 18px;
-      gap: 14px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      gap: 12px;
       flex-wrap: wrap;
+    }
+
+    .player-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .player-meta h3 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: #fff;
     }
 
     .player-meta span {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
     }
 
     .rank-pill {
-      padding: 6px 15px;
+      padding: 6px 14px;
       border-radius: 999px;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 1px;
       border: 1px solid var(--gold);
       color: var(--gold);
-      background: linear-gradient(90deg, rgba(247, 183, 51, 0.2), rgba(255, 42, 85, 0.18));
+      background: linear-gradient(90deg, rgba(247, 183, 51, 0.22), rgba(255, 42, 85, 0.18));
       box-shadow: 0 0 18px rgba(247, 183, 51, 0.28);
     }
 
     .xp-wrap {
       width: 100%;
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .xp-labels {
       display: flex;
       justify-content: space-between;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .xp-bar {
       width: 100%;
-      height: 8px;
+      height: 7px;
       background: rgba(255, 255, 255, 0.09);
       border-radius: 999px;
       overflow: hidden;
@@ -413,7 +501,7 @@
 
     .section-heading {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.22rem;
+      font-size: 1.18rem;
       letter-spacing: 1.5px;
       margin-bottom: 4px;
       color: #fff;
@@ -421,15 +509,15 @@
 
     .subtitle {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 16px;
+      font-size: 0.92rem;
+      margin-bottom: 14px;
     }
 
     .mode-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 18px;
+      gap: 11px;
+      margin-bottom: 16px;
     }
 
     @media (max-width: 560px) {
@@ -440,77 +528,69 @@
       background: rgba(255, 255, 255, 0.035);
       border: 1px solid var(--border);
       border-radius: 11px;
-      padding: 14px;
+      padding: 13px;
       cursor: pointer;
       text-align: left;
-      position: relative;
-      overflow: hidden;
     }
 
     .mode-card:hover {
       transform: translateY(-2px);
       border-color: rgba(0, 243, 255, 0.55);
-      box-shadow: 0 6px 22px rgba(0, 243, 255, 0.14);
+      box-shadow: 0 6px 20px rgba(0, 243, 255, 0.14);
     }
 
     .mode-card.active {
       background: linear-gradient(145deg, rgba(255, 42, 85, 0.2), rgba(247, 183, 51, 0.16), rgba(0, 243, 255, 0.08));
       border-color: var(--gold);
-      box-shadow: 0 0 26px rgba(247, 183, 51, 0.34), inset 0 0 16px rgba(247, 183, 51, 0.12);
+      box-shadow: 0 0 24px rgba(247, 183, 51, 0.34), inset 0 0 14px rgba(247, 183, 51, 0.12);
     }
 
     .mode-tag {
       display: inline-block;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
       padding: 2px 8px;
       border-radius: 4px;
       background: rgba(0, 243, 255, 0.14);
       color: var(--cyan);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       letter-spacing: 1px;
     }
 
     .mode-card.active .mode-tag {
       background: var(--gold);
       color: #090a0f;
-      box-shadow: 0 0 12px var(--gold-glow);
     }
 
     .mode-card h3 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.98rem;
-      margin-bottom: 4px;
+      font-size: 0.95rem;
+      margin-bottom: 3px;
       color: #fff;
     }
 
     .mode-card p {
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
-      line-height: 1.32;
+      line-height: 1.3;
     }
 
     .duration-bar {
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .dur-btn {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      padding: 8px 18px;
+      padding: 7px 16px;
       border-radius: 7px;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       cursor: pointer;
-    }
-
-    .dur-btn:hover {
-      border-color: rgba(0, 243, 255, 0.5);
-      color: #fff;
     }
 
     .dur-btn.active {
@@ -528,14 +608,13 @@
       border: none;
       color: #fff;
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 800;
       letter-spacing: 2px;
-      padding: 15px 28px;
+      padding: 14px 24px;
       border-radius: 10px;
       cursor: pointer;
       box-shadow: 0 8px 26px var(--primary-glow);
-      transition: transform 0.2s, box-shadow 0.2s, background-position 0.35s;
     }
 
     .btn-start:hover {
@@ -555,8 +634,8 @@
       border: 1px solid var(--border);
       color: #fff;
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.86rem;
-      padding: 12px 18px;
+      font-size: 0.84rem;
+      padding: 11px 16px;
       border-radius: 9px;
       cursor: pointer;
     }
@@ -564,48 +643,43 @@
     .btn-ghost:hover {
       border-color: var(--cyan);
       background: rgba(0, 243, 255, 0.12);
-      box-shadow: 0 0 16px var(--cyan-glow);
     }
 
-    /* Liderlik Tablosu */
+    /* Liderlik & Görevler */
     .lb-tabs {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .lb-tab {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      padding: 6px 11px;
+      padding: 5px 10px;
       border-radius: 7px;
       font-family: 'Rajdhani', sans-serif;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       cursor: pointer;
-    }
-
-    .lb-tab:hover {
-      border-color: rgba(247, 183, 51, 0.45);
-      color: #fff;
     }
 
     .lb-tab.active {
       background: linear-gradient(90deg, rgba(247, 183, 51, 0.25), rgba(255, 42, 85, 0.18));
       border-color: var(--gold);
       color: var(--gold);
-      box-shadow: 0 0 16px rgba(247, 183, 51, 0.28);
+      box-shadow: 0 0 14px rgba(247, 183, 51, 0.25);
     }
 
     .lb-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      max-height: 365px;
+      gap: 7px;
+      max-height: 235px;
       overflow-y: auto;
       padding-right: 4px;
+      margin-bottom: 14px;
     }
 
     .lb-row {
@@ -615,52 +689,139 @@
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 9px;
-      padding: 10px 14px;
+      padding: 8px 12px;
     }
 
     .lb-row.top-1 {
       border-color: rgba(247, 183, 51, 0.65);
       background: linear-gradient(90deg, rgba(247, 183, 51, 0.14), rgba(0, 0, 0, 0.45));
-      box-shadow: 0 0 16px rgba(247, 183, 51, 0.16);
     }
     .lb-row.top-2 { border-color: rgba(0, 243, 255, 0.42); }
     .lb-row.top-3 { border-color: rgba(179, 102, 255, 0.42); }
 
-    .lb-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .lb-left { display: flex; align-items: center; gap: 9px; }
+    .lb-pos { font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 0.85rem; width: 24px; color: var(--gold); }
+    .lb-name { font-weight: 700; font-size: 0.96rem; color: #fff; }
+    .lb-sub { font-size: 0.76rem; color: var(--text-muted); }
+    .lb-score { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--cyan); }
+
+    .quest-box {
+      background: rgba(0, 0, 0, 0.38);
+      border: 1px solid rgba(0, 243, 255, 0.22);
+      border-radius: 10px;
+      padding: 11px 13px;
     }
 
-    .lb-pos {
+    .quest-title {
       font-family: 'Orbitron', sans-serif;
-      font-weight: 800;
-      font-size: 0.9rem;
-      width: 24px;
-      color: var(--gold);
-    }
-
-    .lb-name {
-      font-weight: 700;
-      font-size: 1rem;
-      color: #fff;
-    }
-
-    .lb-sub {
       font-size: 0.78rem;
+      color: var(--cyan);
+      letter-spacing: 1px;
+      margin-bottom: 7px;
+    }
+
+    .quest-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.84rem;
+      padding: 4px 0;
       color: var(--text-muted);
     }
 
-    .lb-score {
+    .quest-item.done {
+      color: var(--emerald);
+      text-decoration: line-through;
+    }
+
+    /* Profil & Ekipman Atölyesi Modalı */
+    .workshop-box {
+      max-width: 720px;
+      width: 100%;
+      text-align: left;
+    }
+
+    .workshop-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 16px 0 20px;
+    }
+
+    @media (max-width: 680px) {
+      .workshop-grid { grid-template-columns: 1fr; }
+    }
+
+    .ws-section {
+      background: rgba(0, 0, 0, 0.42);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 14px;
+    }
+
+    .ws-section h4 {
       font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--cyan);
+      font-size: 0.86rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .avatar-presets {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 10px 0;
+    }
+
+    .preset-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 1.15rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    .preset-btn:hover, .preset-btn.selected {
+      border-color: var(--gold);
+      box-shadow: 0 0 14px var(--gold-glow);
+    }
+
+    .slider-row {
+      margin-bottom: 10px;
+    }
+
+    .slider-row label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #dce3f0;
+      margin-bottom: 4px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+
+    .crosshair-preview-box {
+      height: 76px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.65));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 10px;
     }
 
     /* Çıkış & Sonuç Panelleri */
     .modal-box {
-      max-width: 580px;
+      max-width: 600px;
       width: 100%;
       text-align: center;
     }
@@ -668,15 +829,15 @@
     .exit-actions {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 22px;
+      gap: 11px;
+      margin-top: 20px;
     }
 
     .result-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
-      margin: 20px 0;
+      margin: 16px 0;
     }
 
     @media (max-width: 560px) {
@@ -686,44 +847,50 @@
     .res-item {
       background: rgba(0, 0, 0, 0.48);
       border: 1px solid var(--border);
-      padding: 14px 8px;
+      padding: 12px 8px;
       border-radius: 9px;
     }
 
-    .res-item span {
-      display: block;
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .res-item strong {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.25rem;
-      color: #fff;
-    }
+    .res-item span { display: block; font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+    .res-item strong { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #fff; }
 
     .rank-badge {
       display: inline-block;
-      padding: 8px 22px;
+      padding: 7px 20px;
       border-radius: 999px;
       font-family: 'Orbitron', sans-serif;
       font-weight: 900;
-      font-size: 1rem;
-      letter-spacing: 1.8px;
+      font-size: 0.96rem;
+      letter-spacing: 1.6px;
       background: linear-gradient(90deg, rgba(247, 183, 51, 0.24), rgba(255, 42, 85, 0.22));
       border: 1px solid var(--gold);
       color: var(--gold);
-      margin-bottom: 12px;
-      box-shadow: 0 0 24px var(--gold-glow);
+      margin-bottom: 10px;
+      box-shadow: 0 0 22px var(--gold-glow);
     }
 
     .xp-gain-text {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--emerald);
-      margin-bottom: 14px;
+      margin-bottom: 10px;
+    }
+
+    .heatmap-wrap {
+      margin: 10px auto 16px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 8px;
+      max-width: 340px;
+    }
+
+    .heatmap-wrap canvas {
+      width: 100%;
+      height: 110px;
+      display: block;
+      border-radius: 6px;
+      background: #090b12;
     }
 
     .hidden { display: none !important; }
@@ -731,14 +898,8 @@
 </head>
 <body>
 
-  <!-- Özel Crosshair SVG -->
-  <svg id="custom-crosshair" width="32" height="32" viewBox="0 0 32 32">
-    <line x1="16" y1="4" x2="16" y2="11" stroke="#00f3ff" stroke-width="2" />
-    <line x1="16" y1="21" x2="16" y2="28" stroke="#00f3ff" stroke-width="2" />
-    <line x1="4" y1="16" x2="11" y2="16" stroke="#00f3ff" stroke-width="2" />
-    <line x1="21" y1="16" x2="28" y2="16" stroke="#00f3ff" stroke-width="2" />
-    <circle cx="16" cy="16" r="1.5" fill="#ff2a55" />
-  </svg>
+  <!-- Dinamik Özel Crosshair SVG -->
+  <svg id="custom-crosshair" width="48" height="48" viewBox="0 0 48 48"></svg>
 
   <header>
     <div class="brand glow-interact" id="brand-home" title="Ana Menüye Dön">
@@ -766,37 +927,41 @@
     </div>
 
     <div class="controls">
-      <select id="crosshair-color" class="glow-interact" title="Nişangah Rengi">
-        <option value="#00f3ff">Nişangah: Camgöbeği</option>
-        <option value="#00ff66">Nişangah: Neon Yeşil</option>
-        <option value="#ff2a55">Nişangah: Kırmızı</option>
-        <option value="#f7b733">Nişangah: Altın</option>
-        <option value="#ffffff">Nişangah: Beyaz</option>
-      </select>
-      <button class="icon-btn glow-interact" id="btn-sound" title="Sesi Aç/Kapat">🔊 Ses Açık</button>
+      <button class="icon-btn glow-interact" id="btn-sound" title="Sesi Aç/Kapat">🔊 Ses</button>
       <button class="icon-btn exit-btn glow-interact" id="btn-exit-top" title="Çıkış Ekranı (ESC)">⎋ Çıkış</button>
+
+      <!-- Sağ Üst Kalıcı Oyuncu Profili -->
+      <div class="header-profile-chip glow-interact" id="btn-open-profile" title="Profil, Fotoğraf, Sens ve Nişangah Ayarları">
+        <div class="avatar-circle" id="header-avatar">🎯</div>
+        <div class="chip-info">
+          <div class="chip-name" id="header-nick">OYUNCU</div>
+          <div class="chip-rank" id="header-rank">BRONZ 1</div>
+        </div>
+      </div>
     </div>
   </header>
 
+  <!-- 1. TAM ORTALI AÇILIŞ EKRANI -->
+  <div class="overlay" id="welcome-screen">
+    <div class="welcome-card">
+      <div class="shimmer-badge">RESMİ E-SPOR NİŞAN PLATFORMU</div>
+      <h2 class="welcome-title">AIMS PRO'YA HOŞ GELDİNİZ</h2>
+      <p class="welcome-desc">
+        Oyuncu adını girerek kalıcı profilini oluştur; rütben, nişangahın, sens ayarın ve skorların her girişinde korunsun.
+      </p>
+
+      <div class="nick-box">
+        <input type="text" id="welcome-nick" class="nick-input" maxlength="18" placeholder="OYUNCU ADINI GİR" />
+      </div>
+
+      <div class="saved-profiles-row" id="saved-profiles-list"></div>
+
+      <button class="btn-start btn-gold glow-interact" id="btn-enter-hub">AKADEMİYE GİRİŞ YAP</button>
+    </div>
+  </div>
+
   <div id="arena-wrapper">
     <canvas id="gameCanvas"></canvas>
-
-    <!-- 1. ŞIK AÇILIŞ EKRANI -->
-    <div class="overlay" id="welcome-screen">
-      <div class="welcome-card">
-        <div class="shimmer-badge">RESMİ E-SPOR NİŞAN PLATFORMU</div>
-        <h2 class="welcome-title">AIMS PRO'YA HOŞ GELDİNİZ</h2>
-        <p class="welcome-desc">
-          Kademeli rütbe sisteminde yüksel, reflekslerini keskinleştir ve liderlik tablosunda zirveye yerleş.
-        </p>
-
-        <div class="nick-box">
-          <input type="text" id="welcome-nick" class="nick-input" maxlength="18" placeholder="Oyuncu adın (örn: Kaan)" />
-        </div>
-
-        <button class="btn-start btn-gold glow-interact" id="btn-enter-hub">AKADEMİYE GİRİŞ YAP</button>
-      </div>
-    </div>
 
     <!-- 2. ANA MENÜ & LİDERLİK TABLOSU -->
     <div class="overlay hidden" id="start-menu">
@@ -804,15 +969,21 @@
         <!-- Sol: Profil, Mod ve Süre Seçimi -->
         <div class="panel">
           <div class="player-banner">
-            <div class="player-meta">
-              <h3 id="menu-player-name">OYUNCU</h3>
-              <span id="menu-total-xp-label">Toplam XP: 0 • Toplam Skor: 0</span>
+            <div class="player-left">
+              <div class="avatar-circle" id="menu-avatar" style="width:44px;height:44px;font-size:1.3rem;">🎯</div>
+              <div class="player-meta">
+                <h3 id="menu-player-name">OYUNCU</h3>
+                <span id="menu-total-xp-label">XP: 0 • Sens: 1.00x • Skor: 0</span>
+              </div>
             </div>
-            <div class="rank-pill" id="menu-rank-badge">BRONZ 1</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="rank-pill" id="menu-rank-badge">BRONZ 1</div>
+              <button type="button" class="btn-ghost glow-interact" id="btn-menu-workshop" style="padding:6px 11px;font-size:0.76rem;">⚙ Profil & Sens</button>
+            </div>
             <div class="xp-wrap">
               <div class="xp-labels">
-                <span id="xp-progress-text">Sonraki Kademe (BRONZ 2): 0 / 350 XP</span>
-                <button type="button" id="btn-change-nick" style="background:none;border:none;color:var(--gold);font-weight:700;cursor:pointer;font-family:'Rajdhani',sans-serif;">Adı Değiştir</button>
+                <span id="xp-progress-text">Sonraki Kademe (BRONZ 2): 0 / 400 XP</span>
+                <button type="button" id="btn-switch-account" style="background:none;border:none;color:var(--gold);font-weight:700;cursor:pointer;font-family:'Rajdhani',sans-serif;">Hesap Değiştir</button>
               </div>
               <div class="xp-bar">
                 <div class="xp-fill" id="xp-fill-bar"></div>
@@ -855,7 +1026,7 @@
           <button class="btn-start glow-interact" id="btn-play">ANTRENMANI BAŞLAT</button>
         </div>
 
-        <!-- Sağ: Her Oyuna Özel ve Toplam Liderlik Tablosu -->
+        <!-- Sağ: Liderlik Tablosu & Görevler -->
         <div class="panel">
           <h2 class="section-heading">LİDERLİK TABLOSU</h2>
           <p class="subtitle">Mod bazlı rekorlar ve genel toplam puan sıralaması.</p>
@@ -869,15 +1040,109 @@
           </div>
 
           <div class="lb-list" id="leaderboard-list"></div>
+
+          <div class="quest-box">
+            <div class="quest-title">GÜNLÜK NİŞANCI GÖREVLERİ (+EKSTRA XP)</div>
+            <div id="quest-list"></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 3. ÇIKIŞ / DURAKLATMA EKRANI -->
+    <!-- 3. PROFİL, FOTOĞRAF, SENS & NİŞANGAH ATÖLYESİ -->
+    <div class="overlay hidden" id="profile-modal">
+      <div class="panel workshop-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <h2 class="section-heading">PROFİL & EKİPMAN ATÖLYESİ</h2>
+          <button class="btn-ghost glow-interact" id="btn-close-profile" style="padding:6px 12px;">✕ Kapat</button>
+        </div>
+        <p class="subtitle">Tüm ayarların kullanıcı adına özel olarak kalıcı kaydedilir.</p>
+
+        <div class="workshop-grid">
+          <!-- Sol: Profil & Fotoğraf & Sens -->
+          <div class="ws-section">
+            <h4>KİMLİK & PROFİL FOTOĞRAFI</h4>
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+              <div class="avatar-circle" id="ws-avatar-preview" style="width:52px;height:52px;font-size:1.5rem;">🎯</div>
+              <div style="flex:1;">
+                <input type="text" id="ws-nick-input" class="nick-input" style="text-align:left;padding:8px 12px;font-size:0.92rem;" maxlength="18" />
+              </div>
+            </div>
+
+            <label class="btn-ghost glow-interact" style="display:inline-block;font-size:0.78rem;padding:7px 12px;margin-bottom:8px;">
+              📷 Fotoğraf Yükle
+              <input type="file" id="ws-photo-upload" accept="image/*" style="display:none;" />
+            </label>
+
+            <div class="avatar-presets" id="ws-presets">
+              <button type="button" class="preset-btn" data-emoji="🎯">🎯</button>
+              <button type="button" class="preset-btn" data-emoji="👑">👑</button>
+              <button type="button" class="preset-btn" data-emoji="🔥">🔥</button>
+              <button type="button" class="preset-btn" data-emoji="⚡">⚡</button>
+              <button type="button" class="preset-btn" data-emoji="🦅">🦅</button>
+              <button type="button" class="preset-btn" data-emoji="💀">💀</button>
+            </div>
+
+            <h4 style="margin-top:12px;">FARE HASSASİYETİ & TEMA</h4>
+            <div class="slider-row">
+              <label><span>Hassasiyet (Sens)</span><strong id="ws-sens-val" style="color:var(--gold);">1.00x</strong></label>
+              <input type="range" id="ws-sens" min="0.3" max="2.5" step="0.05" value="1.0" />
+            </div>
+
+            <div class="slider-row" style="margin-bottom:0;">
+              <label><span>Hedef Rengi</span></label>
+              <select id="ws-target-theme" style="width:100%;background:#0c0f1a;border:1px solid var(--border);color:#fff;padding:7px;border-radius:7px;font-family:'Rajdhani',sans-serif;font-weight:700;">
+                <option value="cyan">Neon Camgöbeği</option>
+                <option value="gold">Altın Efsane</option>
+                <option value="crimson">Kızıl Lazer</option>
+                <option value="emerald">Zümrüt Yeşili</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Sağ: Nişangah (Crosshair) Özelleştirme -->
+          <div class="ws-section">
+            <h4>NİŞANGAH (CROSSHAIR) AYARLARI</h4>
+            <div class="crosshair-preview-box">
+              <svg id="ws-crosshair-preview" width="48" height="48" viewBox="0 0 48 48"></svg>
+            </div>
+
+            <div class="slider-row">
+              <label><span>Nişangah Rengi</span></label>
+              <input type="color" id="ws-ch-color" value="#00f3ff" style="width:100%;height:32px;border:none;background:none;cursor:pointer;" />
+            </div>
+
+            <div class="slider-row">
+              <label><span>Çizgi Uzunluğu</span><span id="ws-ch-size-val">8px</span></label>
+              <input type="range" id="ws-ch-size" min="3" max="18" step="1" value="8" />
+            </div>
+
+            <div class="slider-row">
+              <label><span>Kalınlık</span><span id="ws-ch-thick-val">2px</span></label>
+              <input type="range" id="ws-ch-thick" min="1" max="5" step="1" value="2" />
+            </div>
+
+            <div class="slider-row">
+              <label><span>Merkez Boşluk</span><span id="ws-ch-gap-val">4px</span></label>
+              <input type="range" id="ws-ch-gap" min="0" max="12" step="1" value="4" />
+            </div>
+
+            <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;color:#dce3f0;">
+              <input type="checkbox" id="ws-ch-dot" checked style="accent-color:var(--gold);width:16px;height:16px;" />
+              Merkez Nokta Göster
+            </label>
+          </div>
+        </div>
+
+        <button class="btn-start btn-gold glow-interact" id="btn-save-profile">AYARLARI KALICI OLARAK KAYDET</button>
+      </div>
+    </div>
+
+    <!-- 4. ÇIKIŞ / DURAKLATMA EKRANI -->
     <div class="overlay hidden" id="exit-menu">
       <div class="panel modal-box">
         <div class="shimmer-badge">ANTRENMAN DURAKLATILDI</div>
-        <h2 class="section-heading" style="font-size: 1.75rem;">ÇIKIŞ EKRANI</h2>
+        <h2 class="section-heading" style="font-size: 1.7rem;">ÇIKIŞ EKRANI</h2>
         <p class="subtitle">Oyun şu an duraklatıldı. Nasıl devam etmek istersin?</p>
 
         <div class="exit-actions">
@@ -888,10 +1153,10 @@
       </div>
     </div>
 
-    <!-- 4. SONUÇ & RÜTBE EKRANI -->
+    <!-- 5. SONUÇ & ISI HARİTASI EKRANI -->
     <div class="overlay hidden" id="result-menu">
       <div class="panel modal-box">
-        <h2 class="section-heading" style="font-size: 1.75rem;">ANTRENMAN TAMAMLANDI</h2>
+        <h2 class="section-heading" style="font-size: 1.65rem;">ANTRENMAN TAMAMLANDI</h2>
         <p class="subtitle" id="res-mode-label">Mod: GRIDSHOT</p>
 
         <div class="rank-badge" id="final-rank">RÜTBE: BRONZ 1</div>
@@ -916,6 +1181,11 @@
           </div>
         </div>
 
+        <div class="heatmap-wrap">
+          <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:4px;letter-spacing:1px;">ATIŞ ISI HARİTASI (YEŞİL: İSABET • KIRMIZI: ISKA)</div>
+          <canvas id="heatmapCanvas" width="320" height="110"></canvas>
+        </div>
+
         <div style="display:flex; gap:12px; flex-wrap:wrap;">
           <button class="btn-start glow-interact" style="flex:1;" id="btn-restart">TEKRAR OYNA</button>
           <button class="btn-ghost glow-interact" id="btn-res-menu">ANA MENÜ & LİDERLİK</button>
@@ -932,6 +1202,7 @@
 
     const welcomeScreen = document.getElementById('welcome-screen');
     const startMenu = document.getElementById('start-menu');
+    const profileModal = document.getElementById('profile-modal');
     const exitMenu = document.getElementById('exit-menu');
     const resultMenu = document.getElementById('result-menu');
 
@@ -945,6 +1216,13 @@
       flick: 'FLICK SHOT',
       tracking: 'STRAFE TRACK',
       precision: 'MİKRO NİŞAN'
+    };
+
+    const TARGET_THEMES = {
+      cyan: { inner: '#00f3ff', mid: '#0088ff', outer: 'rgba(0, 243, 255, 0.16)', particle: '#00f3ff' },
+      gold: { inner: '#ffe082', mid: '#f7b733', outer: 'rgba(247, 183, 51, 0.18)', particle: '#f7b733' },
+      crimson: { inner: '#ff859d', mid: '#ff2a55', outer: 'rgba(255, 42, 85, 0.18)', particle: '#ff2a55' },
+      emerald: { inner: '#69f0ae', mid: '#00c853', outer: 'rgba(0, 230, 118, 0.18)', particle: '#00e676' }
     };
 
     // Kademeli Rütbe Sistemi (Bronz 1-4 -> Gümüş 1-4 -> Altın 1-4 -> Elmas 1-4 -> Ölümsüz -> Radyant)
@@ -969,43 +1247,77 @@
       { minXp: 24500, name: 'RADYANT // AIMS PRO' }
     ];
 
-    const STORAGE_KEY = 'aims_pro_save_v2';
-    function loadSave() {
-      const defaults = {
-        playerName: 'Oyuncu 1',
+    // Çoklu Kalıcı Oyuncu Veritabanı (Her ismin kendi rank, sens, foto ve crosshair kaydı korunur)
+    const DB_KEY = 'aims_pro_profiles_db_v3';
+
+    function createDefaultUser(name) {
+      return {
+        name,
         xp: 0,
         totalScore: 0,
-        bestByMode: {
-          gridshot: 0,
-          flick: 0,
-          tracking: 0,
-          precision: 0
+        avatarEmoji: '🎯',
+        avatarPhoto: '',
+        sens: 1.0,
+        targetTheme: 'cyan',
+        crosshair: {
+          color: '#00f3ff',
+          size: 8,
+          thick: 2,
+          gap: 4,
+          dot: true
+        },
+        quests: {
+          q25hits: false,
+          q80acc: false,
+          q3000score: false
+        }
+      };
+    }
+
+    function loadDB() {
+      const initialDB = {
+        activeUser: 'Kaan',
+        users: {
+          'kaan': createDefaultUser('Kaan')
         },
         entries: [
           { name: 'ProAim_TR', mode: 'gridshot', score: 3450, acc: 92 },
           { name: 'FlickMaster', mode: 'flick', score: 2680, acc: 88 },
           { name: 'TrackKing', mode: 'tracking', score: 2910, acc: 85 },
-          { name: 'OneTapKaan', mode: 'precision', score: 2240, acc: 90 }
+          { name: 'OneTapPRO', mode: 'precision', score: 2240, acc: 90 }
         ]
       };
       try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return defaults;
+        const raw = localStorage.getItem(DB_KEY);
+        if (!raw) return initialDB;
         const parsed = JSON.parse(raw);
+        if (!parsed.users || typeof parsed.users !== 'object') return initialDB;
         return {
-          ...defaults,
-          ...parsed,
-          bestByMode: { ...defaults.bestByMode, ...(parsed.bestByMode || {}) },
-          entries: Array.isArray(parsed.entries) ? parsed.entries : defaults.entries
+          activeUser: parsed.activeUser || 'Kaan',
+          users: parsed.users,
+          entries: Array.isArray(parsed.entries) ? parsed.entries : initialDB.entries
         };
       } catch {
-        return defaults;
+        return initialDB;
       }
     }
 
-    let saveData = loadSave();
-    function persistSave() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(saveData));
+    let db = loadDB();
+    function saveDB() {
+      localStorage.setItem(DB_KEY, JSON.stringify(db));
+    }
+
+    function getCurrentUser() {
+      const key = (db.activeUser || 'Kaan').trim().toLowerCase();
+      if (!db.users[key]) {
+        db.users[key] = createDefaultUser(db.activeUser || 'Kaan');
+      }
+      const u = db.users[key];
+      u.crosshair = { color: '#00f3ff', size: 8, thick: 2, gap: 4, dot: true, ...(u.crosshair || {}) };
+      u.quests = { q25hits: false, q80acc: false, q3000score: false, ...(u.quests || {}) };
+      if (!u.sens) u.sens = 1.0;
+      if (!u.targetTheme) u.targetTheme = 'cyan';
+      return u;
     }
 
     function getRankInfo(xp) {
@@ -1020,19 +1332,69 @@
       return { current, next };
     }
 
-    let activeLbTab = 'total';
-    function renderProfileAndLeaderboard() {
-      document.getElementById('welcome-nick').value = saveData.playerName;
-      document.getElementById('menu-player-name').textContent = saveData.playerName.toUpperCase();
-      document.getElementById('menu-total-xp-label').textContent =
-        `Toplam XP: ${saveData.xp.toLocaleString('tr-TR')} • Toplam Skor: ${saveData.totalScore.toLocaleString('tr-TR')}`;
+    function renderAvatarInto(el, user) {
+      if (user.avatarPhoto) {
+        el.innerHTML = `<img src="${user.avatarPhoto}" alt="avatar" />`;
+      } else {
+        el.textContent = user.avatarEmoji || '🎯';
+      }
+    }
 
-      const { current, next } = getRankInfo(saveData.xp);
+    function renderCrosshairSVG(svgEl, ch) {
+      const c = ch.color || '#00f3ff';
+      const s = Number(ch.size) || 8;
+      const t = Number(ch.thick) || 2;
+      const g = Number(ch.gap) || 4;
+      const mid = 24;
+      let html = `
+        <line x1="${mid}" y1="${mid - g - s}" x2="${mid}" y2="${mid - g}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
+        <line x1="${mid}" y1="${mid + g}" x2="${mid}" y2="${mid + g + s}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
+        <line x1="${mid - g - s}" y1="${mid}" x2="${mid - g}" y2="${mid}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
+        <line x1="${mid + g}" y1="${mid}" x2="${mid + g + s}" y2="${mid}" stroke="${c}" stroke-width="${t}" stroke-linecap="round" />
+      `;
+      if (ch.dot) {
+        html += `<circle cx="${mid}" cy="${mid}" r="${Math.max(1.5, t * 0.85)}" fill="#ff2a55" />`;
+      }
+      svgEl.innerHTML = html;
+    }
+
+    function renderSavedProfilesList() {
+      const container = document.getElementById('saved-profiles-list');
+      container.innerHTML = '';
+      const keys = Object.keys(db.users);
+      keys.forEach(k => {
+        const u = db.users[k];
+        const { current } = getRankInfo(u.xp);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'saved-pill glow-interact';
+        btn.textContent = `${u.avatarEmoji || '🎯'} ${u.name} (${current.name})`;
+        btn.addEventListener('click', () => {
+          document.getElementById('welcome-nick').value = u.name;
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    let activeLbTab = 'total';
+    function refreshAllUI() {
+      const user = getCurrentUser();
+      const { current, next } = getRankInfo(user.xp);
+
+      document.getElementById('welcome-nick').value = user.name;
+      document.getElementById('header-nick').textContent = user.name.toUpperCase();
+      document.getElementById('header-rank').textContent = current.name;
+      renderAvatarInto(document.getElementById('header-avatar'), user);
+
+      document.getElementById('menu-player-name').textContent = user.name.toUpperCase();
+      document.getElementById('menu-total-xp-label').textContent =
+        `XP: ${user.xp.toLocaleString('tr-TR')} • Sens: ${Number(user.sens).toFixed(2)}x • Skor: ${user.totalScore.toLocaleString('tr-TR')}`;
       document.getElementById('menu-rank-badge').textContent = current.name;
+      renderAvatarInto(document.getElementById('menu-avatar'), user);
 
       if (next) {
         const spanXp = next.minXp - current.minXp;
-        const gainedInTier = saveData.xp - current.minXp;
+        const gainedInTier = user.xp - current.minXp;
         const pct = Math.min(100, Math.max(0, Math.round((gainedInTier / spanXp) * 100)));
         document.getElementById('xp-progress-text').textContent =
           `Sonraki Kademe (${next.name}): ${gainedInTier} / ${spanXp} XP`;
@@ -1042,12 +1404,34 @@
         document.getElementById('xp-fill-bar').style.width = '100%';
       }
 
+      renderCrosshairSVG(crosshair, user.crosshair);
+      renderLeaderboard();
+      renderQuests(user);
+      renderSavedProfilesList();
+    }
+
+    function renderQuests(user) {
+      const qList = document.getElementById('quest-list');
+      const items = [
+        { done: user.quests.q25hits, text: 'Tek turda en az 25 hedef vur', reward: '+120 XP' },
+        { done: user.quests.q80acc, text: '%80 veya üzeri isabet oranıyla bitir', reward: '+150 XP' },
+        { done: user.quests.q3000score, text: 'Bir antrenmanda 3.000+ skor yap', reward: '+200 XP' }
+      ];
+      qList.innerHTML = items.map(q => `
+        <div class="quest-item ${q.done ? 'done' : ''}">
+          <span>${q.done ? '✔' : '○'} ${q.text}</span>
+          <strong style="color:${q.done ? 'var(--emerald)' : 'var(--gold)'};">${q.reward}</strong>
+        </div>
+      `).join('');
+    }
+
+    function renderLeaderboard() {
       const listEl = document.getElementById('leaderboard-list');
       listEl.innerHTML = '';
 
       if (activeLbTab === 'total') {
         const totalsMap = {};
-        for (const e of saveData.entries) {
+        for (const e of db.entries) {
           const key = e.name.toLowerCase();
           if (!totalsMap[key]) {
             totalsMap[key] = { name: e.name, total: 0, games: 0 };
@@ -1057,7 +1441,7 @@
         }
         const sortedTotal = Object.values(totalsMap).sort((a, b) => b.total - a.total).slice(0, 8);
         if (sortedTotal.length === 0) {
-          listEl.innerHTML = '<div class="lb-sub" style="text-align:center;padding:24px;">Henüz skor kaydı yok. İlk rekoru sen kır!</div>';
+          listEl.innerHTML = '<div class="lb-sub" style="text-align:center;padding:20px;">Henüz skor kaydı yok.</div>';
           return;
         }
         sortedTotal.forEach((item, idx) => {
@@ -1076,12 +1460,12 @@
           listEl.appendChild(row);
         });
       } else {
-        const filtered = saveData.entries
+        const filtered = db.entries
           .filter(e => e.mode === activeLbTab)
           .sort((a, b) => b.score - a.score)
           .slice(0, 8);
         if (filtered.length === 0) {
-          listEl.innerHTML = '<div class="lb-sub" style="text-align:center;padding:24px;">Bu modda henüz kayıt yok.</div>';
+          listEl.innerHTML = '<div class="lb-sub" style="text-align:center;padding:20px;">Bu modda henüz kayıt yok.</div>';
           return;
         }
         filtered.forEach((item, idx) => {
@@ -1108,6 +1492,7 @@
       }[m]));
     }
 
+    // Oyun Değişkenleri & Sens Hesabı
     let isPlaying = false;
     let isPausedForExit = false;
     let selectedMode = 'gridshot';
@@ -1119,11 +1504,18 @@
     let combo = 0;
     let maxCombo = 0;
     let reactionTimes = [];
+    let shotLog = [];
     let targets = [];
     let particles = [];
     let floatingTexts = [];
     let soundEnabled = true;
     let lastFrameTime = 0;
+
+    // Sens çarpanına göre sanal nişangah koordinatı
+    let aimX = 0;
+    let aimY = 0;
+    let lastRawMouseX = null;
+    let lastRawMouseY = null;
 
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playSound(type) {
@@ -1163,40 +1555,184 @@
     resizeCanvas();
 
     arenaWrapper.addEventListener('mousemove', (e) => {
-      if (isPlaying && !isPausedForExit) {
-        crosshair.style.display = 'block';
-        crosshair.style.left = e.clientX + 'px';
-        crosshair.style.top = e.clientY + 'px';
+      if (!isPlaying || isPausedForExit) return;
+      const rect = canvas.getBoundingClientRect();
+      const rawX = e.clientX - rect.left;
+      const rawY = e.clientY - rect.top;
+      const user = getCurrentUser();
+      const sens = Number(user.sens) || 1.0;
+
+      if (lastRawMouseX === null || Math.abs(sens - 1.0) < 0.01) {
+        aimX = rawX;
+        aimY = rawY;
+      } else {
+        const dx = (rawX - lastRawMouseX) * sens;
+        const dy = (rawY - lastRawMouseY) * sens;
+        aimX = Math.max(10, Math.min(canvas.width - 10, aimX + dx));
+        aimY = Math.max(10, Math.min(canvas.height - 10, aimY + dy));
       }
-    });
-    arenaWrapper.addEventListener('mouseleave', () => {
-      crosshair.style.display = 'none';
+      lastRawMouseX = rawX;
+      lastRawMouseY = rawY;
+
+      crosshair.style.display = 'block';
+      crosshair.style.left = (rect.left + aimX) + 'px';
+      crosshair.style.top = (rect.top + aimY) + 'px';
     });
 
-    document.getElementById('crosshair-color').addEventListener('change', (e) => {
-      const color = e.target.value;
-      crosshair.querySelectorAll('line').forEach(l => l.setAttribute('stroke', color));
+    arenaWrapper.addEventListener('mouseleave', () => {
+      crosshair.style.display = 'none';
+      lastRawMouseX = null;
+      lastRawMouseY = null;
     });
 
     document.getElementById('btn-sound').addEventListener('click', (e) => {
       soundEnabled = !soundEnabled;
-      e.target.textContent = soundEnabled ? '🔊 Ses Açık' : '🔇 Ses Kapalı';
+      e.target.textContent = soundEnabled ? '🔊 Ses' : '🔇 Sessiz';
     });
 
+    // Açılış Ekranı -> Giriş
     document.getElementById('btn-enter-hub').addEventListener('click', () => {
       const val = document.getElementById('welcome-nick').value.trim();
-      if (val) saveData.playerName = val;
-      persistSave();
-      renderProfileAndLeaderboard();
+      const finalName = val || db.activeUser || 'Kaan';
+      db.activeUser = finalName;
+      getCurrentUser().name = finalName;
+      saveDB();
+      refreshAllUI();
       welcomeScreen.classList.add('hidden');
       startMenu.classList.remove('hidden');
     });
 
-    document.getElementById('btn-change-nick').addEventListener('click', () => {
+    document.getElementById('btn-switch-account').addEventListener('click', () => {
       startMenu.classList.add('hidden');
       welcomeScreen.classList.remove('hidden');
+      renderSavedProfilesList();
     });
 
+    // Profil & Ekipman Atölyesi Kontrolleri
+    let tempPhotoData = '';
+    function openProfileWorkshop() {
+      const user = getCurrentUser();
+      tempPhotoData = user.avatarPhoto || '';
+      document.getElementById('ws-nick-input').value = user.name;
+      document.getElementById('ws-sens').value = user.sens;
+      document.getElementById('ws-sens-val').textContent = Number(user.sens).toFixed(2) + 'x';
+      document.getElementById('ws-target-theme').value = user.targetTheme || 'cyan';
+
+      document.getElementById('ws-ch-color').value = user.crosshair.color;
+      document.getElementById('ws-ch-size').value = user.crosshair.size;
+      document.getElementById('ws-ch-size-val').textContent = user.crosshair.size + 'px';
+      document.getElementById('ws-ch-thick').value = user.crosshair.thick;
+      document.getElementById('ws-ch-thick-val').textContent = user.crosshair.thick + 'px';
+      document.getElementById('ws-ch-gap').value = user.crosshair.gap;
+      document.getElementById('ws-ch-gap-val').textContent = user.crosshair.gap + 'px';
+      document.getElementById('ws-ch-dot').checked = !!user.crosshair.dot;
+
+      renderAvatarInto(document.getElementById('ws-avatar-preview'), user);
+      updateWorkshopCrosshairPreview();
+      profileModal.classList.remove('hidden');
+    }
+
+    function updateWorkshopCrosshairPreview() {
+      const previewCh = {
+        color: document.getElementById('ws-ch-color').value,
+        size: document.getElementById('ws-ch-size').value,
+        thick: document.getElementById('ws-ch-thick').value,
+        gap: document.getElementById('ws-ch-gap').value,
+        dot: document.getElementById('ws-ch-dot').checked
+      };
+      renderCrosshairSVG(document.getElementById('ws-crosshair-preview'), previewCh);
+    }
+
+    ['ws-ch-color', 'ws-ch-size', 'ws-ch-thick', 'ws-ch-gap', 'ws-ch-dot'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        document.getElementById('ws-ch-size-val').textContent = document.getElementById('ws-ch-size').value + 'px';
+        document.getElementById('ws-ch-thick-val').textContent = document.getElementById('ws-ch-thick').value + 'px';
+        document.getElementById('ws-ch-gap-val').textContent = document.getElementById('ws-ch-gap').value + 'px';
+        updateWorkshopCrosshairPreview();
+      });
+    });
+
+    document.getElementById('ws-sens').addEventListener('input', (e) => {
+      document.getElementById('ws-sens-val').textContent = Number(e.target.value).toFixed(2) + 'x';
+    });
+
+    document.querySelectorAll('#ws-presets .preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        tempPhotoData = '';
+        const emoji = btn.dataset.emoji;
+        const prev = document.getElementById('ws-avatar-preview');
+        prev.textContent = emoji;
+        prev.dataset.selectedEmoji = emoji;
+      });
+    });
+
+    document.getElementById('ws-photo-upload').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          const c = document.createElement('canvas');
+          c.width = 96;
+          c.height = 96;
+          c.getContext('2d').drawImage(img, 0, 0, 96, 96);
+          tempPhotoData = c.toDataURL('image/jpeg', 0.8);
+          document.getElementById('ws-avatar-preview').innerHTML = `<img src="${tempPhotoData}" alt="avatar" />`;
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById('btn-save-profile').addEventListener('click', () => {
+      const oldUser = getCurrentUser();
+      const newName = document.getElementById('ws-nick-input').value.trim() || oldUser.name;
+      const oldKey = oldUser.name.trim().toLowerCase();
+      const newKey = newName.trim().toLowerCase();
+
+      if (oldKey !== newKey) {
+        if (!db.users[newKey]) {
+          db.users[newKey] = { ...oldUser, name: newName };
+          delete db.users[oldKey];
+        }
+        db.activeUser = newName;
+      }
+
+      const user = getCurrentUser();
+      user.name = newName;
+      user.sens = parseFloat(document.getElementById('ws-sens').value) || 1.0;
+      user.targetTheme = document.getElementById('ws-target-theme').value;
+      const chosenEmoji = document.getElementById('ws-avatar-preview').dataset.selectedEmoji;
+      if (tempPhotoData) {
+        user.avatarPhoto = tempPhotoData;
+      } else if (chosenEmoji) {
+        user.avatarPhoto = '';
+        user.avatarEmoji = chosenEmoji;
+      }
+      user.crosshair = {
+        color: document.getElementById('ws-ch-color').value,
+        size: parseInt(document.getElementById('ws-ch-size').value, 10),
+        thick: parseInt(document.getElementById('ws-ch-thick').value, 10),
+        gap: parseInt(document.getElementById('ws-ch-gap').value, 10),
+        dot: document.getElementById('ws-ch-dot').checked
+      };
+
+      saveDB();
+      refreshAllUI();
+      profileModal.classList.add('hidden');
+    });
+
+    document.getElementById('btn-open-profile').addEventListener('click', () => {
+      if (isPlaying && !isPausedForExit) openExitModal();
+      openProfileWorkshop();
+    });
+    document.getElementById('btn-menu-workshop').addEventListener('click', openProfileWorkshop);
+    document.getElementById('btn-close-profile').addEventListener('click', () => {
+      profileModal.classList.add('hidden');
+    });
+
+    // Mod ve Süre Seçimleri
     document.querySelectorAll('.mode-card').forEach(card => {
       card.addEventListener('click', () => {
         document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
@@ -1219,7 +1755,7 @@
         document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         activeLbTab = tab.dataset.lb;
-        renderProfileAndLeaderboard();
+        renderLeaderboard();
       });
     });
 
@@ -1296,14 +1832,20 @@
       combo = 0;
       maxCombo = 0;
       reactionTimes = [];
+      shotLog = [];
       targets = [];
       particles = [];
       floatingTexts = [];
       timeLeft = selectedDuration;
+      aimX = canvas.width / 2;
+      aimY = canvas.height / 2;
+      lastRawMouseX = null;
+      lastRawMouseY = null;
 
       startMenu.classList.add('hidden');
       exitMenu.classList.add('hidden');
       resultMenu.classList.add('hidden');
+      profileModal.classList.add('hidden');
       updateHUD();
 
       const initialCount = selectedMode === 'gridshot' ? 3 : (selectedMode === 'tracking' ? 2 : 1);
@@ -1329,24 +1871,18 @@
     }
 
     document.getElementById('btn-exit-top').addEventListener('click', () => {
-      if (isPlaying) {
-        openExitModal();
-      } else if (!welcomeScreen.classList.contains('hidden')) {
-        welcomeScreen.classList.add('hidden');
-        startMenu.classList.remove('hidden');
-        renderProfileAndLeaderboard();
-      }
+      if (isPlaying) openExitModal();
     });
 
     document.getElementById('brand-home').addEventListener('click', () => {
       if (isPlaying) {
         openExitModal();
-      } else {
+      } else if (welcomeScreen.classList.contains('hidden')) {
         resultMenu.classList.add('hidden');
         exitMenu.classList.add('hidden');
-        welcomeScreen.classList.add('hidden');
+        profileModal.classList.add('hidden');
         startMenu.classList.remove('hidden');
-        renderProfileAndLeaderboard();
+        refreshAllUI();
       }
     });
 
@@ -1361,7 +1897,7 @@
       crosshair.style.display = 'none';
       exitMenu.classList.add('hidden');
       startMenu.classList.remove('hidden');
-      renderProfileAndLeaderboard();
+      refreshAllUI();
     });
 
     window.addEventListener('keydown', (e) => {
@@ -1370,6 +1906,26 @@
         else openExitModal();
       }
     });
+
+    function drawHeatmap() {
+      const hCanvas = document.getElementById('heatmapCanvas');
+      const hCtx = hCanvas.getContext('2d');
+      hCtx.clearRect(0, 0, hCanvas.width, hCanvas.height);
+
+      // Izgara çizgisi
+      hCtx.strokeStyle = 'rgba(255,255,255,0.06)';
+      hCtx.lineWidth = 1;
+      hCtx.strokeRect(1, 1, hCanvas.width - 2, hCanvas.height - 2);
+
+      for (const s of shotLog) {
+        const px = Math.max(6, Math.min(hCanvas.width - 6, s.nx * hCanvas.width));
+        const py = Math.max(6, Math.min(hCanvas.height - 6, s.ny * hCanvas.height));
+        hCtx.beginPath();
+        hCtx.arc(px, py, s.hit ? 4.5 : 3.5, 0, Math.PI * 2);
+        hCtx.fillStyle = s.hit ? 'rgba(0, 230, 118, 0.85)' : 'rgba(255, 42, 85, 0.85)';
+        hCtx.fill();
+      }
+    }
 
     function endGame() {
       isPlaying = false;
@@ -1381,27 +1937,40 @@
         ? Math.round(reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length)
         : 0;
 
-      // Kademeli sistem için dengeli XP (tek elde rütbe zıplamayı önler)
-      const gainedXp = hits > 0 ? Math.max(15, Math.round(score / 45) + Math.round(hits * 1.5)) : 10;
-      saveData.xp += gainedXp;
-      saveData.totalScore += score;
-      if (score > (saveData.bestByMode[selectedMode] || 0)) {
-        saveData.bestByMode[selectedMode] = score;
+      const user = getCurrentUser();
+      let gainedXp = hits > 0 ? Math.max(15, Math.round(score / 45) + Math.round(hits * 1.5)) : 10;
+
+      // Görev Kontrolü
+      if (!user.quests.q25hits && hits >= 25) {
+        user.quests.q25hits = true;
+        gainedXp += 120;
       }
+      if (!user.quests.q80acc && shots >= 10 && acc >= 80) {
+        user.quests.q80acc = true;
+        gainedXp += 150;
+      }
+      if (!user.quests.q3000score && score >= 3000) {
+        user.quests.q3000score = true;
+        gainedXp += 200;
+      }
+
+      user.xp += gainedXp;
+      user.totalScore += score;
+
       if (score > 0 || hits > 0) {
-        saveData.entries.push({
-          name: saveData.playerName,
+        db.entries.push({
+          name: user.name,
           mode: selectedMode,
           score,
           acc
         });
-        saveData.entries = saveData.entries.slice(-120);
+        db.entries = db.entries.slice(-150);
       }
-      persistSave();
-      renderProfileAndLeaderboard();
 
-      const { current } = getRankInfo(saveData.xp);
+      saveDB();
+      refreshAllUI();
 
+      const { current } = getRankInfo(user.xp);
       document.getElementById('res-mode-label').textContent = `Mod: ${MODE_NAMES[selectedMode]} • Süre: ${selectedDuration}s`;
       document.getElementById('final-rank').textContent = `RÜTBE: ${current.name}`;
       document.getElementById('res-xp-gained').textContent = `+${gainedXp} AIMS XP KAZANILDI`;
@@ -1410,6 +1979,7 @@
       document.getElementById('res-ms').textContent = avgMs + ' ms';
       document.getElementById('res-combo').textContent = maxCombo + 'x';
 
+      drawHeatmap();
       resultMenu.classList.remove('hidden');
     }
 
@@ -1427,8 +1997,11 @@
     canvas.addEventListener('mousedown', (e) => {
       if (!isPlaying || isPausedForExit) return;
       const rect = canvas.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const clickY = e.clientY - rect.top;
+      const user = getCurrentUser();
+      const sens = Number(user.sens) || 1.0;
+
+      const clickX = Math.abs(sens - 1.0) < 0.01 ? (e.clientX - rect.left) : aimX;
+      const clickY = Math.abs(sens - 1.0) < 0.01 ? (e.clientY - rect.top) : aimY;
 
       shots++;
       let hitIndex = -1;
@@ -1441,12 +2014,14 @@
         }
       }
 
+      const theme = TARGET_THEMES[user.targetTheme] || TARGET_THEMES.cyan;
+
       if (hitIndex !== -1) {
         const hitTarget = targets[hitIndex];
-        // Gerçekçi refleks süresi hesaplaması
         const rawReaction = performance.now() - hitTarget.spawnTime;
         const reaction = Math.max(120, Math.min(950, Math.round(rawReaction)));
         reactionTimes.push(reaction);
+        shotLog.push({ nx: clickX / canvas.width, ny: clickY / canvas.height, hit: true });
 
         hits++;
         combo++;
@@ -1457,12 +2032,13 @@
         score += gained;
 
         playSound('hit');
-        createExplosion(hitTarget.x, hitTarget.y, '#00f3ff');
+        createExplosion(hitTarget.x, hitTarget.y, theme.particle);
         addFloatingText(hitTarget.x, hitTarget.y - 15, `+${gained} (${reaction}ms)`, '#f7b733');
 
         targets.splice(hitIndex, 1);
         spawnTarget();
       } else {
+        shotLog.push({ nx: clickX / canvas.width, ny: clickY / canvas.height, hit: false });
         combo = 0;
         score = Math.max(0, score - 30);
         playSound('miss');
@@ -1486,6 +2062,8 @@
       }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const user = getCurrentUser();
+      const theme = TARGET_THEMES[user.targetTheme] || TARGET_THEMES.cyan;
 
       for (let i = targets.length - 1; i >= 0; i--) {
         const t = targets[i];
@@ -1507,9 +2085,9 @@
         }
 
         const grad = ctx.createRadialGradient(t.x, t.y, t.currentRadius * 0.2, t.x, t.y, t.currentRadius);
-        grad.addColorStop(0, '#00f3ff');
-        grad.addColorStop(0.7, '#0088ff');
-        grad.addColorStop(1, 'rgba(0, 243, 255, 0.15)');
+        grad.addColorStop(0, theme.inner);
+        grad.addColorStop(0.7, theme.mid);
+        grad.addColorStop(1, theme.outer);
 
         ctx.beginPath();
         ctx.arc(t.x, t.y, t.currentRadius, 0, Math.PI * 2);
@@ -1568,10 +2146,11 @@
     document.getElementById('btn-res-menu').addEventListener('click', () => {
       resultMenu.classList.add('hidden');
       startMenu.classList.remove('hidden');
-      renderProfileAndLeaderboard();
+      refreshAllUI();
     });
 
-    renderProfileAndLeaderboard();
+    // İlk yükleme
+    refreshAllUI();
   </script>
 </body>
 </html>
